@@ -65,11 +65,8 @@ class User < ApplicationRecord
   end
 
   def email=(value)
-    if provider_email?
-      uid = value
-    else
-      raise ArgumentError, "Email can't be used for #{provider}."
-    end
+    return value if provider_email?
+    raise ArgumentError, "Email can't be used for #{provider}."
   end
 
   def postpone_email_change?
