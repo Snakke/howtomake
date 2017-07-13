@@ -30,15 +30,15 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :timeoutable and :validatable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, 
-         :confirmable, :omniauthable, :omniauth_providers => [:facebook, :twitter, :vkontakte]
+         :recoverable, :rememberable, :trackable,
+         :confirmable, :omniauthable, omniauth_providers: %i[facebook twitter vkontakte]
 
-  validates :email, format: { :with => Devise::email_regexp }, if: :provider_email?
-  validates :uid, :presence => true, :uniqueness => { :case_sensitive => false }, unless: :provider_email?
-  validates :password, :presence => true, :confirmation => true, :length => {:within => 6..40}, :on => :create
-  validates :password, :confirmation => true, :length => {:within => 6..40}, :allow_blank => true, :on => :update
+  validates :uid, format: { with: Devise.email_regexp }, if: :provider_email?
+  validates :uid, presence: true, uniqueness: { case_sensitive: false }, unless: :provider_email?
+  validates :password, presence: true, confirmation: true, length: { within: 6..40 }, on: :create
+  validates :password, confirmation: true, length: { within: 6..40 }, allow_blank: true, on: :update
 
-  EMAIL = "email"
+  EMAIL = 'email'.freeze
 
   def self.find_for_authentication(tainted_conditions)
     super(tainted_conditions.merge(provider: EMAIL))
@@ -47,7 +47,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.name = auth.info.name
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.skip_confirmation!
     end
   end
@@ -65,25 +65,24 @@ class User < ApplicationRecord
   end
 
   def email=(value)
-    if provider_email? 
-      uid = value 
-    else 
-      raise ArgumentError.new("Email can't be used for #{provider}.")
+    if provider_email?
+      uid = value
+    else
+      raise ArgumentError, "Email can't be used for #{provider}."
     end
   end
 
   def postpone_email_change?
     postpone = self.class.reconfirmable &&
-      will_save_change_to_uid? &&
-      !@bypass_confirmation_postpone &&
-      self.uid.present? &&
-      (!@skip_reconfirmation_in_callback || !self.uid_in_database.nil?)
-      @bypass_confirmation_postpone = false
+               will_save_change_to_uid? &&
+               !@bypass_confirmation_postpone &&
+               uid.present? &&
+               (!@skip_reconfirmation_in_callback || !uid_in_database.nil?)
+    @bypass_confirmation_postpone = false
     postpone
   end
 
   def to_s
     name || email
   end
-
 end
