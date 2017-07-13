@@ -47,13 +47,18 @@ gem 'responders', '~> 2.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
   gem 'pry-rails', '~> 0.3.6'
+  gem 'rspec-rails', '~> 3.5'
   gem 'rubocop', '~> 0.49.1', require: false
+  gem 'selenium-webdriver'
+  # Pronto
+  gem 'pronto', '~> 0.9.3'
+  gem 'pronto-flay', '~> 0.9.0', require: false
+  gem 'pronto-rubocop', '~> 0.9.0', require: false
 end
 
 group :development do

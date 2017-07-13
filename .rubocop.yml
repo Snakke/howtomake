@@ -1,0 +1,36 @@
+AllCops:
+  Exclude:
+  - bin/*
+  - script/**/*
+  - db/schema.rb
+  Include:
+  - Gemfile
+  - Rakefile
+  - lib/tasks/**/*.rake
+  - lib/capistrano/tasks/**/*.rake
+  - lib/capistrano/tasks/**/*.cap
+  - config.ru
+  DisplayCopNames: true
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+  - db/migrate/*
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false

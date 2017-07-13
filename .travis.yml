@@ -1,0 +1,5 @@
+language: ruby
+rvm: 2.3.3
+script:
+  - 'if [ "$TRAVIS_PULL_REQUEST" == false ]; then echo "TRAVIS_PULL_REQUEST is unset, skipping Pronto"; else PRONTO_PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} bundle exec pronto run -f github_pr; fi'
+  - bundle exec rake spec

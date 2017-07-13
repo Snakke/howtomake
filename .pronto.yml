@@ -1,0 +1,6 @@
+github:
+  slug: Snakke/app1
+  api_endpoint: https://api.github.com/
+  web_endpoint: https://github.com/
+max_warnings: 150
+verbose: false
