@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Manuals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @manuals.each do |manual| %>
+      <tr>
+        <td><%= manual.name %></td>
+        <td><%= manual.category_id %></td>
+        <td><%= manual.user_id %></td>
+        <td><%= link_to 'Show', manual %></td>
+        <td><%= link_to 'Edit', edit_manual_path(manual) %></td>
+        <td><%= link_to 'Destroy', manual, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Manual', new_manual_path %>
