@@ -41,6 +41,7 @@ gem 'omniauth-vkontakte', '~> 1.4'
 
 gem 'dotenv-rails'
 gem 'responders', '~> 2.4'
+gem 'cancancan', '~> 2.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

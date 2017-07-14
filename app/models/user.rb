@@ -39,6 +39,13 @@ class User < ApplicationRecord
   validates :password, confirmation: true, length: { within: 6..40 }, allow_blank: true, on: :update
 
   EMAIL = 'email'.freeze
+  ROLES = ['admin', 'user'].freeze
+
+  ROLES.each do |role|
+    define_method("#{role}?") do
+      self.role == role
+    end
+  end
 
   def self.find_for_authentication(tainted_conditions)
     super(tainted_conditions.merge(provider: EMAIL))

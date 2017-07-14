@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  load_and_authorize_resource
 
   # GET /users
   # GET /users.json
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    flash[:notice] = 'Ticket was created successfully.' if @user.save
+    flash[:notice] = 'User was created successfully.' if @user.save
     respond_with(@user)
   end
 
@@ -53,6 +54,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:uid, :name, :password, :password_confirmation)
+    params.require(:user).permit(:uid, :name, :password, :password_confirmation, :role)
   end
 end
