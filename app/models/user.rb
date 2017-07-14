@@ -39,9 +39,10 @@ class User < ApplicationRecord
   validates :password, confirmation: true, length: { within: 6..40 }, allow_blank: true, on: :update
 
   EMAIL = 'email'.freeze
-  ROLES = ['admin', 'user'].freeze
+  ROLES = %w[admin user].freeze
 
   ROLES.each do |role|
+    # rubocop:disable Style/RedundantSelf
     define_method("#{role}?") do
       self.role == role
     end
