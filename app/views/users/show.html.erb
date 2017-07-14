@@ -1,0 +1,36 @@
+<h3>User Details:</h3>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Sign in count:</strong>
+  <%= @user.sign_in_count %>
+</p>
+
+<p>
+  <strong>Current sign in at:</strong>
+  <%= @user.current_sign_in_at %>
+</p>
+
+<p>
+  <strong>Last sign in at:</strong>
+  <%= @user.last_sign_in_at %>
+</p>
+
+<p>
+  <strong>Current sign in ip:</strong>
+  <%= @user.current_sign_in_ip %>
+</p>
+
+<p>
+  <strong>Last sign in ip:</strong>
+  <%= @user.last_sign_in_ip %>
+</p>
+
+<p>
+  <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-primary" %>
+  <%= link_to 'Back', users_path, class: "btn btn-secondary" %>
+</p>

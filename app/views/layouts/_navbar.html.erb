@@ -4,11 +4,14 @@
   </button>
   <%= link_to 'How To Make', root_path, class: 'navbar-brand' %>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-    </form>
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to 'Users', users_path, class: 'nav-link' %>
+      </li>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </ul>
     <ul class="navbar-nav">
       <% if user_signed_in? %>
