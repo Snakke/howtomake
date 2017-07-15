@@ -1,0 +1,27 @@
+<%= form_with(model: manual, local: true) do |form| %>
+  <% if manual.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(manual.errors.count, "error") %> prohibited this manual from being saved:</h2>
+
+      <ul>
+      <% manual.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :manual_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.text_field :category_id, id: :manual_category_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
