@@ -13,4 +13,5 @@
 class Manual < ApplicationRecord
   validates :name, :category_id, :user_id, presence: true
   belongs_to :category
+  has_many :steps
 end

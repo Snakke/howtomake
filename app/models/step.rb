@@ -1,13 +1,15 @@
 # == Schema Information
 #
-# Table name: categories
+# Table name: steps
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :integer
+#  manual_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Category < ApplicationRecord
-  validates :name, presence: true
+class Step < ApplicationRecord
+  validates :manual_id, :name, presence: true
+  belongs_to :manual
 end
