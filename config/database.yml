@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   database: howtomake_development
-  username: kirill
+  username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATEBASE_PASSWORD'] %>
 
   # The specified database role being used to connect to postgres.
@@ -60,7 +60,7 @@ development:
 test:
   <<: *default
   database: howtomake_test
-  username: kirill
+  username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATEBASE_PASSWORD'] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,

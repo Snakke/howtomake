@@ -20,3 +20,4 @@
 .env
 /config/database.yml
 /db/seeds.rb
+/db/schema.rb
