@@ -21,7 +21,7 @@ class ManualsController < ApplicationController
   end
 
   def create
-    @manual = Manual.new(manual_params)
+    @manual = current_user.manuals.create(manual_params)
     @manual.save
     respond_with(@manual)
   end
