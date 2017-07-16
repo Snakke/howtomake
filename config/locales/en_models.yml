@@ -1,0 +1,48 @@
+en:
+  activerecord:
+    models:
+      user:
+        one: User
+        other: Users
+      manual:
+        one: Manual
+        other: Manuals
+      category:
+        one: Category
+        other: Categories
+    attributes:
+      user:
+        uid: "Email"
+        encrypted_password: "Password"
+        name: "Name"
+        provider: "Provider"
+        reset_password_token: "Reset password token"
+        reset_password_sent_at: Reset password send at
+        remember_created_at: Remember created at
+        sign_in_count: Sign in count
+        current_sign_in_at: Current sign in at
+        last_sign_in_at: Last sign in at
+        current_sign_in_ip: Current sign in ip
+        last_sign_in_ip: Last sign in ip
+        confirmation_token: Confirmation token
+        confirmed_at: Confirmed at
+        confirmation_sent_at: Confirmation send at
+        unconfirmed_email: Unconfirmed email
+        failed_attempts: Failed attempts
+        unlock_token: Unlock token
+        locked_at: Locked at
+        created_at: Created at
+        updated_at: Update at
+        role: Role
+        locale: Locale
+      manual:
+        name: Title
+        category: Category
+        author: Author
+        created_at: Created at
+        updated_at: Update at
+      category:
+        name: Title
+        created_at: Created at
+        updated_at: Update at
+        

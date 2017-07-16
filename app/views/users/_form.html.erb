@@ -15,31 +15,26 @@
     <% end %>
 
     <div class='form-group'>
-      <%= form.label :uid %>
-      <%= form.text_field :uid, class: 'form-control', placeholder: 'Email' %>
+      <%= form.label :uid, User.human_attribute_name("uid") %>
+      <%= form.text_field :uid, class: 'form-control', placeholder: User.human_attribute_name("uid") %>
     </div>
 
     <div class='form-group'>
-      <%= form.label :name %>
-      <%= form.text_field :name, class: 'form-control', placeholder: 'Name' %>
+      <%= form.label :name, User.human_attribute_name("name") %>
+      <%= form.text_field :name, class: 'form-control', placeholder: User.human_attribute_name("name") %>
     </div>
 
     <div class="form-group">
-      <%= form.label :password %>
-      <%= form.password_field :password, class: 'form-control', placeholder: 'Password' %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :password_confirmation %>
-      <%= form.password_field :password_confirmation , class: 'form-control', placeholder: 'Password confirmation' %>
+      <%= form.label :password, User.human_attribute_name("encrypted_password") %>
+      <%= form.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("encrypted_password") %>
     </div>
 
     <div class='form-group'>
-      <%= form.label :role %>
-      <%= form.text_field :role, class: 'form-control', placeholder: 'Roe' %>
+      <%= form.label :role, User.human_attribute_name("role") %>
+      <%= form.text_field :role, class: 'form-control', placeholder: User.human_attribute_name("role") %>
     </div>
 
-    <%= form.submit "Save", class: "btn btn-primary" %>
-    <%= link_to 'Back', users_path, class: "btn btn-secondary" %>
+    <%= form.submit t('action.save'), class: "btn btn-primary" %>
+    <%= link_to t('action.back'), users_path, class: "btn btn-secondary" %>
   <% end %>
 </div>

@@ -24,6 +24,8 @@
 #  locked_at              :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role                   :string           default("author")
+#  locale                 :string           default("en")
 #
 
 class User < ApplicationRecord
@@ -43,7 +45,7 @@ class User < ApplicationRecord
   alias_attribute :email, :uid
 
   EMAIL = 'email'.freeze
-  ROLES = %w[admin user].freeze
+  ROLES = %w[admin author].freeze
 
   ROLES.each do |role|
     # rubocop:disable Style/RedundantSelf
@@ -69,7 +71,7 @@ class User < ApplicationRecord
   end
 
   def to_s
-    name || email
+    name == '' ? email : name
   end
 
   private

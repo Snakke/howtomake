@@ -1,19 +1,19 @@
-<p id="notice"><%= notice %></p>
+<h3><%= t('view.manual.details') %>:</h3>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%= Manual.human_attribute_name("name") %>:</strong>
   <%= @manual.name %>
 </p>
 
 <p>
-  <strong>Category:</strong>
-  <%= @manual.category_id %>
+  <strong><%= Manual.human_attribute_name("category") %>:</strong>
+  <%= @manual.category.name %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @manual.user_id %>
+  <strong><%= Manual.human_attribute_name("author") %>:</strong>
+  <%= @manual.user %>
 </p>
 
-<%= link_to 'Edit', edit_manual_path(@manual) %> |
-<%= link_to 'Back', manuals_path %>
+<%= link_to t('action.edit'), edit_manual_path(@manual) %> |
+<%= link_to t('action.back'), manuals_path %>

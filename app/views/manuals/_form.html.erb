@@ -1,3 +1,4 @@
+<h3><%= title %></h3>
 <%= form_with(model: manual, local: true) do |form| %>
   <% if manual.errors.any? %>
     <div id="error_explanation">
@@ -12,16 +13,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, Manual.human_attribute_name("name") %>
     <%= form.text_field :name, id: :manual_name %>
   </div>
 
   <div class="field">
-    <%= form.label :category_id %>
+    <%= form.label :category, Manual.human_attribute_name("category") %>
     <%= form.text_field :category_id, id: :manual_category_id %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.submit t('action.save'), class: "btn btn-primary" %>
+  <%= link_to t('action.back'), users_path, class: "btn btn-secondary" %>
 <% end %>

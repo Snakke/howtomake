@@ -1,0 +1,54 @@
+ru:
+  title:
+    user:
+      new: "Новый пользователь"
+      edit: "Изменить пользователя"
+    category:
+      new: "Новая категория"
+      edit: "Изменить категорию"
+    manual:
+      new: "Новая инструкция"
+      edit: "Изменить инструкцию"
+  action:
+    actions: "Действия"
+    edit: "Редактировать"
+    show: "Просмотр"
+    destroy: "Удалить"
+    save: "Сохранить"
+    back: "Назад"
+    sign_up: "Зарегистрироваться"
+    user:
+      new: "Создать пользователя"
+    manual:
+      new: "Создать инструкцию"
+    category:
+      new: "Создать категорию"
+    devise:
+      log_in: "Войти"
+      sign_up: "Регистрация"
+      resend_confirmation: "Отправить подтверждение повторно"
+      reset_password: "Сбросить пароль"
+      resend: "Отправить повторно"
+      edit_profile: "Редактировать профиль"
+      log_out: "Выйти"
+  view:
+    search: "Поиск"
+    manuals: "Инструкции"
+    users: "Пользователи"
+    categories: "Категории"
+    devise:
+      email: "Адрес эл. почты"
+      password: "Пароль"
+      remember_me: "Запомнить меня"
+      name: "Имя"
+      password_confirmation: "Подтверждение пароля"
+      forgot_your_password: "Забыли пароль?"
+      didnt_receive_confirmation: "Не получили письмо с подтверждением?"
+      sign_in_with: "Войти с помощью"
+    user:
+      details: "Сведения о пользователе"
+    manual:
+      details: "Сведения о инструкции"
+    category:
+      details: "Сведения о категории"
+   

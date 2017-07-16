@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<h3><%= t('view.category.details') %>:</h3>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<p>
+  <strong><%= Category.human_attribute_name("name") %>:</strong>
+  <%= @category.name %>
+</p>
+
+<%= link_to t('action.edit'), edit_category_path(@category) %> |
+<%= link_to t('action.back'), categories_path %>

@@ -24,6 +24,8 @@
 #  locked_at              :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role                   :string           default("author")
+#  locale                 :string           default("en")
 #
 
 require 'test_helper'

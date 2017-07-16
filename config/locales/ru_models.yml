@@ -1,0 +1,48 @@
+ru:
+  activerecord:
+    models:
+      user:
+        one: Пользователь
+        other: Пользователи
+      manual:
+        one: Инструкция
+        other: Инструкции
+      category:
+        one: Категория
+        other: Категории
+    attributes:
+      user:
+        uid: Адрес эл. почты
+        encrypted_password: Пароль
+        name: Имя
+        provider: Провайдер
+        reset_password_token: Токен для сброса пароля
+        reset_password_sent_at: Время отправки сброса пароля
+        remember_created_at: Запомнен
+        sign_in_count: Количество авторизаций
+        current_sign_in_at: Время текущего входа
+        last_sign_in_at: Время последнего входа
+        current_sign_in_ip: Текущий ip
+        last_sign_in_ip: Последний ip
+        confirmation_token: Подтверждающий токен
+        confirmed_at: Подтвержден
+        confirmation_sent_at: Подтверждение отправлено в
+        unconfirmed_email: Неподтвержденный адрес эл. почты
+        failed_attempts: Неудачные попытки
+        unlock_token: Разблокирующий токен
+        locked_at: Заблокирован в
+        created_at: Создан
+        updated_at: Обновлен
+        role: Роль
+        locale: Локализация
+      manual:
+        name: Название
+        category: Категория
+        author: Автор
+        created_at: Создана
+        updated_at: Обновлена
+      category:
+        name: Навзвание
+        created_at: Создана
+        updated_at: Обновлена
+        
