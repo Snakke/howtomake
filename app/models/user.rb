@@ -71,7 +71,7 @@ class User < ApplicationRecord
   end
 
   def to_s
-    name == nil || ''  ? email : name
+    name.nil? || name == '' ? email : name
   end
 
   private
