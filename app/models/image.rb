@@ -1,0 +1,2 @@
+class Image < Block
+end
