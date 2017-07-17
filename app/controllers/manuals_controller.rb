@@ -14,6 +14,7 @@ class ManualsController < ApplicationController
 
   def new
     @manual = Manual.new
+    @categories = Category.order(:title)
     respond_with(@manual)
   end
 
@@ -43,6 +44,6 @@ class ManualsController < ApplicationController
   end
 
   def manual_params
-    params.require(:manual).permit(:name, :category_id, :user_id)
+    params.require(:manual).permit(:title, :category_id, :user_id)
   end
 end

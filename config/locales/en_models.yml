@@ -10,10 +10,17 @@ en:
       category:
         one: Category
         other: Categories
+      page:
+        one: Page
+        other: Pages
+      block:
+        one: block
+        other: Blocks
     attributes:
       user:
         uid: "Email"
-        encrypted_password: "Password"
+        email: "Email"
+        password: "Password"
         name: "Name"
         provider: "Provider"
         reset_password_token: "Reset password token"
@@ -32,17 +39,25 @@ en:
         unlock_token: Unlock token
         locked_at: Locked at
         created_at: Created at
-        updated_at: Update at
+        updated_at: Updated at
         role: Role
         locale: Locale
       manual:
-        name: Title
+        title: Title
         category: Category
         author: Author
         created_at: Created at
-        updated_at: Update at
+        updated_at: Updated at
       category:
-        name: Title
+        title: Title
         created_at: Created at
-        updated_at: Update at
+        updated_at: Updated at
+      page:
+        title: Title
+        created_at: Created at
+        updated_at: Updated at
+      block:
+        data: Data
+        created_at: Created at
+        updated_at: Updated at
         

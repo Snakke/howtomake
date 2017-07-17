@@ -49,6 +49,7 @@ en:
       details: "User details"
     manual:
       details: "Manual details"
+      select_category: "Select category"
     category:
       details: "Category details"
   

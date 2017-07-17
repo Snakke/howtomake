@@ -49,6 +49,7 @@ ru:
       details: "Сведения о пользователе"
     manual:
       details: "Сведения о инструкции"
+      select_category: "Выберите категорию"
     category:
       details: "Сведения о категории"
    

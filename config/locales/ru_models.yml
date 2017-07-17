@@ -10,10 +10,17 @@ ru:
       category:
         one: Категория
         other: Категории
+      page:
+        one: Страница
+        other: Страницы
+      block:
+        one: Блок
+        other: Блоки        
     attributes:
       user:
         uid: Адрес эл. почты
-        encrypted_password: Пароль
+        email: Адрес эл. почты
+        password: Пароль
         name: Имя
         provider: Провайдер
         reset_password_token: Токен для сброса пароля
@@ -36,13 +43,21 @@ ru:
         role: Роль
         locale: Локализация
       manual:
-        name: Название
+        title: Название
         category: Категория
         author: Автор
         created_at: Создана
         updated_at: Обновлена
       category:
-        name: Навзвание
+        title: Название
         created_at: Создана
         updated_at: Обновлена
+      page:
+        title: Название
+        created_at: Создана
+        updated_at: Обновлена
+      block:
+        data: Data
+        created_at: Создан
+        updated_at: Обновлен
         

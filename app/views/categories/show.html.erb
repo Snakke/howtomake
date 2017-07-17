@@ -1,8 +1,8 @@
 <h3><%= t('view.category.details') %>:</h3>
 
 <p>
-  <strong><%= Category.human_attribute_name("name") %>:</strong>
-  <%= @category.name %>
+  <strong><%= Category.human_attribute_name("title") %>:</strong>
+  <%= @category.title %>
 </p>
 
 <%= link_to t('action.edit'), edit_category_path(@category) %> |

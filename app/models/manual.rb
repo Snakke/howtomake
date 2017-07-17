@@ -3,7 +3,7 @@
 # Table name: manuals
 #
 #  id          :integer          not null, primary key
-#  name        :string
+#  title       :string
 #  category_id :string
 #  user_id     :string
 #  created_at  :datetime         not null
@@ -11,7 +11,9 @@
 #
 
 class Manual < ApplicationRecord
-  validates :name, :category_id, presence: true
+  validates :title, :category_id, presence: true
+
+  has_many :pages
   belongs_to :category
   belongs_to :user
 end

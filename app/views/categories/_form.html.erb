@@ -3,20 +3,18 @@
   <%= form_with(model: category, local: true) do |form| %>
     <% if category.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
-
         <ul>
-        <% category.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+          <% category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
 
 
     <div class='form-group'>
-      <%= form.label :name, Category.human_attribute_name("name") %>
-      <%= form.text_field :name, class: 'form-control', placeholder: Category.human_attribute_name("name") %>
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control', placeholder: true %>
     </div>
 
     <%= form.submit t('action.save'), class: "btn btn-primary" %>

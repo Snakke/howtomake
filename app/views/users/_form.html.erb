@@ -4,34 +4,32 @@
   <%= form_with(model: user, local: true) do |form| %>
     <% if user.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
         <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+          <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
 
     <div class='form-group'>
-      <%= form.label :uid, User.human_attribute_name("uid") %>
-      <%= form.text_field :uid, class: 'form-control', placeholder: User.human_attribute_name("uid") %>
+      <%= form.label :uid %>
+      <%= form.text_field :uid, class: 'form-control', placeholder: true %>
     </div>
 
     <div class='form-group'>
-      <%= form.label :name, User.human_attribute_name("name") %>
-      <%= form.text_field :name, class: 'form-control', placeholder: User.human_attribute_name("name") %>
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'form-control', placeholder: true %>
     </div>
 
     <div class="form-group">
-      <%= form.label :password, User.human_attribute_name("encrypted_password") %>
-      <%= form.password_field :password, class: 'form-control', placeholder: User.human_attribute_name("encrypted_password") %>
+      <%= form.label :password %>
+      <%= form.password_field :password, class: 'form-control', placeholder: true %>
     </div>
 
     <div class='form-group'>
-      <%= form.label :role, User.human_attribute_name("role") %>
-      <%= form.text_field :role, class: 'form-control', placeholder: User.human_attribute_name("role") %>
+      <%= form.label :role %>
+      <%= form.text_field :role, class: 'form-control', placeholder: true %>
     </div>
 
     <%= form.submit t('action.save'), class: "btn btn-primary" %>
