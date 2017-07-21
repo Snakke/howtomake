@@ -1,20 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { addPage } from '../actions/actions.js';
+import Buttons from './buttons.js'
 
-const AddPage = ({ dispatch }) => {
-return (
-      <button onClick={e => {
-        e.preventDefault();
-        dispatch(addPage());
-      }}>
-        Add Page
-      </button>
+const Toolbar = ({ dispatch }) => {
+  return (
+    <Buttons />
   );
 };
 
-AddPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
-
-export default connect()(AddPage);
+export default Toolbar;
