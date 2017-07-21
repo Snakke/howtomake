@@ -9,3 +9,17 @@
 #manual {
   margin: 20px;
 }
+
+.pages{
+  height: 100%;
+  width: 100%;
+}
+
+.page{
+  margin: auto;
+  margin-top: 1px;
+  border: 1px solid black;
+  height: 400px;
+  width: 800px;
+  background-color: white;
+}

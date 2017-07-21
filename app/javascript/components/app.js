@@ -1,10 +1,11 @@
 import React from 'react';
-
-import Tollbar from './toolbar';
+import Toolbar from './toolbar.js';
+import Pages from './pages.js';
 
 const App = () => (
   <div>
     <Toolbar />
+    <Pages />
   </div>
 );
 
