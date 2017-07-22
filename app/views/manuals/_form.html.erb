@@ -17,7 +17,7 @@
 
   <div class="field">
     <%= form.label :category %>
-    <%= form.collection_select :category_id, Category.order(:title), :id, :title, include_blank: t('view.manual.select_category') %>
+    <%= form.collection_select :category_id, @categories, :id, :title, include_blank: t('view.manual.select_category') %>
   </div>
 
   <%= form.submit t('action.save'), class: "btn btn-primary" %>

@@ -20,6 +20,7 @@ class ManualsController < ApplicationController
   end
 
   def edit
+    @categories = Category.order(:title)
   end
 
   def create
