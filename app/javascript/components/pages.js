@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deletePage } from '../actions/actions.js';
+import { removePage } from '../actions/actions.js';
 import Page from './page.js';
 
 const Pages = ({ pages, onPageClick }) => (
@@ -18,28 +19,27 @@ const Pages = ({ pages, onPageClick }) => (
 Pages.propTypes = {
   pages: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    text: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   onPageClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    pages: state,
+    pages: state.pages,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onPageClick: (id) => {
-      dispatch(deletePage(id));
+      dispatch(removePage(id));
     },
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(Pages);
+  mapDispatchToProps)(Pages);
 
 

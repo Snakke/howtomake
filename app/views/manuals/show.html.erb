@@ -15,7 +15,7 @@
   <%= @manual.user %>
 </p>
 
-<div id="manual"></div>
+<div id="manual" data-manual-id=<%= @manual.id %> data-pages=<%= @pages.to_json %> ></div>
 
 <%= link_to t('action.edit'), edit_manual_path(@manual) %> |
 <%= link_to t('action.back'), manuals_path %>

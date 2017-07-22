@@ -1,16 +1,15 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Page = ({ onClick, text }) => (
-  <div className="page"
-    onClick={onClick}
-  >
-    {text}
+const Page = ({ onClick, title }) => (
+  <div className="page" onClick={onClick}>
+    {title}
   </div>
 );
 
 Page.propTypes = {
   onClick: PropTypes.func.isRequired,
-  text: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Page;

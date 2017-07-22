@@ -1,13 +1,17 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPage } from '../actions/actions.js';
+import { createPage } from '../actions/actions.js';
 
-const PageButtons = ({ dispatch }) => {
+const PageButtons = ({ manual_id, dispatch }) => {
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
-      <button type="button" className="btn btn-secondary" onClick={e => {
-        e.preventDefault();
-        dispatch(addPage());
+      <button type="button" className="btn btn-secondary" onClick={() => {
+        const title = prompt("Please enter title", "Harry Potter");
+        if (title != null) {
+            dispatch(createPage(manual_id, title));
+        }
+        
       }}>
         Add Page
       </button>
@@ -28,4 +32,13 @@ PageButtons.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect()(PageButtons);
+const mapStateToProps = (state) => {
+  return {
+    manual_id: state.manual_id,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  undefined)(PageButtons);
+
