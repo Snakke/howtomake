@@ -7,7 +7,7 @@ const PageButtons = ({ manual_id, dispatch }) => {
   return (
     <div className="btn-group" role="group" aria-label="Basic example">
       <button type="button" className="btn btn-secondary" onClick={() => {
-        const title = prompt("Please enter title", "Harry Potter");
+        const title = prompt("Please enter title", "");
         if (title != null) {
             dispatch(createPage(manual_id, title));
         }
