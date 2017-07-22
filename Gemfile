@@ -45,6 +45,7 @@ gem 'cancancan', '~> 2.0'
 
 gem 'webpacker', '~> 2.0'
 gem 'foreman', '~> 0.84.0'
+gem 'acts_as_list', '~> 0.9.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

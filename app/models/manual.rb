@@ -13,7 +13,7 @@
 class Manual < ApplicationRecord
   validates :title, :category_id, presence: true
 
-  has_many :pages
+  has_many :pages, -> { order(position: :asc) }
   belongs_to :category
   belongs_to :user
 end

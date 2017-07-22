@@ -5,7 +5,8 @@ import { removePage } from '../actions/actions.js';
 import Page from './page.js';
 
 const Pages = ({ pages, onPageClick }) => (
-  <ul>
+  <div className="pages">
+  <div className="preview">
     {pages.map(page =>
       <Page
         key={page.id}
@@ -13,20 +14,23 @@ const Pages = ({ pages, onPageClick }) => (
         onClick={() => onPageClick(page.id)}
       />
     )}
-  </ul>
+  </div>
+  
+  </div>
 );
 
 Pages.propTypes = {
   pages: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    position: PropTypes.number.isRequired,   
   }).isRequired).isRequired,
   onPageClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    pages: state.pages,
+    pages: state.getIn(["manual", "pages"]).toJS(),
   };
 };
 

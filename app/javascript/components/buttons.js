@@ -34,8 +34,9 @@ PageButtons.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    manual_id: state.manual_id,
+    manual_id: state.getIn(["manual", "manual_id"]),
   };
+
 };
 
 export default connect(

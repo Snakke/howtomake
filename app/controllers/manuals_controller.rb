@@ -9,7 +9,6 @@ class ManualsController < ApplicationController
   end
 
   def show
-    @pages = @manual.pages.to_a
     respond_with(@manual)
   end
 

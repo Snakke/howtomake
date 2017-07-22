@@ -9,17 +9,19 @@
 #manual {
   margin: 20px;
 }
-
-.pages{
-  height: 100%;
-  width: 100%;
+.preview{
+  margin-right: auto;
+  height: 500px;
+  width: 30%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
 }
 
 .page{
-  margin: auto;
-  margin-top: 1px;
+  margin-top: 5px;
   border: 1px solid black;
-  height: 400px;
-  width: 800px;
+  height: 180px;
+  width: 300px;
   background-color: white;
 }
