@@ -1,4 +1,4 @@
 {
-  "application.js": "http://0.0.0.0:8080/packs/application.js",
-  "application.css": "http://0.0.0.0:8080/packs/application.css"
+  "application.css": "http://0.0.0.0:8080/packs/application.css",
+  "application.js": "http://0.0.0.0:8080/packs/application.js"
 }

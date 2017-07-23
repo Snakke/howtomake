@@ -13,6 +13,13 @@ export const deletePage = (id) => {
   };
 };
 
+export const selectCurrentPage = (id) => {
+  return {
+    type: 'SELECT_CURRENT_PAGE',
+    id,
+  };
+};
+
 export function createPage(manual_id, title) {
   return dispatch => {
     $.ajax({
