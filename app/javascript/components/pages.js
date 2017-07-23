@@ -7,9 +7,10 @@ import Page from './page.js';
 import CurrentPage from './current_page.js';
 
 const Pages = ({ pages, index, onPageClick, onKeyDeleteDown }) => {
-  let currentPage = { title: "", position: null};
-  if (pages[index]){
-    currentPage = pages[index];
+  let currentPage = pages[index];
+  let cp = null;
+  if (currentPage){
+    cp = <CurrentPage title={currentPage.title} position={currentPage.position} blocks={currentPage.blocks}/>
   }
   return (
   <div className="pages">
@@ -23,7 +24,7 @@ const Pages = ({ pages, index, onPageClick, onKeyDeleteDown }) => {
       />
     )}
   </div>
-  <CurrentPage title={currentPage.title} position={currentPage.position} />
+  {cp}
   </div>
   )
 };
@@ -32,7 +33,10 @@ Pages.propTypes = {
   pages: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    position: PropTypes.number,   
+    position: PropTypes.number,
+    blocks: PropTypes.arrayOf(PropTypes.shape({
+    data: PropTypes.object.isRequired,   
+  }).isRequired).isRequired,  
   }).isRequired).isRequired,
   index: PropTypes.number.isRequired,
   onPageClick: PropTypes.func.isRequired,

@@ -48,3 +48,17 @@ export function removePage(id) {
   };
 };
 
+export function createBlock(page_id, type) {
+  return dispatch => {
+    $.ajax({
+      url: "/blocks",
+      type: 'POST',
+      dataType:'json',
+      data: { block: { page_id: page_id, type: type, data: { x: 5, y: 5, content: "" } } },
+      success: function (data) {
+        dispatch(addBlock(data))
+      }
+    })
+  };
+};
+
