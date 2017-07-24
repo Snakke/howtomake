@@ -1,10 +1,25 @@
-let nextPageId = 0;
+export function createPage(manual_id, title) {
+  return{
+    type: 'CREATE_PAGE',
+    manual_id,
+    title,
+  }
+};
+
 export const addPage = (page) => {
   return {
     type: 'ADD_PAGE',
-    page
+    page,
   };
 };
+
+export function removePage(id) {
+  return{
+    type: 'REMOVE_PAGE',
+    id,
+  }
+};
+
 
 export const deletePage = (id) => {
   return {
@@ -17,34 +32,6 @@ export const selectCurrentPage = (id) => {
   return {
     type: 'SELECT_CURRENT_PAGE',
     id,
-  };
-};
-
-export function createPage(manual_id, title) {
-  return dispatch => {
-    $.ajax({
-      url: "/pages",
-      type: 'POST',
-      dataType:'json',
-      data: { page: { title: title, manual_id: manual_id } },
-      success: function (data) {
-        dispatch(addPage(data))
-      }
-    })
-  };
-};
-
-export function removePage(id) {
-  return dispatch => { 
-    $.ajax({
-      url: "/pages/"+id,
-      type: 'DELETE',
-      dataType:'json',
-      data: { id: id },
-      success: function () {
-        dispatch(deletePage(id))
-      }
-    })
   };
 };
 

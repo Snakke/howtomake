@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import manual from '../reducers/manual.js';
+import connection from '../reducers/connection.js'
 import App from '../components/app.js';
 
 import '../styles/application.scss';
@@ -21,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = rootElement.data('initialState');
 
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const rootReducer = combineReducers({ manual });
+    const rootReducer = combineReducers({ manual: manual, connection: connection });
     const store = createStore(rootReducer,
-                              fromJS({manual: data}),
+                              fromJS({manual: data, connection: {connected: false}}),
                               composeEnhancers(applyMiddleware(thunk)));
 
     ReactDOM.render(
