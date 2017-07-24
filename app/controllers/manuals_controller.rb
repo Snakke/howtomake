@@ -9,7 +9,7 @@ class ManualsController < ApplicationController
   end
 
   def show
-    @pages = @manual.pages.to_a
+    @manual = Manual.includes(pages: :blocks).find(params[:id])
     respond_with(@manual)
   end
 

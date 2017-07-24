@@ -12,4 +12,5 @@
 
 class Block < ApplicationRecord
   belongs_to :page
+  serialize :data, JSON
 end

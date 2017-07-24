@@ -1,45 +1,49 @@
-let nextPageId = 0;
+export function createPage(manual_id, title) {
+  return{
+    type: 'CREATE_PAGE',
+    manual_id,
+    title,
+  }
+};
+
 export const addPage = (page) => {
-  console.log("Page " + page.id + " created.")
   return {
     type: 'ADD_PAGE',
-    id: page.id,
-    title: page.title,
+    page,
   };
 };
 
+export function removePage(id) {
+  return{
+    type: 'REMOVE_PAGE',
+    id,
+  }
+};
+
+
 export const deletePage = (id) => {
-  console.log("Page " + id + " deleted.")
   return {
     type: 'DELETE_PAGE',
     id,
   };
 };
 
-export function createPage(manual_id, title) {
-  return dispatch => {
-    console.log(manual_id) 
-    $.ajax({
-      url: "/pages",
-      type: 'POST',
-      dataType:'json',
-      data: { page: { title: title, manual_id: manual_id } },
-      success: function (resp) {
-        dispatch(addPage(resp))
-      }
-    })
+export const selectCurrentPage = (id) => {
+  return {
+    type: 'SELECT_CURRENT_PAGE',
+    id,
   };
 };
 
-export function removePage(id) {
-  return dispatch => { 
+export function createBlock(page_id, type) {
+  return dispatch => {
     $.ajax({
-      url: "/pages/"+id,
-      type: 'DELETE',
+      url: "/blocks",
+      type: 'POST',
       dataType:'json',
-      data: { id: id },
-      success: function () {
-        dispatch(deletePage(id))
+      data: { block: { page_id: page_id, type: type, data: { x: 5, y: 5, content: "" } } },
+      success: function (data) {
+        dispatch(addBlock(data))
       }
     })
   };
