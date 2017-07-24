@@ -19,11 +19,11 @@ class Page < ApplicationRecord
   after_destroy_commit { ActionCable.server.broadcast ManualsChannel.channel_for_manual(manual_id), destroy_page_data }
 
   def create_page_data
-    { type: "ADD_PAGE", page: as_json }
+    { type: 'ADD_PAGE', page: as_json }
   end
 
   def destroy_page_data
-    { type: "DELETE_PAGE", page: as_json }
+    { type: 'DELETE_PAGE', page: as_json }
   end
 
   def as_json(options = {})
