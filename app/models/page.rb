@@ -11,7 +11,7 @@
 #
 
 class Page < ApplicationRecord
-  has_many :blocks
+  has_many :blocks, dependent: :destroy
   belongs_to :manual
   acts_as_list scope: :manual
 

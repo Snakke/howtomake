@@ -13,4 +13,14 @@
 class Block < ApplicationRecord
   belongs_to :page
   serialize :data, JSON
+
+  after_create_commit { ActionCable.server.broadcast ManualsChannel.channel_for_manual(page.manual_id), create_block_data }
+
+  def create_block_data
+    { type: 'ADD_BLOCK', position: page.position-1, block: as_json}
+  end
+
+  def serializable_hash options=nil
+    super.merge "type" => type
+  end
 end

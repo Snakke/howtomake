@@ -24,5 +24,3 @@ Page.propTypes = {
 };
 
 export default Page;
-
-

@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = rootElement.data('initialState');
 
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const rootReducer = combineReducers({ manual: manual, connection: connection });
+    const rootReducer = combineReducers({ manual, connection });
     const store = createStore(rootReducer,
                               fromJS({manual: data, connection: {connected: false}}),
                               composeEnhancers(applyMiddleware(thunk)));
