@@ -4,7 +4,7 @@ import TextBlock from './text_block.js'
 import ImageBlock from './image_block.js'
 import VideoBlock from './video_block.js'
 
-const CurrentPage = ({ title, position, blocks, onBlockMove }) => {
+const CurrentPage = ({ title, position, blocks }) => {
   let pagesBlocks = blocks.map((block) => {  
     switch (block.type){
       case 'Text':
