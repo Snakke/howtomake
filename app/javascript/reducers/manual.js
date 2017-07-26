@@ -21,9 +21,12 @@ const manual = (state = {}, action) => {
       });
       return state;
     case 'DELETE_PAGE':
-      pageIndex = pageIndex = pages.findIndex((page) => page.get('id') == action.id);
+      pageIndex = pages.findIndex((page) => page.get('id') == action.id);
+      if (pageIndex < 0) { return state }
+        
       let pageByIndex = pages.get(pageIndex);
       pages = pages.delete(pageIndex);
+      state = state.set("current_page", pageIndex > 0 ? pageIndex-1 : 0)
       return state.set("pages", pages.map((page) => {
         if (page.get("position") > pageByIndex.get("position")) {
          page = page.set("position", page.get("position") -1);
@@ -31,7 +34,7 @@ const manual = (state = {}, action) => {
         return page;
       }));
     case 'SELECT_CURRENT_PAGE':
-      pageIndex = pageIndex = pages.findIndex((page) => page.get('id') == action.id);
+      pageIndex = pages.findIndex((page) => page.get('id') == action.id);
       return state.set("current_page", pageIndex);
     case 'ADD_TEXT':
       page_id = pages.getIn([action.position, "id"]);

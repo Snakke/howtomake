@@ -23,7 +23,7 @@ class Page < ApplicationRecord
   end
 
   def destroy_page_data
-    { type: 'DELETE_PAGE', page: as_json }
+    { type: 'DELETE_PAGE', id: id }
   end
 
   def as_json(options = {})
