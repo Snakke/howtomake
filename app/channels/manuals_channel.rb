@@ -29,8 +29,12 @@ class ManualsChannel < ApplicationCable::Channel
     Block.create(page_id: data['page_id'], type: data['type'], data: data['data'])
   end
 
+  def resize_block(data)
+    Block.find(data['id']).update_attributes(data: data['data'])
+  end
+
   def move_block(data)
-    Block.find(data['id']).update(data: { x: data['x'], y: data['y']})
+    Block.find(data['id']).update_attributes(data: data['data'])
   end
 
   def self.channel_for_manual(manual_id)

@@ -5,6 +5,9 @@ const manual = (state = {}, action) => {
   let pages = state.get("pages");
   let pageIndex = null;
   let page_id = null;
+  let page = null;
+  let blockIndex = null;
+  let blockByIndex = null;
   let currentSubscription = getSubscription({ channel: "ManualsChannel",manual_id: state.get("manual_id")})
   switch (action.type) {
     case 'CREATE_PAGE':
@@ -45,12 +48,12 @@ const manual = (state = {}, action) => {
       });
       return state;
     case 'ADD_IMAGE':
-      let height = 800
+      let width = 300
       page_id = pages.getIn([action.position, "id"]);
       currentSubscription.perform('add_image', {
         page_id: page_id,
         type: "Image",
-        data: {x: 50, y: 50, height: height, width: action.height*height/action.width , content: action.url, type: "ImageBlock"}
+        data: {x: 50, y: 50, height: action.height*width/action.width, width: width , content: action.url, type: "ImageBlock"}
       });
       return state;
     case 'ADD_VIDEO':
@@ -62,19 +65,42 @@ const manual = (state = {}, action) => {
       });
       return state;
     case 'ADD_BLOCK':
-      let page = pages.get(action.position);
+      page = pages.get(action.position);
       let blocks = page.get("blocks");
       blocks = blocks.push(fromJS(action.block));
       page = page.set("blocks", blocks);
       pages = pages.set(action.position, page);
       return state.set("pages", pages);
     case 'MOVE_BLOCK':
+      pageIndex = state.get("current_page");
+      page = pages.get(pageIndex);
+      blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
+      if (blockIndex < 0) { return state }
+
+      blockByIndex = page.getIn(["blocks", blockIndex]);
+      blockByIndex = blockByIndex.updateIn(["data", "x"], x => action.x);
+      blockByIndex = blockByIndex.updateIn(["data", "y"], y => action.y);
       currentSubscription.perform('move_block', {
         id: action.id,
-        x: action.x,
-        y: action.y,
+        data: blockByIndex.get("data"),
       });
-      return state
+      debugger;
+      return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
+    case 'RESIZE_BLOCK':
+      pageIndex = state.get("current_page");
+      page = pages.get(pageIndex);
+      blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
+      if (blockIndex < 0) { return state }
+
+      blockByIndex = page.getIn(["blocks", blockIndex]);
+      blockByIndex = blockByIndex.updateIn(["data", "width"], width => width + action.w);
+      blockByIndex = blockByIndex.updateIn(["data", "height"], height => height + action.h);
+      currentSubscription.perform('resize_block', {
+        id: action.id,
+        data: blockByIndex.get("data"),
+      });
+
+      return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
     default:
       return state;
   }

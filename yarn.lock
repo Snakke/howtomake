@@ -4040,7 +4040,7 @@ react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-draggable@^2.2.6:
+react-draggable@^2.2.3, react-draggable@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-2.2.6.tgz#3a806e10f2da6babfea4136be6510e89b0d76901"
   dependencies:
@@ -4073,6 +4073,19 @@ react-redux@^5.0.5:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
+
+react-resizable-box@^2.0.3:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/react-resizable-box/-/react-resizable-box-2.0.6.tgz#c6fbd7c0bac7a6678eb32d0993cab7b601bea8e7"
+  dependencies:
+    lodash.isequal "^4.5.0"
+
+react-rnd@^5.0.9:
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/react-rnd/-/react-rnd-5.0.9.tgz#6b7b2e69e7ae23060917cb037774f15c83086606"
+  dependencies:
+    react-draggable "^2.2.3"
+    react-resizable-box "^2.0.3"
 
 react-transition-group@1.2.0:
   version "1.2.0"

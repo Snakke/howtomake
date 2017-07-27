@@ -76,3 +76,12 @@ export const moveBlock = (id, x, y) => {
   }
 }
 
+export const resizeBlock = (id, w, h) => {
+  return{
+    type: 'RESIZE_BLOCK',
+    id,
+    w,
+    h,
+  }
+}
+
