@@ -6,5 +6,4 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
-  channel_prefix: howtomake_production
+  url: redis://redistogo:03983c3f0af395567a1043d412cfd12c@angelfish.redistogo.com:10353/
