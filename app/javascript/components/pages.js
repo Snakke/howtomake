@@ -5,26 +5,18 @@ import { removePage } from '../actions/actions.js';
 import { selectCurrentPage } from '../actions/actions.js';
 import Page from './page.js';
 import CurrentPage from './current_page.js';
+import Preview from './SortablePages.js';
 
 const Pages = ({ pages, index, onPageClick, onKeyDeleteDown }) => {
-  let currentPage = pages[index];
-  let cp = null;
-  if (currentPage){
-    cp = <CurrentPage title={currentPage.title} position={currentPage.position} blocks={currentPage.blocks}/>
+  let selectedPage = pages[index];
+  let currentPage = null;
+  if (selectedPage){
+    currentPage = <CurrentPage title={selectedPage.title} position={selectedPage.position} blocks={selectedPage.blocks}/>
   }
   return (
   <div className="pages">
-  <div className="preview">
-    {pages.map(page =>
-      <Page
-        key={page.id}
-        {...page}
-        onClick={() => onPageClick(page.id)}
-        onKeyPress={() => onKeyDeleteDown(page.id)}
-      />
-    )}
-  </div>
-  {cp}
+  <Preview pages={pages} />
+  {currentPage}
   </div>
   )
 };

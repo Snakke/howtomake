@@ -15,7 +15,7 @@
   <%= @manual.user %>
 </p>
 
-<div id="manual" data-initial-state=<%= manual_json(@manual) %> ></div>
+<%= content_tag :div, nil, id: "manual", data: { "initial-state" => manual_data(@manual)} %>
 
 <%= link_to t('action.edit'), edit_manual_path(@manual) %> |
 <%= link_to t('action.back'), manuals_path %>

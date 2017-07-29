@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Block from './block.js';
 import { connect } from 'react-redux';
 import { createSubscription } from '../cable'
-import { addPage } from '../actions/actions.js';
 
 class ConnectionState extends React.Component{
   componentWillMount() {
