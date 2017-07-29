@@ -37,6 +37,14 @@ class ManualsChannel < ApplicationCable::Channel
     Block.find(data['id']).update_attributes(data: data['data'])
   end
 
+  def sort_pages(data)
+    current_user.manuals.where(id: params[:manual_id]).first.pages.where(id: data['id']).first.update(position: data['newPosition'])
+  end
+
+  def update_text(data)
+    Block.find(data['id']).update_attributes(data: data['data'])
+  end
+
   def self.channel_for_manual(manual_id)
     format(MANUAL_CHANNEL, manual_id)
   end

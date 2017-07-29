@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createPage } from '../actions/actions.js';
 import { createTextBlock, createImageBlock, createVideoBlock } from '../actions/actions.js';
-import '../cloudinary.rb';
+import '../cloudinary.js';
 import bootbox from 'bootbox';
 import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Col } from 'reactstrap';
 

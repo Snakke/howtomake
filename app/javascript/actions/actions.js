@@ -76,12 +76,36 @@ export const moveBlock = (id, x, y) => {
   }
 }
 
-export const resizeBlock = (id, w, h) => {
+export const resizeBlock = (id, direction, w, h) => {
   return{
     type: 'RESIZE_BLOCK',
     id,
+    direction,
     w,
     h,
   }
 }
 
+export const sortPages = (id, oldPosition, newPosition) => {
+  return{
+    type: 'SORT_PAGES',
+    id,
+    oldPosition,
+    newPosition,
+  }
+}
+
+export const updatePages = (new_order) => {
+  return{
+    type: 'UPDATE_PAGES',
+    new_order,
+  }
+}
+
+export const updateText = (id, content) => {
+  return{
+    type: 'UPDATE_TEXT',
+    id,
+    content,
+  }
+}

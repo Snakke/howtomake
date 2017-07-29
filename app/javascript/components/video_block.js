@@ -17,7 +17,8 @@ class VideoBlock extends React.Component{
   }
   
   onResize(event: MouseEvent, data: Direction, refToElement: HTMLElement, delta: NumberSize,) {
-    this.props.onBlockResize(this.props.id, delta.width, delta.height);
+    debugger
+    this.props.onBlockResize(this.props.id, data, delta.width, delta.height);
   }
 
   render(){
@@ -34,7 +35,9 @@ class VideoBlock extends React.Component{
         bounds="parent"
         onResizeStop={this.onResize}
         onDragStop={this.onMove}
-      > 
+        dragHandlerClassName={".handler"}
+      >  
+        <div className="handler"></div> 
         <div className="video_block" >
           <iframe
             src={this.props.data.content}
@@ -48,18 +51,14 @@ class VideoBlock extends React.Component{
 
 VideoBlock.propTypes = {
   data: PropTypes.object.isRequired,
-};
-
-VideoBlock.propTypes = {
-  data: PropTypes.object.isRequired,
   onBlockMove: PropTypes.func.isRequired,
   onBlockResize: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onBlockResize: (id, w, h) => {
-      dispatch(resizeBlock(id, w, h));
+    onBlockResize: (id, direction, w, h) => {
+      dispatch(resizeBlock(id, direction, w, h));
     },
     onBlockMove: (id, x, y) => {
       dispatch(moveBlock(id, x, y));

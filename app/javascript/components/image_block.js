@@ -17,7 +17,10 @@ class ImageBlock extends React.Component{
   }
   
   onResize(event: MouseEvent, data: Direction, refToElement: HTMLElement, delta: NumberSize,) {
-    this.props.onBlockResize(this.props.id, delta.width, delta.height);
+    console.log(data)
+    console.log(delta)
+    console.log(refToElement)
+    this.props.onBlockResize(this.props.id, data, delta.width, delta.height);
   }
 
   render(){
@@ -52,8 +55,8 @@ ImageBlock.propTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onBlockResize: (id, w, h) => {
-      dispatch(resizeBlock(id, w, h));
+    onBlockResize: (id, direction, w, h) => {
+      dispatch(resizeBlock(id, direction, w, h));
     },
     onBlockMove: (id, x, y) => {
       dispatch(moveBlock(id, x, y));

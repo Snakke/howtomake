@@ -84,7 +84,6 @@ const manual = (state = {}, action) => {
         id: action.id,
         data: blockByIndex.get("data"),
       });
-      debugger;
       return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
     case 'RESIZE_BLOCK':
       pageIndex = state.get("current_page");
@@ -95,11 +94,53 @@ const manual = (state = {}, action) => {
       blockByIndex = page.getIn(["blocks", blockIndex]);
       blockByIndex = blockByIndex.updateIn(["data", "width"], width => width + action.w);
       blockByIndex = blockByIndex.updateIn(["data", "height"], height => height + action.h);
+      switch(action.direction){
+        case 'topLeft':
+          blockByIndex = blockByIndex.updateIn(["data", "x"], x => x - action.w);
+          blockByIndex = blockByIndex.updateIn(["data", "y"], y => y - action.h);
+          break;;
+        case 'top':
+        case 'topRight':
+          blockByIndex = blockByIndex.updateIn(["data", "y"], y => y - action.h);
+          break;
+        case 'left':
+        case 'bottomLeft':
+          blockByIndex = blockByIndex.updateIn(["data", "x"], x => x - action.w);
+          break;
+        default: break;
+      }
+
       currentSubscription.perform('resize_block', {
         id: action.id,
         data: blockByIndex.get("data"),
       });
+      return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
+    case 'SORT_PAGES':
+      if ( action.oldPosition == action.newPosition ) { return state }
+      currentSubscription.perform('sort_pages', {
+        id: action.id,
+        newPosition: action.newPosition,
+      });
+      return state;
+    case 'UPDATE_PAGES':
+      pages = pages.map(page => {
+        page = page.set('position', ( action.newOrder.indexOf(page.get('id'))+1))
+        return page;
+      });
+      pages = pages.sortBy(page => page.get('position'));
+      return state.set("pages", pages);
+    case 'UPDATE_TEXT':
+      pageIndex = state.get("current_page");
+      page = pages.get(pageIndex);
+      blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
+      if (blockIndex < 0) { return state }
 
+      blockByIndex = page.getIn(["blocks", blockIndex]);
+      blockByIndex = blockByIndex.updateIn(["data", "content"], content => action.content);
+      currentSubscription.perform('update_text', {
+        id: action.id,
+        data: blockByIndex.get("data"),
+      });
       return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
     default:
       return state;
