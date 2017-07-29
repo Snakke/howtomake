@@ -21,6 +21,20 @@ class VideoBlock extends React.Component{
   }
 
   render(){
+    if (!this.props.editMode) {
+      return(
+        <div className="video_block" style={{ position: "absolute",
+                                              top: this.props.data.y,
+                                              left: this.props.data.x,
+                                              height: this.props.data.height,
+                                              width: this.props.data.width }} >
+          <iframe
+            src={this.props.data.content}
+            frameBorder="0" allowFullScreen
+          ></iframe>
+        </div>
+      )
+    }
     return (
       <Rnd
         default={{
@@ -34,15 +48,16 @@ class VideoBlock extends React.Component{
         bounds="parent"
         onResizeStop={this.onResize}
         onDragStop={this.onMove}
-        dragHandlerClassName={".handler"}
+        dragHandlerClassName={".video-handler"}
       >  
-        <div className="handler"></div> 
+        
         <div className="video_block" >
           <iframe
             src={this.props.data.content}
             frameBorder="0" allowFullScreen
           ></iframe>
         </div>
+        <i className="fa fa-arrows video-handler fa-2x" aria-hidden="true"></i> 
       </Rnd>
     )
   }
@@ -52,6 +67,12 @@ VideoBlock.propTypes = {
   data: PropTypes.object.isRequired,
   onBlockMove: PropTypes.func.isRequired,
   onBlockResize: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    editMode: state.getIn(["manual", "edit_mode"]),
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -65,4 +86,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(VideoBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(VideoBlock);

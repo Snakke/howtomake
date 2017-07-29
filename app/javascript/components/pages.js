@@ -6,13 +6,14 @@ import { removePage } from '../actions/actions.js';
 import { selectCurrentPage } from '../actions/actions.js';
 import Page from './page.js'
 
-const Pages = SortableContainer(({pages, onPageClick, onKeyDeleteDown}) => {
+const Pages = SortableContainer(({pages, onPageClick, onKeyDeleteDown, disabled}) => {
   return (
     <div className="preview">
       {pages.map((page, index) => (
         <Page
           key={page.id}
           index={index}
+          disabled={disabled}
           {...page}
           onClick={() => onPageClick(page.id)}
           onKeyPress={() => onKeyDeleteDown(page.id)}

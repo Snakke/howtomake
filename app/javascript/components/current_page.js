@@ -20,9 +20,7 @@ const CurrentPage = ({ title, position, blocks }) => {
   return (
     <div className="currentPage" >
       <div className="header">{title}</div>
-      <div className="page_body">
-        {pagesBlocks}
-      </div>
+      {pagesBlocks}
       <div className="footer">{position}</div>
     </div>
   );

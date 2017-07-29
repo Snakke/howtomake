@@ -44,6 +44,17 @@ class TextBlock extends React.Component{
   }
   
   render(){
+    if (!this.props.editMode) {
+      return(
+        <div dangerouslySetInnerHTML={{ __html: marked(this.props.data.content) }}
+             className="text_block" style={{ position: "absolute",
+                                             top: this.props.data.y,
+                                             left: this.props.data.x,
+                                             height: this.props.data.height,
+                                             width: this.props.data.width }} >
+        </div>
+      )
+    }
     return (
       <Rnd
         default={{
@@ -67,16 +78,15 @@ class TextBlock extends React.Component{
             topRight: false,
           }
         }
-        dragHandlerClassName={".handler"}
+        dragHandlerClassName={".text-handler"}
       >  
-      <div className="handler"></div>        
+      <i className="fa fa-arrows text-handler fa-2x" aria-hidden="true"></i> 
       <textarea 
         className="block"
         value={this.props.data.content}
         onChange={this.handleChange}
         ref={(input) => { this.textArea = input; }}
       ></textarea>
-      <div dangerouslySetInnerHTML={{ __html: marked(this.props.data.content) }} ></div>
     </Rnd>
     )
   }
@@ -95,6 +105,12 @@ TextBlock.propTypes = {
   sendUpdatedText: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    editMode: state.getIn(["manual", "edit_mode"]),
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onBlockResize: (id, direction, w, h) => {
@@ -109,4 +125,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(TextBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(TextBlock);

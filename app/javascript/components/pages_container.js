@@ -14,7 +14,7 @@ const PagesContainer = ({ pages, index, onPageClick, onKeyDeleteDown }) => {
   }
   return (
     <div className="pages">
-      <PagesList pages={pages} />
+      <PagesList className="preview" pages={pages} />
       {currentPage}
     </div>
   )

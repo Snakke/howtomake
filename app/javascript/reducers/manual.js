@@ -2,7 +2,9 @@ import { fromJS } from 'immutable';
 import { getSubscription } from '../cable.js'
 
 const manual = (state = {}, action) => {
+  let manual_id = state.get("manual_id");
   let pages = state.get("pages");
+  let current_page = state.get("current_page");
   let pageIndex = null;
   let page_id = null;
   let page = null;
@@ -13,7 +15,7 @@ const manual = (state = {}, action) => {
     case 'CREATE_PAGE':
       currentSubscription.perform('add_page', {
         title: "New page",
-        manual_id: action.manual_id
+        manual_id
       });
       return state;
     case 'ADD_PAGE':
@@ -40,7 +42,7 @@ const manual = (state = {}, action) => {
       pageIndex = pages.findIndex((page) => page.get('id') == action.id);
       return state.set("current_page", pageIndex);
     case 'ADD_TEXT':
-      page_id = pages.getIn([action.position, "id"]);
+      page_id = pages.getIn([current_page, "id"]);
       currentSubscription.perform('add_text', {
         page_id: page_id,
         type: "Text",
@@ -49,7 +51,7 @@ const manual = (state = {}, action) => {
       return state;
     case 'ADD_IMAGE':
       let width = 300
-      page_id = pages.getIn([action.position, "id"]);
+      page_id = pages.getIn([current_page, "id"]);
       currentSubscription.perform('add_image', {
         page_id: page_id,
         type: "Image",
@@ -57,7 +59,7 @@ const manual = (state = {}, action) => {
       });
       return state;
     case 'ADD_VIDEO':
-      page_id = pages.getIn([action.position, "id"]);
+      page_id = pages.getIn([current_page, "id"]);
       currentSubscription.perform('add_video', {
         page_id: page_id,
         type: "Video",
@@ -65,11 +67,11 @@ const manual = (state = {}, action) => {
       });
       return state;
     case 'ADD_BLOCK':
-      page = pages.get(action.position);
+      page = pages.get(current_page);
       let blocks = page.get("blocks");
       blocks = blocks.push(fromJS(action.block));
       page = page.set("blocks", blocks);
-      pages = pages.set(action.position, page);
+      pages = pages.set(current_page, page);
       return state.set("pages", pages);
     case 'MOVE_BLOCK':
       pageIndex = state.get("current_page");
@@ -142,6 +144,9 @@ const manual = (state = {}, action) => {
         data: blockByIndex.get("data"),
       });
       return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
+    case 'EDIT_MODE':
+      debugger
+      return state.set("edit_mode", !state.get("edit_mode"));
     default:
       return state;
   }
