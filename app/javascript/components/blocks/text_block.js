@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Rnd from 'react-rnd';
-import { resizeBlock } from '../actions/actions.js';
-import { moveBlock } from '../actions/actions.js';
-import { updateText } from '../actions/actions.js';
+import { resizeBlock, moveBlock, updateText } from '../../actions/actions.js';
 import ContentEditable from 'react-contenteditable';
 import marked from 'marked';
 

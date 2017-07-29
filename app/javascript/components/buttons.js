@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createPage } from '../actions/actions.js';
-import { createTextBlock, createImageBlock, createVideoBlock } from '../actions/actions.js';
-import '../cloudinary.js';
-import bootbox from 'bootbox';
+import { createPage, createTextBlock, createImageBlock, createVideoBlock } from '../actions/actions.js';
 import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Col } from 'reactstrap';
+import '../cloudinary.js';
 
-class PageButtons extends React.Component{
+class Buttons extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -65,7 +63,7 @@ class PageButtons extends React.Component{
   }
 }
 
-PageButtons.propTypes = {
+Buttons.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
@@ -79,4 +77,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  undefined)(PageButtons);
+  undefined)(Buttons);

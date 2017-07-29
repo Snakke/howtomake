@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 
-const Page = ({ onKeyPress, onClick, title, position, id }) => {
-  let handleKeyPress = (e) => {
+const DragHandle = SortableHandle(() => <span>::::</span>);
+
+const Page = SortableElement(({ onKeyPress, onClick, title, position, id }) => 
+  <div className="page" onClick={onClick} onKeyPress={(e) => {
     let key = e.keyCode || e.charCode;
     if( key == 127 ){
       onKeyPress();
     }
-  }
-  return (
-  <div className="page" onClick={onClick} onKeyPress={handleKeyPress} tabIndex="0">
+  }} tabIndex="0">
+    <DragHandle />
     {position}
   </div>
-  )
-};
+);
 
 Page.propTypes = {
   onClick: PropTypes.func.isRequired,

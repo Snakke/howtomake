@@ -1,5 +1,4 @@
 import ActionCable from 'actioncable';
-import { isEqual } from 'lodash/fp/isEqual';
 
 const consumer = ActionCable.createConsumer();
 

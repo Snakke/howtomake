@@ -1,46 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react';
+import { SortableContainer } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { removePage } from '../actions/actions.js';
 import { selectCurrentPage } from '../actions/actions.js';
-import Page from './page.js';
-import CurrentPage from './current_page.js';
-import Preview from './SortablePages.js';
+import Page from './page.js'
 
-const Pages = ({ pages, index, onPageClick, onKeyDeleteDown }) => {
-  let selectedPage = pages[index];
-  let currentPage = null;
-  if (selectedPage){
-    currentPage = <CurrentPage title={selectedPage.title} position={selectedPage.position} blocks={selectedPage.blocks}/>
-  }
+const Pages = SortableContainer(({pages, onPageClick, onKeyDeleteDown}) => {
   return (
-  <div className="pages">
-  <Preview pages={pages} />
-  {currentPage}
-  </div>
-  )
-};
-
-Pages.propTypes = {
-  pages: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    position: PropTypes.number,
-    blocks: PropTypes.arrayOf(PropTypes.shape({
-    data: PropTypes.object.isRequired,   
-  }).isRequired).isRequired,  
-  }).isRequired).isRequired,
-  index: PropTypes.number.isRequired,
-  onPageClick: PropTypes.func.isRequired,
-  onKeyDeleteDown: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    pages: state.getIn(["manual", "pages"]).toJS(),
-    index: state.getIn(["manual", "current_page"]),
-  };
-};
+    <div className="preview">
+      {pages.map((page, index) => (
+        <Page
+          key={page.id}
+          index={index}
+          {...page}
+          onClick={() => onPageClick(page.id)}
+          onKeyPress={() => onKeyDeleteDown(page.id)}
+        />
+      ))}
+    </div>
+  );
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -53,6 +33,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps)(Pages);
+export default connect(undefined, mapDispatchToProps)(Pages);
