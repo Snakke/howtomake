@@ -47,6 +47,8 @@ gem 'webpacker', '~> 2.0'
 gem 'foreman', '~> 0.84.0'
 gem 'acts_as_list', '~> 0.9.7'
 
+gem 'redis', '~> 3.3', '>= 3.3.3'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
