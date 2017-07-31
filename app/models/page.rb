@@ -12,6 +12,7 @@
 
 class Page < ApplicationRecord
   has_many :blocks, dependent: :destroy
+  has_many :comments, dependent: :destroy
   belongs_to :manual
   acts_as_list scope: :manual
 

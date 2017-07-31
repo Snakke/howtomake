@@ -12,6 +12,7 @@
 
 class Manual < ApplicationRecord
   validates :title, :category_id, presence: true
+  acts_as_taggable_on :tags
 
   has_many :pages, -> { order(position: :asc) }
   belongs_to :category

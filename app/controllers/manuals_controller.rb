@@ -4,12 +4,16 @@ class ManualsController < ApplicationController
   respond_to :html
 
   def index
-    @manuals = Manual.all
+    if params[:tag]
+      @manuals = Manual.tagged_with(params[:tag])
+    else
+      @manuals = Manual.all
+    end
     respond_with(@manuals)
   end
 
   def show
-    @manual = Manual.includes(pages: :blocks).find(params[:id])
+    @manual = Manual.includes(pages: [:blocks, :comments]).find(params[:id])
     respond_with(@manual)
   end
 
@@ -46,6 +50,6 @@ class ManualsController < ApplicationController
   end
 
   def manual_params
-    params.require(:manual).permit(:title, :category_id, :user_id)
+    params.require(:manual).permit(:title, :category_id, :user_id, :tag_list)
   end
 end

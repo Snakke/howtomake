@@ -20,6 +20,11 @@
     <%= form.collection_select :category_id, @categories, :id, :title, include_blank: t('view.manual.select_category') %>
   </div>
 
+  <div class='field'>
+    <%= form.label :tag_list, 'Tags (separated by commas)' %><br/>
+    <%= form.text_field :tag_list %>
+  </div>
+
   <%= form.submit t('action.save'), class: "btn btn-primary" %>
   <%= link_to t('action.back'), manuals_path, class: "btn btn-secondary" %>
 <% end %>
