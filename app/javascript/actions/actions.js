@@ -108,3 +108,10 @@ export const editMode = () => {
     type: 'EDIT_MODE'
   }
 }
+
+export const updateTitle = (title) => {
+  return{
+    type: 'UPDATE_TITLE',
+    title,
+  }
+}

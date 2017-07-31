@@ -8,7 +8,7 @@ import Page from './page.js'
 
 const Pages = SortableContainer(({pages, onPageClick, onKeyDeleteDown, disabled}) => {
   return (
-    <div className="preview">
+    <div className="pages-list">
       {pages.map((page, index) => (
         <Page
           key={page.id}

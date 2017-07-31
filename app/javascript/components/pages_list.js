@@ -13,7 +13,11 @@ class PagesList extends React.Component {
     this.props.sortPages(this.props.pages[oldIndex].id , oldIndex + 1, newIndex + 1);
   };
   render() {
-    return <Pages pages={this.props.pages} onSortEnd={this.onSortEnd} useDragHandle={true} disabled={!this.props.editMode}/>;
+    return (
+      <div className="preview col-2"> 
+        <Pages pages={this.props.pages} onSortEnd={this.onSortEnd} useDragHandle={true} disabled={!this.props.editMode}/>
+      </div>
+    )
   }
 }
 

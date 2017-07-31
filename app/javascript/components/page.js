@@ -12,7 +12,7 @@ const Page = SortableElement(({ onKeyPress, onClick, title, position, id }) =>
     }
   }} tabIndex="0">
     <DragHandle />
-    <p>{position}</p>
+    <p>{position}. {title}</p>
   </div>
 );
 

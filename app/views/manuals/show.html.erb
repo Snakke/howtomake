@@ -1,21 +1,19 @@
-<h3><%= t('view.manual.details') %>:</h3>
-
-<p>
-  <strong><%= Manual.human_attribute_name("title") %>:</strong>
-  <%= @manual.title %>
-</p>
-
-<p>
-  <strong><%= Manual.human_attribute_name("category") %>:</strong>
-  <%= @manual.category.title %>
-</p>
-
-<p>
-  <strong><%= Manual.human_attribute_name("author") %>:</strong>
-  <%= @manual.user %>
-</p>
+<h2 class="manual_title"><%= @manual.title %></h2>
 
 <%= content_tag :div, nil, id: "manual", data: { "initial-state" => manual_data(@manual)} %>
 
-<%= link_to t('action.edit'), edit_manual_path(@manual) %> |
-<%= link_to t('action.back'), manuals_path %>
+<div class="manual_details">
+  <p>
+    <strong><%= Manual.human_attribute_name("category") %>:</strong>
+    <%= @manual.category.title %>
+    <br>
+    <strong><%= Manual.human_attribute_name("author") %>:</strong>
+    <%= @manual.user %>
+    <br>
+    <strong><%= Manual.human_attribute_name("created_at") %>:</strong>
+    <%= @manual.created_at.to_date%>
+    <br>
+    <strong><%= Manual.human_attribute_name("updated_at") %>:</strong>
+    <%= @manual.updated_at.to_time%>
+  </p>
+</div>

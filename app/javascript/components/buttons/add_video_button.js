@@ -24,7 +24,7 @@ class AddVideoButton extends React.Component{
     let input =null;
     return (
       <div>
-        <button type="button" className="btn btn-secondary" onClick={this.toggle} disabled={this.props.disabled}>Add Video</button>
+        <button type="button" className="btn btn-secondary" onClick={this.toggle} disabled={this.props.disabled}><i className="fa fa-youtube fa-2x" aria-hidden="true"></i></button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader>Add video:</ModalHeader>
           <Form  onSubmit={e => {

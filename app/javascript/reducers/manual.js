@@ -74,8 +74,7 @@ const manual = (state = {}, action) => {
       pages = pages.set(current_page, page);
       return state.set("pages", pages);
     case 'MOVE_BLOCK':
-      pageIndex = state.get("current_page");
-      page = pages.get(pageIndex);
+      page = pages.get(current_page);
       blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
       if (blockIndex < 0) { return state }
 
@@ -86,10 +85,9 @@ const manual = (state = {}, action) => {
         id: action.id,
         data: blockByIndex.get("data"),
       });
-      return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
+      return state.setIn(["pages", current_page, "blocks", blockIndex], blockByIndex);
     case 'RESIZE_BLOCK':
-      pageIndex = state.get("current_page");
-      page = pages.get(pageIndex);
+      page = pages.get(current_page);
       blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
       if (blockIndex < 0) { return state }
 
@@ -116,7 +114,7 @@ const manual = (state = {}, action) => {
         id: action.id,
         data: blockByIndex.get("data"),
       });
-      return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
+      return state.setIn(["pages", current_page, "blocks", blockIndex], blockByIndex);
     case 'SORT_PAGES':
       if ( action.oldPosition == action.newPosition ) { return state }
       currentSubscription.perform('sort_pages', {
@@ -132,8 +130,7 @@ const manual = (state = {}, action) => {
       pages = pages.sortBy(page => page.get('position'));
       return state.set("pages", pages);
     case 'UPDATE_TEXT':
-      pageIndex = state.get("current_page");
-      page = pages.get(pageIndex);
+      page = pages.get(current_page);
       blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
       if (blockIndex < 0) { return state }
 
@@ -143,10 +140,16 @@ const manual = (state = {}, action) => {
         id: action.id,
         data: blockByIndex.get("data"),
       });
-      return state.setIn(["pages", pageIndex, "blocks", blockIndex], blockByIndex);
+      return state.setIn(["pages", current_page, "blocks", blockIndex], blockByIndex);
     case 'EDIT_MODE':
-      debugger
       return state.set("edit_mode", !state.get("edit_mode"));
+    case 'UPDATE_TITLE':
+      let pageId = pages.getIn([current_page, "id"]);
+      currentSubscription.perform('update_title', {
+        id: pageId,
+        title: action.title,
+      });
+      return state.setIn(["pages", current_page, "title"], action.title);
     default:
       return state;
   }

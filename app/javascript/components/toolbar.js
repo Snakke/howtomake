@@ -9,9 +9,9 @@ class Toolbar extends React.Component{
   render(){
     let buttons = null;
     return (
-      <div>
+      <div className="buttons">
       <Buttons disabled={!this.props.editMode}/>
-      <button type="button" className="btn btn-secondary" onClick={this.props.onEditButtonClick}>Edit mode</button>
+      <button type="button" data-toggle="button" className="btn btn-secondary edit" onClick={this.props.onEditButtonClick}><i className="fa fa-pencil fa-2x" aria-hidden="true"></i></button>
       </div>
     );
   }

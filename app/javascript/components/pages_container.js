@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removePage } from '../actions/actions.js';
-import { selectCurrentPage } from '../actions/actions.js';
+import { fromJS } from 'immutable';
+import { selectCurrentPage, removePage } from '../actions/actions.js';
 import CurrentPage from './current_page.js';
 import PagesList from './pages_list.js';
 
@@ -10,12 +10,13 @@ const PagesContainer = ({ pages, index, onPageClick, onKeyDeleteDown }) => {
   let selectedPage = pages[index];
   let currentPage = null;
   if (selectedPage){
-    currentPage = <CurrentPage title={selectedPage.title} position={selectedPage.position} blocks={selectedPage.blocks}/>
+    currentPage = <CurrentPage title={fromJS(selectedPage.title)} position={selectedPage.position} blocks={selectedPage.blocks}/>
   }
   return (
-    <div className="pages">
-      <PagesList className="preview" pages={pages} />
+    <div className="pages row">
+      <PagesList pages={pages} />
       {currentPage}
+      <div className="col-3">comments</div>
     </div>
   )
 };

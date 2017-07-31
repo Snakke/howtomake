@@ -5,6 +5,7 @@ import Rnd from 'react-rnd';
 import { resizeBlock, moveBlock, updateText } from '../../actions/actions.js';
 import ContentEditable from 'react-contenteditable';
 import marked from 'marked';
+import autosize from 'autosize';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -18,6 +19,10 @@ marked.setOptions({
 });
 
 class TextBlock extends React.Component{
+  componentWillMount() {
+    autosize($('.text-area'));
+  }
+
   constructor(props) {
     super(props);
     this.onResize = this.onResize.bind(this);
@@ -33,14 +38,13 @@ class TextBlock extends React.Component{
     this.props.onBlockResize(this.props.id, data, delta.width, delta.height);
   }
 
-  handleChange(e){
+  handleChange(){
     if (this.textAreaTimer) { clearTimeout(this.textAreaTimer) }
     console.log(this.textArea.value);
     this.setState({data: this.props.data.content = this.textArea.value});
     this.textAreaTimer = setTimeout(() => { 
       this.props.sendUpdatedText(this.props.id, this.props.data.content);
     }, 2000 );
-    
   }
   
   render(){
@@ -80,12 +84,13 @@ class TextBlock extends React.Component{
         }
         dragHandlerClassName={".text-handler"}
       >  
-      <i className="fa fa-arrows text-handler fa-2x" aria-hidden="true"></i> 
+      <div className="text-handler" ></div>
       <textarea 
-        className="block"
+        className="block text-area"
         value={this.props.data.content}
         onChange={this.handleChange}
         ref={(input) => { this.textArea = input; }}
+        onKeyDown={() => {autosize($('.text-area'))}}
       ></textarea>
     </Rnd>
     )
