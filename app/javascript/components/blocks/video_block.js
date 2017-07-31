@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Rnd from 'react-rnd';
-import { resizeBlock } from '../actions/actions.js';
-import { moveBlock } from '../actions/actions.js';
+import { resizeBlock, moveBlock } from '../../actions/actions.js';
 
-class ImageBlock extends React.Component{
+class VideoBlock extends React.Component{
   constructor(props) {
     super(props);
     this.onResize = this.onResize.bind(this);
@@ -17,13 +16,25 @@ class ImageBlock extends React.Component{
   }
   
   onResize(event: MouseEvent, data: Direction, refToElement: HTMLElement, delta: NumberSize,) {
-    console.log(data)
-    console.log(delta)
-    console.log(refToElement)
+    debugger
     this.props.onBlockResize(this.props.id, data, delta.width, delta.height);
   }
 
   render(){
+    if (!this.props.editMode) {
+      return(
+        <div className="video_block" style={{ position: "absolute",
+                                              top: this.props.data.y,
+                                              left: this.props.data.x,
+                                              height: this.props.data.height,
+                                              width: this.props.data.width }} >
+          <iframe
+            src={this.props.data.content}
+            frameBorder="0" allowFullScreen
+          ></iframe>
+        </div>
+      )
+    }
     return (
       <Rnd
         default={{
@@ -35,22 +46,33 @@ class ImageBlock extends React.Component{
         minWidth={50}
         minHeight={50}
         bounds="parent"
-        lockAspectRatio="true"
         onResizeStop={this.onResize}
         onDragStop={this.onMove}
+        dragHandlerClassName={".video-handler"}
       >  
-        <div className="image_block" >
-          <img src={this.props.data.content} />
+        
+        <div className="video_block" >
+          <iframe
+            src={this.props.data.content}
+            frameBorder="0" allowFullScreen
+          ></iframe>
         </div>
+        <i className="fa fa-arrows video-handler fa-2x" aria-hidden="true"></i> 
       </Rnd>
     )
   }
 };
 
-ImageBlock.propTypes = {
+VideoBlock.propTypes = {
   data: PropTypes.object.isRequired,
   onBlockMove: PropTypes.func.isRequired,
   onBlockResize: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    editMode: state.getIn(["manual", "edit_mode"]),
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -64,4 +86,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(ImageBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(VideoBlock);

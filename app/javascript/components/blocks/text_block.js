@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Rnd from 'react-rnd';
-import { resizeBlock } from '../actions/actions.js';
-import { moveBlock } from '../actions/actions.js';
-import { updateText } from '../actions/actions.js';
+import { resizeBlock, moveBlock, updateText } from '../../actions/actions.js';
 import ContentEditable from 'react-contenteditable';
 import marked from 'marked';
+import autosize from 'autosize';
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -20,6 +19,10 @@ marked.setOptions({
 });
 
 class TextBlock extends React.Component{
+  componentWillMount() {
+    autosize($('.text-area'));
+  }
+
   constructor(props) {
     super(props);
     this.onResize = this.onResize.bind(this);
@@ -35,17 +38,27 @@ class TextBlock extends React.Component{
     this.props.onBlockResize(this.props.id, data, delta.width, delta.height);
   }
 
-  handleChange(e){
+  handleChange(){
     if (this.textAreaTimer) { clearTimeout(this.textAreaTimer) }
     console.log(this.textArea.value);
     this.setState({data: this.props.data.content = this.textArea.value});
     this.textAreaTimer = setTimeout(() => { 
       this.props.sendUpdatedText(this.props.id, this.props.data.content);
     }, 2000 );
-    
   }
   
   render(){
+    if (!this.props.editMode) {
+      return(
+        <div dangerouslySetInnerHTML={{ __html: marked(this.props.data.content) }}
+             className="text_block" style={{ position: "absolute",
+                                             top: this.props.data.y,
+                                             left: this.props.data.x,
+                                             height: this.props.data.height,
+                                             width: this.props.data.width }} >
+        </div>
+      )
+    }
     return (
       <Rnd
         default={{
@@ -69,16 +82,16 @@ class TextBlock extends React.Component{
             topRight: false,
           }
         }
-        dragHandlerClassName={".handler"}
+        dragHandlerClassName={".text-handler"}
       >  
-      <div className="handler"></div>        
+      <div className="text-handler" ></div>
       <textarea 
-        className="block"
+        className="block text-area"
         value={this.props.data.content}
         onChange={this.handleChange}
         ref={(input) => { this.textArea = input; }}
+        onKeyDown={() => {autosize($('.text-area'))}}
       ></textarea>
-      <div dangerouslySetInnerHTML={{ __html: marked(this.props.data.content) }} ></div>
     </Rnd>
     )
   }
@@ -97,6 +110,12 @@ TextBlock.propTypes = {
   sendUpdatedText: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    editMode: state.getIn(["manual", "edit_mode"]),
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onBlockResize: (id, direction, w, h) => {
@@ -111,4 +130,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(TextBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(TextBlock);

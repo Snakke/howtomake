@@ -1,11 +1,9 @@
-export function createPage(manual_id) {
+export function createPage() {
   return{
     type: 'CREATE_PAGE',
-    manual_id,
   };
 };
 
-//need?
 export const addPage = (page) => {
   return {
     type: 'ADD_PAGE',
@@ -20,7 +18,6 @@ export function removePage(id) {
   };
 };
 
-//need?
 export const deletePage = (id) => {
   return {
     type: 'DELETE_PAGE',
@@ -35,34 +32,30 @@ export const selectCurrentPage = (id) => {
   };
 };
 
-export const createTextBlock = (position) => {
+export const createTextBlock = () => {
   return {
     type: 'ADD_TEXT',
-    position,
   };
 };
-export const createImageBlock = (position, image) => {
+export const createImageBlock = (image) => {
   return {
     type: 'ADD_IMAGE',
-    position,
     url: image.url,
     height: image.height,
     width: image.width,
   };
 };
 
-export const createVideoBlock = (position, url) => {
+export const createVideoBlock = (url) => {
   return {
     type: 'ADD_VIDEO',
-    position,
     url,
   };
 };
 
-export const addBlock = (position, block) => {
+export const addBlock = (block) => {
   return {
     type: 'ADD_BLOCK',
-    position,
     block,
   }
 }
@@ -107,5 +100,18 @@ export const updateText = (id, content) => {
     type: 'UPDATE_TEXT',
     id,
     content,
+  }
+}
+
+export const editMode = () => {
+  return{
+    type: 'EDIT_MODE'
+  }
+}
+
+export const updateTitle = (title) => {
+  return{
+    type: 'UPDATE_TITLE',
+    title,
   }
 }

@@ -9,15 +9,12 @@ class ConnectionState extends React.Component{
     createSubscription({channel: "ManualsChannel", manual_id: this.props.manualId},
       {
         connected: function() {
-          debugger
           _dispatch({type: "CONNECTED"})
         },
         disconnected: function() {
-          debugger
           _dispatch({type: "DISCONNECTED"})
         },
         received: function(data) {
-          debugger
           _dispatch(data);
         }
       }

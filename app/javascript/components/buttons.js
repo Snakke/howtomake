@@ -1,82 +1,52 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import AddPageButton from './buttons/add_page_button.js'
+import AddTextButton from './buttons/add_text_button.js'
+import AddImageButton from './buttons/add_image_button.js'
+import AddVideoButton from './buttons/add_video_button.js'
 import { connect } from 'react-redux';
-import { createPage } from '../actions/actions.js';
-import { createTextBlock, createImageBlock, createVideoBlock } from '../actions/actions.js';
+import { createPage, createTextBlock, createImageBlock } from '../actions/actions.js';
 import '../cloudinary.js';
-import bootbox from 'bootbox';
-import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Col } from 'reactstrap';
 
-class PageButtons extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false,
-    };
-
-    this.toggle = this.toggle.bind(this);
-  }
-  toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
-
+class Buttons extends React.Component{
   render(){
-    let input =null;
     return (
       <div className="btn-group" role="group" aria-label="Basic example">
-        <button type="button" className="btn btn-secondary" onClick={() => {
-          this.props.dispatch(createPage(this.props.manual_id))
-        }}>Add Page</button>
-        
-        <button type="button" className="btn btn-secondary" onClick={() => {
-          this.props.dispatch(createTextBlock(this.props.position));
-        }}>Add Text</button>
-
-        <button type="button" className="btn btn-secondary" onClick={() => {
-          cloudinary.openUploadWidget({ cloud_name: 'snake', upload_preset: 'cobgfeow'}, 
-            (error, result) => { 
-              if (result != null) {
-                this.props.dispatch(createImageBlock(this.props.position, result[0]));
-              }
-            });
-        }}>Add Image</button>
-
-        <button type="button" className="btn btn-secondary" onClick={this.toggle}>Add Video</button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} >
-          <ModalHeader>Add video:</ModalHeader>
-          <Form  onSubmit={e => {
-            e.preventDefault();
-            this.props.dispatch(createVideoBlock(this.props.position, input.value));
-          }}>
-            <ModalBody>
-              <Label for="url" >Enter please url:</Label>
-              <input className="form-control" placeholder="Url" ref={node => { input = node; }}/>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" type="submit" onClick={this.toggle}>Ok</Button>
-              <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-            </ModalFooter>
-          </Form>
-        </Modal>
+        <AddPageButton onClick={() => this.props.onAddPageClick()} disabled={this.props.disabled}/>
+        <AddTextButton onClick={() => this.props.onAddTextClick()} disabled={this.props.disabled}/>
+        <AddImageButton onClick={() => this.props.onAddImageClick()} disabled={this.props.disabled}/>
+        <AddVideoButton disabled={this.props.disabled}/>
       </div>
     );
   }
 }
-
-PageButtons.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => {
   return {
     manual_id: state.getIn(["manual", "manual_id"]),
     position: state.getIn(["manual", "current_page"]),
   };
+};
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddPageClick: () => {
+      dispatch(createPage());
+    },
+    onAddTextClick: () => {
+      dispatch(createTextBlock())
+    },
+    onAddImageClick: () => {
+      cloudinary.openUploadWidget({ cloud_name: 'snake', upload_preset: 'cobgfeow'}, 
+        (error, result) => { 
+          if (result != null) {
+            dispatch(createImageBlock(result[0]));
+          }
+        }
+      );
+    },
+  };
 };
 
 export default connect(
   mapStateToProps,
-  undefined)(PageButtons);
+  mapDispatchToProps)(Buttons);

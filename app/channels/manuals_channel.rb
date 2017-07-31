@@ -45,6 +45,10 @@ class ManualsChannel < ApplicationCable::Channel
     Block.find(data['id']).update_attributes(data: data['data'])
   end
 
+  def update_title(data)
+    current_user.manuals.where(id: params[:manual_id]).first.pages.where(id: data['id']).first.update(title: data['title'])
+  end
+
   def self.channel_for_manual(manual_id)
     format(MANUAL_CHANNEL, manual_id)
   end

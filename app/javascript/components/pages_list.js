@@ -1,28 +1,35 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+import React from 'react';
+import { arrayMove } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { sortPages } from '../actions/actions.js';
-import SortablePages from './SortPages.js';
+import Pages from './pages.js';
 
-class SortableComponent extends Component {
+class PagesList extends React.Component {
   onSortEnd = ({oldIndex, newIndex}) => {
-    debugger
     this.setState({
       pages: arrayMove(this.props.pages, oldIndex, newIndex),
     });
     this.props.sortPages(this.props.pages[oldIndex].id , oldIndex + 1, newIndex + 1);
   };
   render() {
-    return <SortablePages pages={this.props.pages} onSortEnd={this.onSortEnd} transitionDuration={500} useDragHandle={true}/>;
+    return (
+      <div className="preview col-2"> 
+        <Pages pages={this.props.pages} onSortEnd={this.onSortEnd} useDragHandle={true} disabled={!this.props.editMode}/>
+      </div>
+    )
   }
 }
 
-SortableComponent.propTypes = {
+PagesList.propTypes = {
   pages: PropTypes.array.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    editMode: state.getIn(["manual", "edit_mode"]),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -38,4 +45,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(SortableComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(PagesList);
