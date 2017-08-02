@@ -49,7 +49,12 @@ class ImageBlock extends React.Component{
         onResizeStop={this.onResize}
         onDragStop={this.onMove}
       >  
-        <div className="image_block" >
+        <div className="image_block" onKeyPress={(e) => {
+          let key = e.keyCode || e.charCode;
+          if( key == 127 ){
+            this.props.onKeyPress();
+          }
+        }} tabIndex="0" >
           <img src={this.props.data.content} />
         </div>
       </Rnd>

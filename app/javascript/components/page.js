@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 
-const DragHandle = SortableHandle(() => <i className="fa fa-bars fa-2x draghandle" aria-hidden="true"></i>);
+const DragHandle = SortableHandle((style) => <i className="fa fa-bars fa-2x draghandle" aria-hidden="true" ></i>);
 
 const Page = SortableElement(({ onKeyPress, onClick, title, position, id }) => 
   <div className="page" onClick={onClick} onKeyPress={(e) => {

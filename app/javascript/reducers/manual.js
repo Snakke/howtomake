@@ -115,6 +115,22 @@ const manual = (state = {}, action) => {
         data: blockByIndex.get("data"),
       });
       return state.setIn(["pages", current_page, "blocks", blockIndex], blockByIndex);
+    case 'REMOVE_BLOCK':
+      currentSubscription.perform('delete_block', {
+        id: action.id
+      });
+      return state;
+    case 'DELETE_BLOCK':
+      page = pages.get(current_page);
+      blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
+      if (blockIndex < 0) { return state }
+
+      blocks = page.get("blocks");
+      blockByIndex = page.getIn(["blocks", blockIndex]);
+
+      blocks = blocks.delete(blockIndex);
+
+      return state.setIn(["pages", current_page, "blocks"], blocks);
     case 'SORT_PAGES':
       if ( action.oldPosition == action.newPosition ) { return state }
       currentSubscription.perform('sort_pages', {

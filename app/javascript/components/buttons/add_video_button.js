@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createVideoBlock } from '../../actions/actions.js';
 import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, } from 'reactstrap';
-
+import urlParser from 'js-video-url-parser';
 
 class AddVideoButton extends React.Component{
   constructor(props) {
@@ -29,7 +29,8 @@ class AddVideoButton extends React.Component{
           <ModalHeader>Add video:</ModalHeader>
           <Form  onSubmit={e => {
             e.preventDefault();
-            this.props.onAddVideoClick(input.value);
+            let video_url = urlParser.parse(input.value)
+            this.props.onAddVideoClick("https://www.youtube.com/embed/"+video_url.id);
           }}>
             <ModalBody>
               <Label for="url" >Enter please url:</Label>

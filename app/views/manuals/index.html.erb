@@ -1,29 +1,5 @@
 <h3><%= Manual.model_name.human(count: 2) %></h3>
 
-<table class="table table-striped table-bordered table-sm">
-  <thead>
-    <tr class="row">
-      <th class="col-2"><%= Manual.human_attribute_name("title") %></th>
-      <th class="col-2"><%= Manual.human_attribute_name("category") %></th>
-      <th class="col-2"><%= Manual.human_attribute_name("author") %></th>
-      <th class="col-6"><%= t('action.actions') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @manuals.each do |manual| %>
-      <tr class="row">
-        <td class="col-2"><%= manual.title %></td>
-        <td class="col-2"><%= manual.category.title %></td>
-        <td class="col-2"><%= manual.user %></td>
-        <td class="col-6">
-          <%= link_to t('action.edit'), edit_manual_path(manual), class: 'btn btn-sm btn-primary' %>
-          <%= link_to t('action.show'), manual, class: 'btn btn-sm btn-secondary' %>
-          <%= link_to t('action.destroy'), manual, class: 'btn btn-sm btn-danger', method: :delete,
-                                                                          data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'table', manuals: @manuals %>
 
 <%= link_to t('action.manual.new'), new_manual_path, class: "btn btn-primary" %>

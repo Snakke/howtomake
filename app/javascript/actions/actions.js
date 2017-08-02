@@ -115,3 +115,17 @@ export const updateTitle = (title) => {
     title,
   }
 }
+
+export const removeBlock = (id) =>{
+  return{
+    type: 'REMOVE_BLOCK',
+    id,
+  }
+}
+
+export const deleteBlock = (id) => {
+  return{
+    type: 'DELETE_BLOCK',
+    id,
+  }
+}

@@ -1,10 +1,6 @@
 <h2 class="manual_title"><%= @manual.title %></h2>
 
-<div id='tag_cloud'>
-  <% tag_cloud Manual.tag_counts, %w{s m l} do |tag, css_class| %>
-    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
-  <% end %>
-</div>
+
 <%= content_tag :div, nil, id: "manual", data: { "initial-state" => manual_data(@manual)} %>
 
 <div class="manual_details">

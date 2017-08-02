@@ -1,36 +1,15 @@
-<h3><%= t('view.user.details') %>:</h3>
+<div id="profile" class="profile">
+  <div class="profile-info row">
+    <div id="image2" class="image" align="center" data-user-id=<%= @user.id %>>
+    <%= cl_image_tag(@user.image, id: "image", :width => 200, :height => 200, :crop => :fill) %>
+    </div>
+    <div class="col-md-9 col-lg-9">
+      <div class="row">
+        <h3><%= @user.name %></h3>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong><%= User.human_attribute_name("uid") %>:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("sign_in_count") %>:</strong>
-  <%= @user.sign_in_count %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("current_sign_in_at") %>:</strong>
-  <%= @user.current_sign_in_at %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("last_sign_in_at") %>:</strong>
-  <%= @user.last_sign_in_at %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("current_sign_in_ip") %>:</strong>
-  <%= @user.current_sign_in_ip %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("last_sign_in_ip") %>:</strong>
-  <%= @user.last_sign_in_ip %>
-</p>
-
-<p>
-  <%= link_to t('action.edit'), edit_user_path(@user), class: "btn btn-primary" %>
-  <%= link_to t('action.back'), users_path, class: "btn btn-secondary" %>
-</p>
+<%= render 'manuals/table', manuals: @user.manuals %>
+</table>

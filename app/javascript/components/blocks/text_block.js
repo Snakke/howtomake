@@ -84,14 +84,19 @@ class TextBlock extends React.Component{
         }
         dragHandlerClassName={".text-handler"}
       >  
-      <div className="text-handler" ></div>
+      <div className="text-handler" tabIndex="0" onKeyPress={(e) => {
+        let key = e.keyCode || e.charCode;
+        if( key == 127 ){
+          this.props.onKeyPress();
+        }
+      }}></div>
       <textarea 
         className="block text-area"
         value={this.props.data.content}
         onChange={this.handleChange}
         ref={(input) => { this.textArea = input; }}
         onKeyDown={() => {autosize($('.text-area'))}}
-      ></textarea>
+        tabIndex="0" ></textarea>
     </Rnd>
     )
   }

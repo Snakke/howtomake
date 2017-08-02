@@ -39,7 +39,7 @@ en:
         unlock_token: Unlock token
         locked_at: Locked at
         created_at: Created at
-        updated_at: Updated at
+        updated_at: Last update
         role: Role
         locale: Locale
       manual:
@@ -47,17 +47,17 @@ en:
         category: Category
         author: Author
         created_at: Created at
-        updated_at: Updated at
+        updated_at: Last update
       category:
         title: Title
         created_at: Created at
-        updated_at: Updated at
+        updated_at: Last update
       page:
         title: Title
         created_at: Created at
-        updated_at: Updated at
+        updated_at: Last update
       block:
         data: Data
         created_at: Created at
-        updated_at: Updated at
+        updated_at: Last update
         

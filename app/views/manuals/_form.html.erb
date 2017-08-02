@@ -22,7 +22,7 @@
 
   <div class='field'>
     <%= form.label :tag_list, 'Tags (separated by commas)' %><br/>
-    <%= form.text_field :tag_list %>
+    <%= form.text_field :tag_list, id: "tag_field", data: {list: tags_list(@tags), multiple: ''} %>
   </div>
 
   <%= form.submit t('action.save'), class: "btn btn-primary" %>

@@ -9,12 +9,13 @@ import '../cloudinary.js';
 
 class Buttons extends React.Component{
   render(){
+    if (!this.props.disabled) { return null}
     return (
       <div className="btn-group" role="group" aria-label="Basic example">
-        <AddPageButton onClick={() => this.props.onAddPageClick()} disabled={this.props.disabled}/>
-        <AddTextButton onClick={() => this.props.onAddTextClick()} disabled={this.props.disabled}/>
-        <AddImageButton onClick={() => this.props.onAddImageClick()} disabled={this.props.disabled}/>
-        <AddVideoButton disabled={this.props.disabled}/>
+        <AddPageButton onClick={() => this.props.onAddPageClick()} />
+        <AddTextButton onClick={() => this.props.onAddTextClick()} />
+        <AddImageButton onClick={() => this.props.onAddImageClick()} />
+        <AddVideoButton />
       </div>
     );
   }

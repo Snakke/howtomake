@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  scope '/admin' do
-    resources :users
-    resources :categories
+  resources :users do
+    resources :manuals
   end
+  resources :categories
 end

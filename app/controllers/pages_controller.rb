@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   respond_to :json
 
   def index
-    @pages = Page.where(manual_id: params[:manual_id]).all
+    @pages = Page.inclued(:users).where(manual_id: params[:manual_id]).all
     respond_with(@pages)
   end
 

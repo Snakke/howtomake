@@ -3,6 +3,8 @@ $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
 @import 'sign_in';
 @import 'forms';
+@import 'footer';
+@import 'awesomplete';
 
 #root {
   margin-top: 20px;
@@ -21,6 +23,7 @@ $fa-font-path: "~font-awesome/fonts";
 }
 
 .buttons{
+  height: 50px;
   position: relative;
   .edit{
     position: absolute;
@@ -29,13 +32,13 @@ $fa-font-path: "~font-awesome/fonts";
 }
 
 .pages{
+  margin-top: 5px;
   display: -webkit-flex;
   display: flex;
   margin-bottom: 10px;
   
   .preview{
     position: relative;
-    margin-top: 5px;
     padding-right: 0px;
     z-index: 1;
     height: 550px;
@@ -55,8 +58,9 @@ $fa-font-path: "~font-awesome/fonts";
       }
     }
   }
-    .currentPage{
-    margin-top: 5px;
+  
+  .currentPage{
+    padding: 0px;
     border: 1px solid black;
     border-radius: 3px;
     background-color: white;
@@ -115,7 +119,7 @@ $fa-font-path: "~font-awesome/fonts";
     }
 
 
-    .header {
+    .page_header {
       position: absolute;
       top: 0;
       width: 100%;
@@ -123,11 +127,24 @@ $fa-font-path: "~font-awesome/fonts";
       font-size: 16pt;
     }
 
-    .footer{
+    .page_footer{
       position: absolute;
       bottom: 0;
       width: 100%;
       text-align: center;
+    }
+  }
+
+  .comments{
+    height: 550px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .comment{
+      margin-bottom: 5px;
+      border: 1px solid black;
+      border-radius: 3px;
+      background-color: white;
+
     }
   }
 }
@@ -185,9 +202,21 @@ $fa-font-path: "~font-awesome/fonts";
 .manual_details{
 }
 
-.footer{
-  position: relative;
-  bottom: 0;
-  margin: 20px;
+.table {
+  border: none;
   text-align: center;
+}
+
+.table-bordered > thead > tr > th{
+  text-align: center;
+}
+
+
+.profile{
+  .image{
+    padding: 0px;
+    background-color: white;
+    height: 200px;
+    width: 200px;
+  }
 }

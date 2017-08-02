@@ -16,7 +16,6 @@ class VideoBlock extends React.Component{
   }
   
   onResize(event: MouseEvent, data: Direction, refToElement: HTMLElement, delta: NumberSize,) {
-    debugger
     this.props.onBlockResize(this.props.id, data, delta.width, delta.height);
   }
 
@@ -57,7 +56,11 @@ class VideoBlock extends React.Component{
             frameBorder="0" allowFullScreen
           ></iframe>
         </div>
-        <i className="fa fa-arrows video-handler fa-2x" aria-hidden="true"></i> 
+        <i className="fa fa-arrows video-handler fa-2x" aria-hidden="true" tabIndex="0" onKeyPress={(e) => {
+        let key = e.keyCode || e.charCode;
+        if( key == 127 ){
+          this.props.onKeyPress();
+        }}}></i> 
       </Rnd>
     )
   }

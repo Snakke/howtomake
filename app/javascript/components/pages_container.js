@@ -4,19 +4,22 @@ import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
 import { selectCurrentPage, removePage } from '../actions/actions.js';
 import CurrentPage from './current_page.js';
+import Comments from './comments.js';
 import PagesList from './pages_list.js';
 
 const PagesContainer = ({ pages, index, onPageClick, onKeyDeleteDown }) => {
   let selectedPage = pages[index];
   let currentPage = null;
+  let comments = null;
   if (selectedPage){
     currentPage = <CurrentPage title={fromJS(selectedPage.title)} position={selectedPage.position} blocks={selectedPage.blocks}/>
+    comments = <Comments className="comments" comments={selectedPage.comments}/>
   }
   return (
     <div className="pages row">
       <PagesList pages={pages} />
       {currentPage}
-      <div className="col-3">comments</div>
+      {comments}
     </div>
   )
 };
@@ -27,8 +30,9 @@ PagesContainer.propTypes = {
     title: PropTypes.string.isRequired,
     position: PropTypes.number,
     blocks: PropTypes.arrayOf(PropTypes.shape({
-    data: PropTypes.object.isRequired,   
-  }).isRequired).isRequired,  
+      data: PropTypes.object.isRequired,   
+    }).isRequired).isRequired,
+    comments: PropTypes.array.isRequired,  
   }).isRequired).isRequired,
   index: PropTypes.number.isRequired,
   onPageClick: PropTypes.func.isRequired,

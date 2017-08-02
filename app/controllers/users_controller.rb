@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
+  helper_method :sort_column, :sort_direction
+  
   load_and_authorize_resource
   respond_to :html
 
@@ -10,6 +12,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.includes(:manuals).find(params[:id])
     respond_with(@user)
   end
 
@@ -40,11 +43,19 @@ class UsersController < ApplicationController
 
   private
 
+  def sort_column
+    Manual.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
   def set_user
     @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:uid, :name, :password, :password_confirmation, :role)
+    params.require(:user).permit(:uid, :name, :password, :password_confirmation, :role, :image)
   end
 end
