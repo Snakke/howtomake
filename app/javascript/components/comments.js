@@ -6,7 +6,7 @@ import Comment from './comment.js';
 class Comments extends React.Component {
   render(){
     return (
-      <div className="comments col-3" >
+      <div className="comments" >
         {this.props.comments.map((comment) => (
           <Comment
             key={comment.id}

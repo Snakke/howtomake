@@ -6,6 +6,6 @@ module ManualsHelper
   end
 
   def tags_list(tags)
-    tags.map(&:inspect).join(', ').gsub('"', '')
+    tags.map(&:inspect).join(', ').delete('"')
   end
 end

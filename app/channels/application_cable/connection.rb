@@ -7,6 +7,10 @@ module ApplicationCable
       logger.add_tags 'ActionCable', current_user.email
     end
 
+    def ability
+      @ability ||= Ability.new(current_user)
+    end
+
     protected
 
     def find_verified_user # this checks whether a user is authenticated with devise

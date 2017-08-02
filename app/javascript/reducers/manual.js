@@ -43,27 +43,27 @@ const manual = (state = {}, action) => {
       return state.set("current_page", pageIndex);
     case 'ADD_TEXT':
       page_id = pages.getIn([current_page, "id"]);
-      currentSubscription.perform('add_text', {
+      currentSubscription.perform('add_block', {
         page_id: page_id,
         type: "Text",
-        data: {x: 50, y: 50, height: 50, width: 200, content: "text", type: "Block"}
+        data: {x: 50, y: 50, height: 50, width: 200, content: "text"}
       });
       return state;
     case 'ADD_IMAGE':
       let width = 300
       page_id = pages.getIn([current_page, "id"]);
-      currentSubscription.perform('add_image', {
+      currentSubscription.perform('add_block', {
         page_id: page_id,
         type: "Image",
-        data: {x: 50, y: 50, height: action.height*width/action.width, width: width , content: action.url, type: "ImageBlock"}
+        data: {x: 50, y: 50, height: action.height*width/action.width, width: width , content: action.url}
       });
       return state;
     case 'ADD_VIDEO':
       page_id = pages.getIn([current_page, "id"]);
-      currentSubscription.perform('add_video', {
+      currentSubscription.perform('add_block', {
         page_id: page_id,
         type: "Video",
-        data: {x: 50, y: 50, height: 270, width: 480 , content: action.url, type: "VideoBlock"}
+        data: {x: 50, y: 50, height: 270, width: 480 , content: action.url}
       });
       return state;
     case 'ADD_BLOCK':
@@ -81,7 +81,7 @@ const manual = (state = {}, action) => {
       blockByIndex = page.getIn(["blocks", blockIndex]);
       blockByIndex = blockByIndex.updateIn(["data", "x"], x => action.x);
       blockByIndex = blockByIndex.updateIn(["data", "y"], y => action.y);
-      currentSubscription.perform('move_block', {
+      currentSubscription.perform('update_block', {
         id: action.id,
         data: blockByIndex.get("data"),
       });
@@ -110,7 +110,7 @@ const manual = (state = {}, action) => {
         default: break;
       }
 
-      currentSubscription.perform('resize_block', {
+      currentSubscription.perform('update_block', {
         id: action.id,
         data: blockByIndex.get("data"),
       });
@@ -152,7 +152,7 @@ const manual = (state = {}, action) => {
 
       blockByIndex = page.getIn(["blocks", blockIndex]);
       blockByIndex = blockByIndex.updateIn(["data", "content"], content => action.content);
-      currentSubscription.perform('update_text', {
+      currentSubscription.perform('update_block', {
         id: action.id,
         data: blockByIndex.get("data"),
       });
@@ -161,7 +161,7 @@ const manual = (state = {}, action) => {
       return state.set("edit_mode", !state.get("edit_mode"));
     case 'UPDATE_TITLE':
       let pageId = pages.getIn([current_page, "id"]);
-      currentSubscription.perform('update_title', {
+      currentSubscription.perform('update_pages_title', {
         id: pageId,
         title: action.title,
       });

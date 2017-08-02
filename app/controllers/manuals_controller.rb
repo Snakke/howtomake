@@ -3,6 +3,8 @@ class ManualsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
+  load_and_authorize_resource
+
   respond_to :html, :js
 
   def index
@@ -10,14 +12,14 @@ class ManualsController < ApplicationController
     if params[:user_id]
       @user = User.find(params[:user_id])
       @manuals = @manuals.where(user_id: params[:user_id])
-    end 
+    end
     @manuals = @manuals.tagged_with(params[:tag]) if params[:tag]
-    @manuals = @manuals.order(sort_column + " " + sort_direction)
+    @manuals = @manuals.order(sort_column + ' ' + sort_direction)
     respond_with(@manuals)
   end
 
   def show
-    @manual = Manual.includes(:category, :user, pages: [:blocks, comments: :user ]).find(params[:id])
+    @manual = Manual.includes(:category, :user, pages: [:blocks, comments: :user]).find(params[:id])
     respond_with(@manual)
   end
 
@@ -30,6 +32,7 @@ class ManualsController < ApplicationController
 
   def edit
     @categories = Category.order(:title)
+    @tags = Tag.pluck(:name)
   end
 
   def create
@@ -51,11 +54,11 @@ class ManualsController < ApplicationController
   private
 
   def sort_column
-    Manual.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    Manual.column_names.include?(params[:sort]) ? params[:sort] : 'title'
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   def set_manual

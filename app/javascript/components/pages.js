@@ -7,6 +7,7 @@ import { selectCurrentPage } from '../actions/actions.js';
 import Page from './page.js'
 
 const Pages = SortableContainer(({pages, onPageClick, onKeyDeleteDown, disabled}) => {
+  if (disabled) { onKeyDeleteDown = () => { return null } }
   return (
     <div className="pages-list">
       {pages.map((page, index) => (

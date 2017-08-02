@@ -33,8 +33,7 @@ class Page < ApplicationRecord
   end
 
   def as_json(options = {})
-    options[:include] = :blocks, { comments: {include: {user: { only: [:name, :image] } } } } 
+    options[:include] = :blocks, { comments: { include: { user: { only: %i[name image] } } } }
     super(options)
   end
 end
-

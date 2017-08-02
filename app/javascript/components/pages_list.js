@@ -14,8 +14,8 @@ class PagesList extends React.Component {
   };
   render() {
     return (
-      <div className="preview col-2"> 
-        <Pages pages={this.props.pages} onSortEnd={this.onSortEnd} useDragHandle={false} disabled={!this.props.editMode}/>
+      <div className="preview"> 
+        <Pages pages={this.props.pages} onSortEnd={this.onSortEnd} useDragHandle={true} disabled={!this.props.editMode}/>
       </div>
     )
   }

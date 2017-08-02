@@ -12,10 +12,10 @@
     <%= @manual.user %>
     <br>
     <strong><%= Manual.human_attribute_name("created_at") %>:</strong>
-    <%= @manual.created_at.to_date%>
+    <%= @manual.created_at.to_s(:db)%>
     <br>
     <strong><%= Manual.human_attribute_name("updated_at") %>:</strong>
-    <%= @manual.updated_at.to_time%>
+    <%= @manual.updated_at.to_s(:db)%>
     <br>
     <strong>Tags:</strong>
     <%=raw @manual.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>

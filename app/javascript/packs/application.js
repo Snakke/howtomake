@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tags = $('#tag_field');
   if (tags.length>0) {
-    const tags_autocomplete = new Awesomplete('input[data-multiple]', {
+    new Awesomplete('input[data-multiple]', {
       filter: function(text, input) {
         return Awesomplete.FILTER_CONTAINS(text, input.match(/[^,]*$/)[0]);
       },

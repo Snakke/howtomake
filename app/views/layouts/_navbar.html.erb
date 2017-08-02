@@ -11,10 +11,10 @@
       <li class="nav-item">
         <%= link_to t('view.manuals'), manuals_path, class: 'nav-link' %>
       </li>
-      <% if can? :manage, User %>
-        <li class="nav-item">
-          <%= link_to t('view.users'), users_path, class: 'nav-link' %>
-        </li>
+      <li class="nav-item">
+        <%= link_to t('view.users'), users_path, class: 'nav-link' %>
+      </li>
+      <% if can? :manage, Category %>
         <li class="nav-item">
           <%= link_to t('view.categories'), categories_path, class: 'nav-link' %>
         </li>

@@ -26,6 +26,7 @@
 #  updated_at             :datetime         not null
 #  role                   :string           default("author")
 #  locale                 :string           default("en")
+#  image                  :string
 #
 
 class User < ApplicationRecord

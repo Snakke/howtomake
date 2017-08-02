@@ -9,7 +9,7 @@ class Comment extends React.Component {
         <div className="title h5">
           <a href={"/users/"+this.props.user_id}><b>{this.props.user.name} </b></a>made a post.
         </div>
-        <h6 className="text-muted time">{this.props.created_at}</h6>
+        <h6 className="text-muted time">{this.props.date_format}</h6>
         <div className="description"> 
           <p>{this.props.comment}</p>
         </div>

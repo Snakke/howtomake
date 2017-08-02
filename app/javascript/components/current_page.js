@@ -37,7 +37,7 @@ class CurrentPage extends React.Component {
     });
     if (!this.props.editMode) { 
       return (
-        <div className="currentPage col-7" >
+        <div className="currentPage" >
           <div className="page_header" >{this.props.title}</div>
           {pagesBlocks}
           <div className="page_footer">{this.props.position}</div>
@@ -45,8 +45,8 @@ class CurrentPage extends React.Component {
       );
     }
     return (
-      <div className="currentPage col-7" >
-        <InlineEdit className="page_header" activeClassName="header" paramName="title" text={this.props.title} change={this.handleChange}></InlineEdit>
+      <div className="currentPage" >
+        <InlineEdit className="page_header" activeClassName="page_header" paramName="title" text={this.props.title} change={this.handleChange}></InlineEdit>
         {pagesBlocks}
         <div className="page_footer">{this.props.position}</div>
       </div>

@@ -42,6 +42,7 @@ $fa-font-path: "~font-awesome/fonts";
     padding-right: 0px;
     z-index: 1;
     height: 550px;
+    width: 190px;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-flex: none;
@@ -65,6 +66,7 @@ $fa-font-path: "~font-awesome/fonts";
     border-radius: 3px;
     background-color: white;
     height: 550px;
+    width: 665px;
     position: relative;
     -webkit-flex: none;
             flex: none;
@@ -137,6 +139,7 @@ $fa-font-path: "~font-awesome/fonts";
 
   .comments{
     height: 550px;
+    width: 285px;
     overflow-x: hidden;
     overflow-y: auto;
     .comment{
