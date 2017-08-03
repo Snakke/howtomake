@@ -11,7 +11,8 @@
 #
 
 class Manual < ApplicationRecord
-  validates :title, :category_id, presence: true
+  validates :title, presence: true, length: { within: 6..40 }
+  validates :category_id, presence: true
   acts_as_taggable_on :tags
 
   has_many :pages, -> { order(position: :asc) }

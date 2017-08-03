@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { createVideoBlock } from '../../actions/actions.js';
+import { connect } from 'react-redux';
 import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, } from 'reactstrap';
+import { createVideoBlock } from '../../actions/actions.js';
 import urlParser from 'js-video-url-parser';
 
 class AddVideoButton extends React.Component{
@@ -24,7 +24,7 @@ class AddVideoButton extends React.Component{
     let input =null;
     return (
       <div>
-        <button type="button" className="btn btn-secondary" onClick={this.toggle} disabled={this.props.disabled}><i className="fa fa-youtube fa-2x" aria-hidden="true"></i></button>
+        <button type="button" className="btn btn-secondary" onClick={this.toggle} ><i className="fa fa-youtube fa-2x" aria-hidden="true"></i></button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader>Add video:</ModalHeader>
           <Form  onSubmit={e => {
@@ -54,7 +54,8 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-//https://www.youtube.com/embed/Q0oIoR9mLwc
+
 export default connect(
   undefined,
   mapDispatchToProps)(AddVideoButton);
+  

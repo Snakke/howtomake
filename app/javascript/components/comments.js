@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Comment from './comment.js';
+import NewComment from './new_comment.js';
 
 class Comments extends React.Component {
   render(){
@@ -13,6 +14,7 @@ class Comments extends React.Component {
             {...comment}
           />
         ))}
+        <NewComment />
       </div>
     );
   }

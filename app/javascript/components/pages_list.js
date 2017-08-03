@@ -1,12 +1,12 @@
 import React from 'react';
-import { arrayMove } from 'react-sortable-hoc';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { arrayMove } from 'react-sortable-hoc';
 import { sortPages } from '../actions/actions.js';
 import Pages from './pages.js';
 
 class PagesList extends React.Component {
-  onSortEnd = ({oldIndex, newIndex}) => {
+  onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState({
       pages: arrayMove(this.props.pages, oldIndex, newIndex),
     });
@@ -15,7 +15,11 @@ class PagesList extends React.Component {
   render() {
     return (
       <div className="preview"> 
-        <Pages pages={this.props.pages} onSortEnd={this.onSortEnd} useDragHandle={true} disabled={!this.props.editMode}/>
+        <Pages pages={this.props.pages}
+               onSortEnd={this.onSortEnd}
+               useDragHandle={true}
+               disabled={!this.props.editMode}
+        />
       </div>
     )
   }
@@ -25,24 +29,12 @@ PagesList.propTypes = {
   pages: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    editMode: state.getIn(["manual", "edit_mode"]),
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     sortPages: (id, oldPosition, newPosition) => {
       dispatch(sortPages(id, oldPosition, newPosition));
     },
-    onPageClick: (id) => {
-      dispatch(selectCurrentPage(id));
-    },
-    onKeyDeleteDown: (id) => {
-      dispatch(removePage(id))
-    },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PagesList);
+export default connect(undefined, mapDispatchToProps)(PagesList);

@@ -6,6 +6,9 @@
       <th><%= User.human_attribute_name("image") %></th>
       <th><%= User.human_attribute_name("name") %></th>
       <th><%= User.human_attribute_name("created_at")  %></th>
+      <% if can? :manage, User %>
+        <th><%= t('action.actions') %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -14,9 +17,17 @@
         <td><%= link_to cl_image_tag(user.image, id: "image", :width => 100, :height => 100, :crop => :fill), user%></td>
         <td><%= link_to user.name, user %></td>
         <td><%= user.created_at.to_time.to_s(:db) %></td>
+        <% if can? :manage, User %>
+          <td>
+            <%= link_to t('action.edit'), edit_user_path(user), class: 'btn btn-sm btn-primary' %>
+            <%= link_to t('action.destroy'), user, class: 'btn btn-sm btn-danger', method: :delete,
+                                                                            data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('action.user.new'), new_user_path, class: "btn btn-primary" %>
+<% if can? :manage, User %>
+  <%= link_to t('action.user.new'), new_user_path, class: "btn btn-primary" %>
+<% end %>

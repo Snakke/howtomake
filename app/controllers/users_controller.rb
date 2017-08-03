@@ -42,6 +42,10 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  def set_new_locale
+    current_user.update(locale: params[:locale])
+  end
+
   private
 
   def sort_column

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import TextBlock from './blocks/text_block.js'
-import ImageBlock from './blocks/image_block.js'
-import VideoBlock from './blocks/video_block.js'
 import ContentEditable from 'react-contenteditable';
 import InlineEdit from 'react-edit-inline';
 import { updateTitle, removeBlock } from '../actions/actions.js';
+import TextBlock from './blocks/text_block.js'
+import ImageBlock from './blocks/image_block.js'
+import VideoBlock from './blocks/video_block.js'
 
 class CurrentPage extends React.Component {
   constructor(props) {
@@ -26,11 +26,17 @@ class CurrentPage extends React.Component {
     let pagesBlocks = this.props.blocks.map((block) => {  
       switch (block.type){
         case 'Text':
-          return <TextBlock key={block.id} {...block} onKeyPress={() => this.props.onKeyDeleteDown(block.id)} />;
+          return <TextBlock key={block.id} {...block} 
+                            onKeyPress={() => this.props.onKeyDeleteDown(block.id)}
+                            editMode={this.props.editMode} />;
         case 'Image':
-          return <ImageBlock key={block.id} {...block} onKeyPress={() => this.props.onKeyDeleteDown(block.id)} />;
+          return <ImageBlock key={block.id} {...block}
+                             onKeyPress={() => this.props.onKeyDeleteDown(block.id)}
+                             editMode={this.props.editMode} />;
         case 'Video':
-          return <VideoBlock key={block.id} {...block} onKeyPress={() => this.props.onKeyDeleteDown(block.id)} />;
+          return <VideoBlock key={block.id} {...block}
+                             onKeyPress={() => this.props.onKeyDeleteDown(block.id)}
+                             editMode={this.props.editMode} />;
         default:
           return null;  
       };
@@ -77,7 +83,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     onKeyDeleteDown: (id) => {
       dispatch(removeBlock(id))
-    }
+    },
   };
 };
 

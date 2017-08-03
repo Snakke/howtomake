@@ -129,3 +129,10 @@ export const deleteBlock = (id) => {
     id,
   }
 }
+
+export const sendComment = (comment) =>{
+  return{
+    type: 'SEND_COMMENT',
+    comment,
+  }
+}

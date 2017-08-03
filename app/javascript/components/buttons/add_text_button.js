@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AddTextButton = ({ onClick , disabled}) => {
-  return <button type="button" className="btn btn-secondary" onClick={onClick} disabled={disabled}><i className="fa fa-text-height fa-2x" aria-hidden="true"></i></button>
+const AddTextButton = ({ onClick }) => {
+  return <button type="button" className="btn btn-secondary" onClick={onClick} ><i className="fa fa-text-height fa-2x" aria-hidden="true"></i></button>
 }
 
 AddTextButton.propTypes = {

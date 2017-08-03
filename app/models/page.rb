@@ -29,7 +29,7 @@ class Page < ApplicationRecord
   end
 
   def update_page_data
-    { type: 'UPDATE_PAGES', newOrder: Page.order(:position).pluck(:id).as_json }
+    { type: 'UPDATE_PAGES', newOrder: Page.where(manual_id: manual_id).order(:position).pluck(:id).as_json }
   end
 
   def as_json(options = {})

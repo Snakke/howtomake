@@ -36,6 +36,10 @@ class ManualsChannel < ApplicationCable::Channel
     Block.where(id: data['id']).first.destroy if can_update?
   end
 
+  def send_comment(data)
+    Comment.create(user_id: current_user.id, page_id: data['page_id'], comment: data['comment'])
+  end
+
   def self.channel_for_manual(manual_id)
     format(MANUAL_CHANNEL, manual_id)
   end

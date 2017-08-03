@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :manuals
+    post 'set_new_locale', on: :member
   end
   resources :categories
 end

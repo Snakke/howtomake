@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Rnd from 'react-rnd';
 import { resizeBlock, moveBlock, updateText } from '../../actions/actions.js';
-import ContentEditable from 'react-contenteditable';
 import marked from 'marked';
 import autosize from 'autosize';
 
@@ -55,8 +54,8 @@ class TextBlock extends React.Component{
                                              top: this.props.data.y,
                                              left: this.props.data.x,
                                              height: this.props.data.height,
-                                             width: this.props.data.width }} >
-        </div>
+                                             width: this.props.data.width }}
+        ></div>
       )
     }
     return (
@@ -84,19 +83,20 @@ class TextBlock extends React.Component{
         }
         dragHandlerClassName={".text-handler"}
       >  
-      <div className="text-handler" tabIndex="0" onKeyPress={(e) => {
-        let key = e.keyCode || e.charCode;
-        if( key == 127 ){
-          this.props.onKeyPress();
-        }
-      }}></div>
-      <textarea 
-        className="block text-area"
-        value={this.props.data.content}
-        onChange={this.handleChange}
-        ref={(input) => { this.textArea = input; }}
-        onKeyDown={() => {autosize($('.text-area'))}}
-        tabIndex="0" ></textarea>
+        <div className="text-handler" tabIndex="0" onKeyPress={(e) => {
+          let key = e.keyCode || e.charCode;
+          if( key == 127 ){
+            this.props.onKeyPress();
+          }
+        }}></div>
+        <textarea 
+          className="block text-area"
+          value={this.props.data.content}
+          onChange={this.handleChange}
+          ref={(input) => { this.textArea = input; }}
+          onKeyDown={() => {autosize($('.text-area'))}}
+          tabIndex="0"
+        ></textarea>
     </Rnd>
     )
   }
@@ -115,12 +115,6 @@ TextBlock.propTypes = {
   sendUpdatedText: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    editMode: state.getIn(["manual", "edit_mode"]),
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onBlockResize: (id, direction, w, h) => {
@@ -131,8 +125,8 @@ const mapDispatchToProps = (dispatch) => {
     },
     sendUpdatedText: (id, content) => {
       dispatch(updateText(id, content));
-    }
+    },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextBlock);
+export default connect(undefined, mapDispatchToProps)(TextBlock);

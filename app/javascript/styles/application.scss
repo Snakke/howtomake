@@ -147,7 +147,18 @@ $fa-font-path: "~font-awesome/fonts";
       border: 1px solid black;
       border-radius: 3px;
       background-color: white;
-
+    }
+    .new-comment{
+      width: 100%;
+      textarea{
+        width: 95%;
+      }
+      margin: 5px;
+      display: inline-block;
+      button{
+        position: absolute;
+        right: 0;
+      }
     }
   }
 }

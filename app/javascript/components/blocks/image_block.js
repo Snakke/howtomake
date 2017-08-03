@@ -68,12 +68,6 @@ ImageBlock.propTypes = {
   onBlockResize: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    editMode: state.getIn(["manual", "edit_mode"]),
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onBlockResize: (id, direction, w, h) => {
@@ -85,4 +79,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageBlock);
+export default connect(undefined, mapDispatchToProps)(ImageBlock);

@@ -1,14 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { editMode, createPage, createTextBlock, createImageBlock } from '../actions/actions.js'
 import Buttons from './buttons.js'
-import { editMode } from '../actions/actions.js'
+import '../cloudinary.js';
 
 class Toolbar extends React.Component{
   render(){
     let buttons = null;
+    if (!this.props.canEdit){ return null }
     return (
       <div className="buttons">
-        <Buttons disabled={this.props.editMode}/>
+        <Buttons editMode={this.props.editMode}
+          onAddPageClick={() => this.props.onAddPageClick()}
+          onAddTextClick={() => this.props.onAddTextClick()}
+          onAddImageClick={() => this.props.onAddImageClick()}/>
         <button 
           type="button"
           data-toggle="button"
@@ -23,6 +29,7 @@ class Toolbar extends React.Component{
 const mapStateToProps = (state) => {
   return {
     editMode: state.getIn(["manual", "edit_mode"]),
+    canEdit: state.getIn(["manual", "can_edit"]),
   };
 };
 
@@ -30,6 +37,21 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onEditButtonClick: () => {
       dispatch(editMode());
+    },
+    onAddPageClick: () => {
+      dispatch(createPage());
+    },
+    onAddTextClick: () => {
+      dispatch(createTextBlock())
+    },
+    onAddImageClick: () => {
+      cloudinary.openUploadWidget({ cloud_name: 'snake', upload_preset: 'cobgfeow'}, 
+        (error, result) => { 
+          if (result != null) {
+            dispatch(createImageBlock(result[0]));
+          }
+        }
+      );
     },
   };
 };
