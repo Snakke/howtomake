@@ -37,8 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  const profile = $('#image2');
-  if (profile.length>0){
+  const profile = $('#profile-image');
+  if ( profile.length>0 && ( profile.data("user-id") == profile.data("current-user-id") || profile.data("admin") == "admin")) {
+
     var myDropzone = new Dropzone(document.getElementById('image'), {
       uploadMultiple: false,
       acceptedFiles:'.jpg,.png,.jpeg,.gif',
