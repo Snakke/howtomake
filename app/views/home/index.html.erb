@@ -1,8 +1,16 @@
 <h3>New Manuals</h3>
-<table id="manual_table" class="table table-striped table-bordered table-sm">
+<table id="new_manuals_table" class="table table-striped table-bordered table-sm">
   <%= render 'manuals/body', manuals: @new_manuals %>
-  </table>
-<h3>Popular Manuals</h3>
-<table id="manual_table" class="table table-striped table-bordered table-sm">
-<%= render 'manuals/body', manuals: @new_manuals %>
 </table>
+
+<h3>Popular Manuals</h3>
+<table id="popular_manuals_table" class="table table-striped table-bordered table-sm">
+  <%= render 'manuals/body', manuals: @new_manuals %>
+</table>
+
+<h3>Tag cloud</h3>
+<div id='tag_cloud'>
+  <% tag_cloud Manual.tag_counts, %w{s m l} do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+</div>
