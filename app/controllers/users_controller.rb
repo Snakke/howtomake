@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
-
+  skip_before_action :authenticate_user!, only: %i[show index]
   helper_method :sort_column, :sort_direction
 
   load_and_authorize_resource
@@ -43,7 +43,9 @@ class UsersController < ApplicationController
   end
 
   def set_new_locale
-    current_user.update(locale: params[:locale])
+    current_user.update(locale: params[:locale]) if current_user
+    cookies[:locale] = params[:locale]
+    logger.debug "* COOKIES: #{cookies[:locale]}"
   end
 
   private

@@ -19,5 +19,8 @@
     <br>
     <strong>Tags:</strong>
     <%=raw @manual.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+    <br>
+    <strong>Views:</strong>
+    <%= @manual.manual_views.size %>
   </p>
 </div>

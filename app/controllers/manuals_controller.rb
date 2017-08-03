@@ -19,7 +19,8 @@ class ManualsController < ApplicationController
   end
 
   def show
-    @manual = Manual.includes(:category, :user, pages: [:blocks, comments: :user]).find(params[:id])
+    ManualView.add(current_user.id, params[:id])
+    @manual = Manual.includes(:user, :category, pages: [:blocks, comments: :user]).find(params[:id])
     respond_with(@manual)
   end
 
@@ -66,6 +67,6 @@ class ManualsController < ApplicationController
   end
 
   def manual_params
-    params.require(:manual).permit(:title, :category_id, :user_id, :tag_list)
+    params.require(:manual).permit(:title, :category_id, :user_id, :tag_list, :manual_views_count)
   end
 end

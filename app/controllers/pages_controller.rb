@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
   before_action :set_page, only: %i[show edit update destroy]
 
-  load_and_authorize_resource
-
   respond_to :json
 
   def index

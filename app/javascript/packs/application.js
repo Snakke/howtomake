@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const profile = $('#profile-image');
-  if ( profile.length>0 && ( profile.data("user-id") == profile.data("current-user-id") || profile.data("admin") == "admin")) {
+  if ( profile.length>0 && profile.data("can-edit")) {
 
     var myDropzone = new Dropzone(document.getElementById('image'), {
       uploadMultiple: false,

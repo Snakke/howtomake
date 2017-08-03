@@ -2,12 +2,13 @@
 #
 # Table name: manuals
 #
-#  id          :integer          not null, primary key
-#  title       :string
-#  category_id :integer
-#  user_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                 :integer          not null, primary key
+#  title              :string
+#  category_id        :integer
+#  user_id            :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  manual_views_count :integer
 #
 
 class Manual < ApplicationRecord
@@ -16,6 +17,7 @@ class Manual < ApplicationRecord
   acts_as_taggable_on :tags
 
   has_many :pages, -> { order(position: :asc) }
+  has_many :manual_views
   belongs_to :category
   belongs_to :user
 end

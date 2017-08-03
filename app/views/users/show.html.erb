@@ -1,6 +1,6 @@
 <div id="profile" class="profile">
   <div class="profile-info row">
-    <div id="profile-image" class="image" align="center" data-user-id=<%= @user.id %> data-current-user-id=<%= current_user.id %> data-admin=<%= current_user.role %>>
+    <div id="profile-image" class="image" align="center" data-can-edit=<%= can_edit(@user) %>>
     <%= cl_image_tag(@user.image, id: "image", :width => 200, :height => 200, :crop => :fill) %>
     </div>
     <div class="col-md-9 col-lg-9">
