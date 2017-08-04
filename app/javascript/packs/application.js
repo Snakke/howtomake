@@ -98,16 +98,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const user_edit = $('.editable');
   if (user_edit.length>0){
-    $('.editable').jinplace({
-      submitFunction: function(opts, value) {
+    user_edit.jinplace({
+      submitFunction: (opts, value) => {
+          let objectData = {};
           let data = {};
-          data[opts.attribute] = value;
-          let data2 = {};
-          data2[opts.object] = data;
-          return new Promise(function(resolve, reject) {
+          objectData[opts.attribute] = value;
+          data[opts.object] = objectData;
+          return new Promise((resolve, reject) => {
            $.ajax(opts.url, {
                       type: "PATCH",
-                      data: data2,
+                      data: data,
                       dataType: 'JSON',
                       success: () => {
                         resolve(value);

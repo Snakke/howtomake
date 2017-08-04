@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Admin::CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
 
   load_and_authorize_resource
@@ -25,17 +25,17 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     @category.save
-    respond_with(@category)
+    respond_with(@category, location: admin_categories_path)
   end
 
   def update
     @category.update(category_params)
-    respond_with(@category)
+    respond_with(@category, location: admin_categories_path)
   end
 
   def destroy
     @category.destroy
-    respond_with(@category)
+    respond_with(@category, location: admin_categories_path)
   end
 
   private

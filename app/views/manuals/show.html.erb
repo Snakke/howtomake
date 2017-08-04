@@ -29,5 +29,5 @@
 <% if can_edit(@manual) %>
 <%= link_to t('action.edit'), edit_manual_path(@manual), class: 'btn btn-sm btn-primary' %>
 <%= link_to t('action.destroy'), manual_path, class: 'btn btn-sm btn-danger', method: :delete,
-                                                                            data: { confirm: 'Are you sure?' } %>
+                                                                              data: { confirm: 'Are you sure?' } %>
 <% end %>
