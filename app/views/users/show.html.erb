@@ -5,8 +5,8 @@
     </div>
     <div class="col-md-9 col-lg-9">
       <div class="row">
-        <h3 class="editable" data-attribute="name" data-url=<%= user_path %> data-activator="#bio-edit"><%= @user.name %></h3>
-        <%= editable(@user) %>
+        <h3 class="editable" data-object="user" data-attribute="name" data-url=<%= user_path %> data-activator="#bio-edit"><%= @user.name %></h3>
+        <%= editable(@user, "bio-edit") %>
       </div>
     </div>
   </div>

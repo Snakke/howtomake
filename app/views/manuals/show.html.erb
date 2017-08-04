@@ -1,5 +1,5 @@
-<h2 class="manual_title"><%= @manual.title %></h2>
-
+<h2 class="manual_title editable" data-object="manual" data-attribute="title" data-url=<%= manual_path %> data-activator="#title-edit"><%= @manual.title %></h2>
+<%= editable(@manual, "title-edit") %>
 
 <%= content_tag :div, nil, id: "manual", data: { "initial-state" => manual_data(@manual)} %>
 
@@ -8,7 +8,7 @@
 <div class="manual_details" >
   <p>
     <strong><%= Manual.human_attribute_name("category") %>:</strong>
-    <div class="editable" data-attribute=<%= manual_path %> data-url=<%= manual_path %> ><%= @manual.category.title %></div>
+    <%= @manual.category.title %>
     <br>
     <strong><%= Manual.human_attribute_name("author") %>:</strong>
     <%= @manual.user %>
@@ -26,3 +26,8 @@
     <%= @manual.manual_views.size %>
   </p>
 </div>
+<% if can_edit(@manual) %>
+<%= link_to t('action.edit'), edit_manual_path(@manual), class: 'btn btn-sm btn-primary' %>
+<%= link_to t('action.destroy'), manual_path, class: 'btn btn-sm btn-danger', method: :delete,
+                                                                            data: { confirm: 'Are you sure?' } %>
+<% end %>

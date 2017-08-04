@@ -10,4 +10,13 @@ module ApplicationHelper
       link_to title, user_manuals_path(@user, sort: column, direction: direction), {class: css_class, remote: true}
     end
   end
+
+  def can_edit(object)
+    can? :update, object
+  end
+
+  def editable(user, activator)
+    icon = content_tag(:i, "", {class: ["fa", "fa-pencil"], "aria-hidden": "true"})
+    content_tag :button, icon, {class: ["btn", "btn-outline-primary", "btn-sm"], id: activator} if can_edit(user)
+  end
 end

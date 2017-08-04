@@ -102,10 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
       submitFunction: function(opts, value) {
           let data = {};
           data[opts.attribute] = value;
+          let data2 = {};
+          data2[opts.object] = data;
           return new Promise(function(resolve, reject) {
            $.ajax(opts.url, {
                       type: "PATCH",
-                      data: { user: data },
+                      data: data2,
                       dataType: 'JSON',
                       success: () => {
                         resolve(value);

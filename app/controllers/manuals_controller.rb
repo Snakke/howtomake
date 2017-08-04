@@ -6,7 +6,7 @@ class ManualsController < ApplicationController
 
   #load_and_authorize_resource
 
-  respond_to :html, :js
+  respond_to :html, :js, :json
 
   def index
     @manuals = Manual.includes(:user, :category)
@@ -22,6 +22,7 @@ class ManualsController < ApplicationController
   def show
     ManualView.add(current_user.id, params[:id]) if current_user
     @manual = Manual.includes(:user, :category, pages: [:blocks, comments: :user]).find(params[:id])
+    @tags = Tag.pluck(:name)
     @rating = @manual.ratings.average(:value).to_f
     respond_with(@manual)
   end
