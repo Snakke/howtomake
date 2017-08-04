@@ -12,8 +12,8 @@ import manual from '../reducers/manual.js';
 import connection from '../reducers/connection.js'
 import App from '../components/app.js';
 import Dropzone from 'dropzone';
-import rating from 'five-star-rating';
-import rateit from 'jquery.rateit'
+import rateit from 'jquery.rateit';
+import '../jinplace';
 import '../awesomplete';
 
 import '../styles/application.scss';
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log('Success! Cloudinary public ID is', response.public_id);
       $.ajax({
         url: "/users/"+profile.data("user-id"),    
-        type: 'PUT',   
+        type: 'PATCH',   
         dataType:'json',    
         data: { user: { image: response.public_id } },
       });
@@ -94,5 +94,25 @@ document.addEventListener("DOMContentLoaded", () => {
         data: { value: $(this).rateit('value') },
       });
     });  
+  }
+
+  const user_edit = $('.editable');
+  if (user_edit.length>0){
+    $('.editable').jinplace({
+      submitFunction: function(opts, value) {
+          let data = {};
+          data[opts.attribute] = value;
+          return new Promise(function(resolve, reject) {
+           $.ajax(opts.url, {
+                      type: "PATCH",
+                      data: { user: data },
+                      dataType: 'JSON',
+                      success: () => {
+                        resolve(value);
+                      }
+                  });
+         });
+      }
+    });
   }
 });

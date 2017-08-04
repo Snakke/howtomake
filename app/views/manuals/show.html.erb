@@ -5,10 +5,10 @@
 
 <div class="rateit" data-rateit-value=<%= @rating %> data-url=<%= rate_manual_path %> style="font-size:35px"></div>
 
-<div class="manual_details">
+<div class="manual_details" >
   <p>
     <strong><%= Manual.human_attribute_name("category") %>:</strong>
-    <%= @manual.category.title %>
+    <div class="editable" data-attribute=<%= manual_path %> data-url=<%= manual_path %> ><%= @manual.category.title %></div>
     <br>
     <strong><%= Manual.human_attribute_name("author") %>:</strong>
     <%= @manual.user %>

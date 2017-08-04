@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
     @users = User.all
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:manuals).find(params[:id])
+    @user = User.includes(manuals: [:category, :user]).find(params[:id])
     respond_with(@user)
   end
 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def update
     @user.update(user_params)
-    sign_in :user, @user, bypass: true if current_user == @user
+    sign_in :user, @user, bypass_sign_in: true if current_user == @user
     respond_with(@user)
   end
 
