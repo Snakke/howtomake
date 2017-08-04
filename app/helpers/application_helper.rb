@@ -1,6 +1,7 @@
 module ApplicationHelper
-  def sortable(column, title = nil)
-    title ||= column.titleize
+  def table_column(klass, column, title: nil, sortable: true)
+    title ||= klass.human_attribute_name(column)
+    return title unless sortable
     css_class = column == sort_column ? "current-#{sort_direction}" : nil
     direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
     if @user.blank?

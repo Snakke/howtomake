@@ -42,10 +42,11 @@ en:
         updated_at: Last update
         role: Role
         locale: Locale
+        image: Avatar
       manual:
         title: Title
-        category: Category
-        author: Author
+        category_id: Category
+        user_id: Author
         created_at: Created at
         updated_at: Last update
       category:

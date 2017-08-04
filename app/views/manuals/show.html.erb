@@ -3,6 +3,8 @@
 
 <%= content_tag :div, nil, id: "manual", data: { "initial-state" => manual_data(@manual)} %>
 
+<div class="rateit" data-rateit-value=<%= @rating %> data-url=<%= rate_manual_path %> style="font-size:35px"></div>
+
 <div class="manual_details">
   <p>
     <strong><%= Manual.human_attribute_name("category") %>:</strong>

@@ -2066,6 +2066,10 @@ find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
+five-star-rating@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/five-star-rating/-/five-star-rating-0.2.2.tgz#80e17aca52d1fa3ddb11a7ac76ee1ca7d2bd0aae"
+
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
@@ -2661,7 +2665,13 @@ javascript-natural-sort@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/javascript-natural-sort/-/javascript-natural-sort-0.7.1.tgz#f9e2303d4507f6d74355a73664d1440fb5a0ef59"
 
-jquery@>=1.9.1:
+jquery.rateit@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/jquery.rateit/-/jquery.rateit-1.1.1.tgz#9e604561a0ddd85c1685b3006323af08a10f098b"
+  dependencies:
+    jquery ">=1.6"
+
+jquery@>=1.6, jquery@>=1.9.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 

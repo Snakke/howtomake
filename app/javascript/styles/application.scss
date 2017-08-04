@@ -1,6 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
+@import "~five-star-rating/css/rating";
+@import "~jquery.rateit/scripts/rateit";
 @import 'sign_in';
 @import 'forms';
 @import 'footer';

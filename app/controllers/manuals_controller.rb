@@ -1,9 +1,10 @@
 class ManualsController < ApplicationController
   before_action :set_manual, only: %i[edit update destroy]
+  skip_before_action :authenticate_user!, only: %i[show index]
 
   helper_method :sort_column, :sort_direction
 
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   respond_to :html, :js
 
@@ -19,8 +20,9 @@ class ManualsController < ApplicationController
   end
 
   def show
-    ManualView.add(current_user.id, params[:id])
+    ManualView.add(current_user.id, params[:id]) if current_user
     @manual = Manual.includes(:user, :category, pages: [:blocks, comments: :user]).find(params[:id])
+    @rating = @manual.ratings.average(:value).to_f
     respond_with(@manual)
   end
 
@@ -52,6 +54,11 @@ class ManualsController < ApplicationController
     respond_with(@manual)
   end
 
+  def rate
+    Rating.rate(params[:id], current_user.id, params[:value])
+    head :ok
+  end
+  
   private
 
   def sort_column

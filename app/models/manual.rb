@@ -18,6 +18,7 @@ class Manual < ApplicationRecord
 
   has_many :pages, -> { order(position: :asc) }
   has_many :manual_views
+  has_many :ratings
   belongs_to :category
   belongs_to :user
 end

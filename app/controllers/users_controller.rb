@@ -42,12 +42,6 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
-  def set_new_locale
-    current_user.update(locale: params[:locale]) if current_user
-    cookies[:locale] = params[:locale]
-    logger.debug "* COOKIES: #{cookies[:locale]}"
-  end
-
   private
 
   def sort_column

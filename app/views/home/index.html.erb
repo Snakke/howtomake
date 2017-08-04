@@ -1,12 +1,8 @@
 <h3>New Manuals</h3>
-<table id="new_manuals_table" class="table table-striped table-bordered table-sm">
-  <%= render 'manuals/body', manuals: @new_manuals %>
-</table>
+<%= render 'manuals/table', manuals: @new_manuals, sortable: false %>
 
 <h3>Popular Manuals</h3>
-<table id="popular_manuals_table" class="table table-striped table-bordered table-sm">
-  <%= render 'manuals/body', manuals: @popular_manuals %>
-</table>
+<%= render 'manuals/table', manuals: @popular_manuals, sortable: false %>
 
 <h3>Tag cloud</h3>
 <div id='tag_cloud'>

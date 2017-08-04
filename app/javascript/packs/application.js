@@ -12,7 +12,8 @@ import manual from '../reducers/manual.js';
 import connection from '../reducers/connection.js'
 import App from '../components/app.js';
 import Dropzone from 'dropzone';
-import 'dropzone/dist/dropzone.css';
+import rating from 'five-star-rating';
+import rateit from 'jquery.rateit'
 import '../awesomplete';
 
 import '../styles/application.scss';
@@ -79,5 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
         this.input.value = before + text + ", ";
       }
     });
+  }
+
+  const stars = $('.rateit');
+  if (stars.length>0){
+    stars.rateit({max: 5, mode: "font", step: 1, resetable: false});
+    const url = stars.data('url');
+    stars.bind('rated', function() { 
+      $.ajax({
+        url: url,    
+        type: 'POST',   
+        dataType:'json',    
+        data: { value: $(this).rateit('value') },
+      });
+    });  
   }
 });

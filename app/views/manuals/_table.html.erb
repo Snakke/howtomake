@@ -1,11 +1,21 @@
+<% sortable = true if sortable.nil? %>
 <table id="manual_table" class="table table-striped table-bordered table-sm">
   <thead>
     <tr class="m-0">
-      <th class="w-33"><%= sortable "title" %></th>
-      <th class="w-17"><%= sortable "category_id" %></th>
-      <th class="w-25"><%= sortable "user_id" %></th>
-      <th class="w-25"><%= sortable "updated_at" %></th>
+      <th class="w-33"><%= table_column Manual, "title", sortable: sortable %></th>
+      <th class="w-17"><%= table_column Manual, "category_id", sortable: sortable %></th>
+      <th class="w-25"><%= table_column Manual, "user_id", sortable: sortable %></th>
+      <th class="w-25"><%= table_column Manual, "updated_at", sortable: sortable %></th>
     </tr>
   </thead>
-  <%= render 'manuals/body', manuals: manuals %>
+  <tbody>
+    <% manuals.each do |manual| %>
+      <tr class="m-0">
+        <td class="w-33"><%= link_to manual.title, manual %></td>
+        <td class="w-17"><%= manual.category.title %></td>
+        <td class="w-25"><%= link_to manual.user, user_path(manual.user_id) %></td>
+        <td class="w-25"><%= manual.updated_at.to_s(:db) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
