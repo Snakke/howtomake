@@ -7,13 +7,15 @@ import NewComment from './new_comment.js';
 class Comments extends React.Component {
   render(){
     return (
-      <div className="comments" >
-        {this.props.comments.map((comment) => (
-          <Comment
-            key={comment.id}
-            {...comment}
-          />
-        ))}
+      <div className="comments-bar">
+        <div className="comments" >
+          {this.props.comments.map((comment) => (
+            <Comment
+              key={comment.id}
+              {...comment}
+            />
+          ))}
+        </div>
         <NewComment />
       </div>
     );

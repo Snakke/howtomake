@@ -30,7 +30,7 @@ class NewComment extends React.Component {
           }}
         >
         </textarea><br/>
-        <button className="btn btn-primary" onClick={this.comment}>Comment</button>
+        <button className="btn btn-primary btn-sm" onClick={this.comment}>Comment</button>
       </div>
     );
   }
