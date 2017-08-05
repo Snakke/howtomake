@@ -1,25 +1,34 @@
-<h3><%= title %></h3>
-<%= form_with(model: manual, local: true) do |form| %>
-  <% if manual.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% manual.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="col-12 col-md-9 col-lg-6">
+
+  <h3><%= title %></h3>
+
+  <%= form_with(model: manual, local: true) do |form| %>
+    <% if manual.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% manual.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control', placeholder: true %>
     </div>
+
+    <div class="form-group">
+      <%= form.label :category %>
+      <%= form.collection_select :category_id, @categories, :id, :title, { include_blank: t('view.manual.select_category') }, class: 'form-control', placeholder: true %>
+    </div>
+
+    <div class='form-group'>
+      <%= form.label :tag_list, 'Tags (separated by commas)' %><br/>
+      <%= form.text_field :tag_list, id: "tag_field", data: {list: tags_list(@tags), multiple: ''}, class: "form-control", placeholder: true %>
+    </div>
+
+    <%= form.submit t('action.save'), class: "btn btn-primary" %>
+    <%= link_to t('action.back'), manuals_path, class: "btn btn-secondary" %>
   <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :manual_title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :category %>
-    <%= form.collection_select :category_id, @categories, :id, :title, include_blank: t('view.manual.select_category') %>
-  </div>
-
-  <%= form.submit t('action.save'), class: "btn btn-primary" %>
-  <%= link_to t('action.back'), manuals_path, class: "btn btn-secondary" %>
-<% end %>
+</div>

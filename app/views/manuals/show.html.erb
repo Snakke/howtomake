@@ -1,19 +1,53 @@
-<h2 class="manual_title"><%= @manual.title %></h2>
+<div class="manual">
+<div class="row">
+    <div class="manual_title col-8">
+      <div class="row">
+        <div class="h2 editable" data-object="manual" data-attribute="title" data-url=<%= manual_path %> data-activator="#title-edit"><%= @manual.title %></div>
+        <%= editable(@manual, "title-edit") %>
+      </div>
+    </div>
+    <div class="rateit col-2" data-rateit-value=<%= @rating %> data-url=<%= rate_manual_path %> style="font-size:35px"></div>
+    <button class="btn btn-primary col-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Details
+    </button>
+</div>
+
+<p>
+  
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-block">
+    <div class="manual_details" >
+      <p>
+        <strong><%= Manual.human_attribute_name("category") %>:</strong>
+        <%= @manual.category.title %>
+        <br>
+        <strong><%= Manual.human_attribute_name("author") %>:</strong>
+        <%= link_to @manual.user, user_path(@manual.user) %>
+        <br>
+        <strong><%= Manual.human_attribute_name("created_at") %>:</strong>
+        <%= @manual.created_at.to_s(:db)%>
+        <br>
+        <strong><%= Manual.human_attribute_name("updated_at") %>:</strong>
+        <%= @manual.updated_at.to_s(:db)%>
+        <br>
+        <strong>Tags:</strong>
+        <%=raw @manual.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+        <br>
+        <strong>Views:</strong>
+        <%= @manual.manual_views.size %>
+      </p>
+    </div>
+    <% if can_edit(@manual) %>
+      <div class="btn-group" role="group" aria-label="Basic example">
+      <%= link_to t('action.edit'), edit_manual_path(@manual), class: 'btn btn-sm btn-primary' %>
+      <%= link_to t('action.destroy'), manual_path, class: 'btn btn-sm btn-danger', method: :delete,
+                                                                                  data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <%= content_tag :div, nil, id: "manual", data: { "initial-state" => manual_data(@manual)} %>
 
-<div class="manual_details">
-  <p>
-    <strong><%= Manual.human_attribute_name("category") %>:</strong>
-    <%= @manual.category.title %>
-    <br>
-    <strong><%= Manual.human_attribute_name("author") %>:</strong>
-    <%= @manual.user %>
-    <br>
-    <strong><%= Manual.human_attribute_name("created_at") %>:</strong>
-    <%= @manual.created_at.to_date%>
-    <br>
-    <strong><%= Manual.human_attribute_name("updated_at") %>:</strong>
-    <%= @manual.updated_at.to_time%>
-  </p>
 </div>

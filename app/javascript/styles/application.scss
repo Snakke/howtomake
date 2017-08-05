@@ -1,8 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
+@import "~five-star-rating/css/rating";
+@import "~jquery.rateit/scripts/rateit";
 @import 'sign_in';
 @import 'forms';
+@import 'footer';
+@import 'awesomplete';
 
 #root {
   margin-top: 20px;
@@ -12,25 +16,59 @@ $fa-font-path: "~font-awesome/fonts";
   margin-top: 20px;
 }
 
+.manual{
+  margin-bottom: 100px;
+  .manual-title{
+    display: inline-block;
+  }
+}
+
+#tag_cloud {
+  line-height: 1.6em;
+  font-weight: bold;
+  .s { font-size: 1em; }
+  .m { font-size: 1.8em; }
+  .l { font-size: 2.6em; }
+}
+
+.home-title{
+  padding-left: 10px;
+}
+
+.sort-dropdown{
+  position: absolute;
+  right: 8.5%;
+}
+.manual-create{
+  margin-left: 1%;
+}
+
 .buttons{
+  height: 50px;
+  width: 100%;
   position: relative;
+  .btn-group{
+    position: absolute;
+    left: -15px;
+  }
   .edit{
     position: absolute;
-    right: 0px;
+    right: -15px;
   }
 }
 
 .pages{
+  margin-top: 5px;
   display: -webkit-flex;
   display: flex;
   margin-bottom: 10px;
+  height: 455px;
   
   .preview{
     position: relative;
-    margin-top: 5px;
     padding-right: 0px;
     z-index: 1;
-    height: 550px;
+    width: 190px;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-flex: none;
@@ -47,12 +85,13 @@ $fa-font-path: "~font-awesome/fonts";
       }
     }
   }
-    .currentPage{
-    margin-top: 5px;
+  
+  .currentPage{
+    padding: 0px;
     border: 1px solid black;
     border-radius: 3px;
     background-color: white;
-    height: 550px;
+    width: 665px;
     position: relative;
     -webkit-flex: none;
             flex: none;
@@ -107,7 +146,7 @@ $fa-font-path: "~font-awesome/fonts";
     }
 
 
-    .header {
+    .page_header {
       position: absolute;
       top: 0;
       width: 100%;
@@ -115,11 +154,39 @@ $fa-font-path: "~font-awesome/fonts";
       font-size: 16pt;
     }
 
-    .footer{
+    .page_footer{
       position: absolute;
       bottom: 0;
       width: 100%;
       text-align: center;
+    }
+  }
+
+  .comments-bar{
+    margin-left: 5px;
+    .comments{
+      width: 280px;
+      height: 75%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      .comment{
+        margin-bottom: 5px;
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: white;
+      }
+    }
+    .new-comment{
+      width: 100%;
+      textarea{
+        width: 100%;
+      }
+      margin-top: 5px;
+      display: inline-block;
+      button{
+        position: absolute;
+        right: 0;
+      }
     }
   }
 }
@@ -149,7 +216,7 @@ $fa-font-path: "~font-awesome/fonts";
   border: 1px solid black;
   border-radius: 3px;
   height: 80px;
-  width: 155px;
+  width: 175px;
   background-color: white;
   text-align: center;
   vertical-align: middle;
@@ -170,16 +237,56 @@ $fa-font-path: "~font-awesome/fonts";
   margin: 5px;
 }
 
-.manual_title{
-  text-align: center;
+.manual{
+  .manual_title{
+  }
+  .edit-button{
+    height: 35px;
+    width: 35px;
+  }
+  input{
+    height: 30px;
+  }
 }
 
 .manual_details{
 }
 
-.footer{
-  position: relative;
-  bottom: 0;
-  margin: 20px;
+.table {
+  border: none;
   text-align: center;
+}
+
+.table-bordered > thead > tr > th{
+  text-align: center;
+}
+
+.fa-arrow-up{
+    color: #0275d8;
+}
+.profile-card{
+  margin: 10px !important;
+  padding: 0 !important;
+  width: 240px !important;
+  flex: none !important;
+  .image{
+    width: 100%;
+  }
+  img{
+    width: 100%;
+  }
+  .editable{
+    width: 84%;
+    display: inline-block;
+    textarea{
+      width: 84%;
+    }
+  }
+  button{
+    position: absolute;
+  }
+}
+
+.user-table{
+  margin-top: 20px;
 }

@@ -7,11 +7,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
+  before_action :authenticate_user!
 
-  rescue_from CanCan::AccessDenied do |_exception|
+  rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
-      format.html { redirect_to main_app.root_url, notice: 'Error!' }
+      format.html { redirect_to main_app.root_url, notice: exception.message }
       format.js   { head :forbidden, content_type: 'text/html' }
     end
   end
@@ -23,9 +24,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
-    I18n.locale = extract_locale_from_accept_language_header
-    # I18n.locale = current_user.locale
+    I18n.locale = if current_user
+                    current_user.locale
+                  else
+                    cookies[:locale] ||= extract_locale_from_accept_language_header
+                  end
     logger.debug "* Locale set to '#{I18n.locale}'"
   end
 

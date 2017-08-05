@@ -1,36 +1,18 @@
-<h3><%= t('view.user.details') %>:</h3>
+<div class="row">
+<div class="col-sm-3">
+  <div class="card profile-card">
+    <div id="profile-image" class="image" data-user-id=<%= @user.id %> data-can-edit=<%= can_edit(@user) %> >
+      <%= cl_image_tag(@user.image, id: "image", :height=>200, :aspect_ratio=>"4:3", crop: :fill) %>
+    </div>
+    <div class="card-block">
+      <h3 class="editable" data-type="textarea" data-object="user" data-attribute="name" data-url=<%= user_path %> data-activator="#bio-edit"><%= @user.name %></h3>
+        <%= editable(@user, "bio-edit") %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong><%= User.human_attribute_name("uid") %>:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("sign_in_count") %>:</strong>
-  <%= @user.sign_in_count %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("current_sign_in_at") %>:</strong>
-  <%= @user.current_sign_in_at %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("last_sign_in_at") %>:</strong>
-  <%= @user.last_sign_in_at %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("current_sign_in_ip") %>:</strong>
-  <%= @user.current_sign_in_ip %>
-</p>
-
-<p>
-  <strong><%= User.human_attribute_name("last_sign_in_ip") %>:</strong>
-  <%= @user.last_sign_in_ip %>
-</p>
-
-<p>
-  <%= link_to t('action.edit'), edit_user_path(@user), class: "btn btn-primary" %>
-  <%= link_to t('action.back'), users_path, class: "btn btn-secondary" %>
-</p>
+<div class="col-sm-9 user-table">
+<h4>Users Manuals</h4>
+<%= render 'manuals/cards', manuals: @user.manuals %>
+</div>
+</div>

@@ -12,6 +12,7 @@
 
 class Page < ApplicationRecord
   has_many :blocks, dependent: :destroy
+  has_many :comments, dependent: :destroy
   belongs_to :manual
   acts_as_list scope: :manual
 
@@ -28,11 +29,11 @@ class Page < ApplicationRecord
   end
 
   def update_page_data
-    { type: 'UPDATE_PAGES', newOrder: Page.order(:position).pluck(:id).as_json }
+    { type: 'UPDATE_PAGES', newOrder: Page.where(manual_id: manual_id).order(:position).pluck(:id).as_json }
   end
 
   def as_json(options = {})
-    options[:include] = :blocks
+    options[:include] = :blocks, { comments: { include: { user: { only: %i[name image] } } } }
     super(options)
   end
 end

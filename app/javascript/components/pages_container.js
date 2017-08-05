@@ -2,21 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fromJS } from 'immutable';
-import { selectCurrentPage, removePage } from '../actions/actions.js';
-import CurrentPage from './current_page.js';
 import PagesList from './pages_list.js';
+import CurrentPage from './current_page.js';
+import Comments from './comments.js';
 
-const PagesContainer = ({ pages, index, onPageClick, onKeyDeleteDown }) => {
+const PagesContainer = ({ pages, index, editMode }) => {
   let selectedPage = pages[index];
   let currentPage = null;
+  let comments = null;
   if (selectedPage){
-    currentPage = <CurrentPage title={fromJS(selectedPage.title)} position={selectedPage.position} blocks={selectedPage.blocks}/>
+    currentPage = <CurrentPage title={selectedPage.title} position={selectedPage.position} blocks={selectedPage.blocks}/>
+    comments = <Comments comments={selectedPage.comments}/>
   }
   return (
     <div className="pages row">
-      <PagesList pages={pages} />
+      <PagesList pages={pages} editMode={editMode}/>
       {currentPage}
-      <div className="col-3">comments</div>
+      {comments}
     </div>
   )
 };
@@ -27,32 +29,21 @@ PagesContainer.propTypes = {
     title: PropTypes.string.isRequired,
     position: PropTypes.number,
     blocks: PropTypes.arrayOf(PropTypes.shape({
-    data: PropTypes.object.isRequired,   
-  }).isRequired).isRequired,  
+      data: PropTypes.object.isRequired,   
+    }).isRequired).isRequired,
+    comments: PropTypes.array.isRequired,  
   }).isRequired).isRequired,
   index: PropTypes.number.isRequired,
-  onPageClick: PropTypes.func.isRequired,
-  onKeyDeleteDown: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     pages: state.getIn(["manual", "pages"]).toJS(),
     index: state.getIn(["manual", "current_page"]),
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onPageClick: (id) => {
-      dispatch(selectCurrentPage(id));
-    },
-    onKeyDeleteDown: (id) => {
-      dispatch(removePage(id))
-    },
+    editMode: state.getIn(["manual", "edit_mode"]),
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps)(PagesContainer);
+  undefined)(PagesContainer);

@@ -39,25 +39,26 @@ ru:
         unlock_token: Разблокирующий токен
         locked_at: Заблокирован в
         created_at: Создан
-        updated_at: Обновлен
+        updated_at: Послдение изменение
         role: Роль
         locale: Локализация
+        image: Аватар
       manual:
         title: Название
-        category: Категория
-        author: Автор
+        category_id: Категория
+        user_id: Автор
         created_at: Создана
-        updated_at: Обновлена
+        updated_at: Послдение изменение
       category:
         title: Название
         created_at: Создана
-        updated_at: Обновлена
+        updated_at: Послдение изменение
       page:
         title: Название
         created_at: Создана
-        updated_at: Обновлена
+        updated_at: Послдение изменение
       block:
-        data: Data
+        data: Дата
         created_at: Создан
-        updated_at: Обновлен
+        updated_at: Послдение изменение
         

@@ -1,10 +1,53 @@
-<div class="mt-3">
-  <h1>Hello!</h1>
-</div>
-<% if user_signed_in? %>
-  <div class="lead">
-    Logged in as <strong><%= current_user.to_s %></strong>.
+<div class="row">
+  <div class="col-9">
+    <h3 class="home-title"><%= t('view.popular_manual') %></h3>
+    <div class="card-deck">
+      <% @popular_manuals.each do |popular_manual| %>
+        <div class="card profile-card">
+          <div class="card-block">
+            <h3 class="card-title"><%= link_to popular_manual.title, popular_manual %></h3>
+            <p><%= t('view.by') %> <%= link_to popular_manual.user, user_path(popular_manual.user_id) %></p>
+            <p><%= Manual.human_attribute_name("category_id") %>: <%= popular_manual.category.title %></p>
+            <p><%= t('view.rating') %>: <%= manual_rating(popular_manual.ratings.average(:value).to_f)  %></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"><strong><%= Manual.human_attribute_name("updated_at") %>:</strong>
+            <%= popular_manual.updated_at.to_date%></small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <h3 class="home-title"><%= t('view.new_manual') %></h3>
+    <div class="card-deck">
+      <% @new_manuals.each do |new_manual| %>
+        <div class="card profile-card">
+          <div class="card-block">
+            <h3 class="card-title"><%= link_to new_manual.title, new_manual %></h3>
+            <p><%= t('view.by') %> <%= link_to new_manual.user, user_path(new_manual.user_id) %></p>
+            <p><%= Manual.human_attribute_name("category_id") %>: <%= new_manual.category.title %></p>
+            <p><%= t('view.rating') %>: <%= manual_rating(new_manual.ratings.average(:value).to_f)  %></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"><strong><%= Manual.human_attribute_name("updated_at") %>:</strong>
+            <%= new_manual.updated_at.to_date%></small>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
-<% end %>
+  <div class="col-3">
+    <h3 class="home-title"><%= t('view.tag_cloud') %></h3>
+    <div class="card-deck">
+      <div class="card">
+        <div class="card-block">
+          <div id='tag_cloud'>
+            <% tag_cloud Manual.tag_counts, %w{s m l} do |tag, css_class| %>
+              <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

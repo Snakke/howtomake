@@ -16,7 +16,6 @@ class VideoBlock extends React.Component{
   }
   
   onResize(event: MouseEvent, data: Direction, refToElement: HTMLElement, delta: NumberSize,) {
-    debugger
     this.props.onBlockResize(this.props.id, data, delta.width, delta.height);
   }
 
@@ -27,7 +26,8 @@ class VideoBlock extends React.Component{
                                               top: this.props.data.y,
                                               left: this.props.data.x,
                                               height: this.props.data.height,
-                                              width: this.props.data.width }} >
+                                              width: this.props.data.width }}
+        >
           <iframe
             src={this.props.data.content}
             frameBorder="0" allowFullScreen
@@ -50,14 +50,18 @@ class VideoBlock extends React.Component{
         onDragStop={this.onMove}
         dragHandlerClassName={".video-handler"}
       >  
-        
         <div className="video_block" >
           <iframe
             src={this.props.data.content}
             frameBorder="0" allowFullScreen
           ></iframe>
         </div>
-        <i className="fa fa-arrows video-handler fa-2x" aria-hidden="true"></i> 
+        <i className="fa fa-arrows video-handler fa-2x" aria-hidden="true" tabIndex="0" onKeyPress={(e) => {
+          let key = e.keyCode || e.charCode;
+          if( key == 127 ){
+            this.props.onKeyPress();
+          }
+        }}></i> 
       </Rnd>
     )
   }
@@ -67,12 +71,6 @@ VideoBlock.propTypes = {
   data: PropTypes.object.isRequired,
   onBlockMove: PropTypes.func.isRequired,
   onBlockResize: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    editMode: state.getIn(["manual", "edit_mode"]),
-  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -86,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(VideoBlock);
+export default connect(undefined, mapDispatchToProps)(VideoBlock);

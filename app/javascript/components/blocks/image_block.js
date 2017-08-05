@@ -49,7 +49,12 @@ class ImageBlock extends React.Component{
         onResizeStop={this.onResize}
         onDragStop={this.onMove}
       >  
-        <div className="image_block" >
+        <div className="image_block" onKeyPress={(e) => {
+          let key = e.keyCode || e.charCode;
+          if( key == 127 ){
+            this.props.onKeyPress();
+          }
+        }} tabIndex="0" >
           <img src={this.props.data.content} />
         </div>
       </Rnd>
@@ -63,12 +68,6 @@ ImageBlock.propTypes = {
   onBlockResize: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    editMode: state.getIn(["manual", "edit_mode"]),
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onBlockResize: (id, direction, w, h) => {
@@ -80,4 +79,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageBlock);
+export default connect(undefined, mapDispatchToProps)(ImageBlock);

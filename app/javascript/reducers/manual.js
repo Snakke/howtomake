@@ -12,6 +12,7 @@ const manual = (state = {}, action) => {
   let blockByIndex = null;
   let currentSubscription = getSubscription({ channel: "ManualsChannel",manual_id: state.get("manual_id")})
   switch (action.type) {
+    //=========PAGES=========
     case 'CREATE_PAGE':
       currentSubscription.perform('add_page', {
         title: "New page",
@@ -41,29 +42,53 @@ const manual = (state = {}, action) => {
     case 'SELECT_CURRENT_PAGE':
       pageIndex = pages.findIndex((page) => page.get('id') == action.id);
       return state.set("current_page", pageIndex);
+    case 'SORT_PAGES':
+      if ( action.oldPosition == action.newPosition ) { return state }
+      currentSubscription.perform('sort_pages', {
+        id: action.id,
+        newPosition: action.newPosition,
+      });
+      return state;
+    case 'UPDATE_TITLE':
+      let pageId = pages.getIn([current_page, "id"]);
+      currentSubscription.perform('update_pages_title', {
+        id: pageId,
+        title: action.title,
+      });
+      return state.setIn(["pages", current_page, "title"], action.title);
+    case 'UPDATE_PAGES':
+      pages = pages.map(page => {
+        page = page.set('position', ( action.newOrder.indexOf(page.get('id'))+1))
+        return page;
+      });
+      pages = pages.sortBy(page => page.get('position'));
+      return state.set("pages", pages);
+    //=========PAGES=========
+
+    //=========BLOCKS=========
     case 'ADD_TEXT':
       page_id = pages.getIn([current_page, "id"]);
-      currentSubscription.perform('add_text', {
+      currentSubscription.perform('add_block', {
         page_id: page_id,
         type: "Text",
-        data: {x: 50, y: 50, height: 50, width: 200, content: "text", type: "Block"}
+        data: {x: 50, y: 50, height: 50, width: 200, content: "text"}
       });
       return state;
     case 'ADD_IMAGE':
       let width = 300
       page_id = pages.getIn([current_page, "id"]);
-      currentSubscription.perform('add_image', {
+      currentSubscription.perform('add_block', {
         page_id: page_id,
         type: "Image",
-        data: {x: 50, y: 50, height: action.height*width/action.width, width: width , content: action.url, type: "ImageBlock"}
+        data: {x: 50, y: 50, height: action.height*width/action.width, width: width , content: action.url}
       });
       return state;
     case 'ADD_VIDEO':
       page_id = pages.getIn([current_page, "id"]);
-      currentSubscription.perform('add_video', {
+      currentSubscription.perform('add_block', {
         page_id: page_id,
         type: "Video",
-        data: {x: 50, y: 50, height: 270, width: 480 , content: action.url, type: "VideoBlock"}
+        data: {x: 50, y: 50, height: 270, width: 480 , content: action.url}
       });
       return state;
     case 'ADD_BLOCK':
@@ -81,7 +106,7 @@ const manual = (state = {}, action) => {
       blockByIndex = page.getIn(["blocks", blockIndex]);
       blockByIndex = blockByIndex.updateIn(["data", "x"], x => action.x);
       blockByIndex = blockByIndex.updateIn(["data", "y"], y => action.y);
-      currentSubscription.perform('move_block', {
+      currentSubscription.perform('update_block', {
         id: action.id,
         data: blockByIndex.get("data"),
       });
@@ -110,25 +135,28 @@ const manual = (state = {}, action) => {
         default: break;
       }
 
-      currentSubscription.perform('resize_block', {
+      currentSubscription.perform('update_block', {
         id: action.id,
         data: blockByIndex.get("data"),
       });
       return state.setIn(["pages", current_page, "blocks", blockIndex], blockByIndex);
-    case 'SORT_PAGES':
-      if ( action.oldPosition == action.newPosition ) { return state }
-      currentSubscription.perform('sort_pages', {
-        id: action.id,
-        newPosition: action.newPosition,
+    case 'REMOVE_BLOCK':
+      currentSubscription.perform('delete_block', {
+        id: action.id
       });
       return state;
-    case 'UPDATE_PAGES':
-      pages = pages.map(page => {
-        page = page.set('position', ( action.newOrder.indexOf(page.get('id'))+1))
-        return page;
-      });
-      pages = pages.sortBy(page => page.get('position'));
-      return state.set("pages", pages);
+    case 'DELETE_BLOCK':
+      page = pages.get(current_page);
+      blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
+      if (blockIndex < 0) { return state }
+
+      blocks = page.get("blocks");
+      blockByIndex = page.getIn(["blocks", blockIndex]);
+
+      blocks = blocks.delete(blockIndex);
+
+      return state.setIn(["pages", current_page, "blocks"], blocks);
+    
     case 'UPDATE_TEXT':
       page = pages.get(current_page);
       blockIndex = page.get("blocks").findIndex((block) => block.get('id') == action.id);
@@ -136,20 +164,28 @@ const manual = (state = {}, action) => {
 
       blockByIndex = page.getIn(["blocks", blockIndex]);
       blockByIndex = blockByIndex.updateIn(["data", "content"], content => action.content);
-      currentSubscription.perform('update_text', {
+      currentSubscription.perform('update_block', {
         id: action.id,
         data: blockByIndex.get("data"),
       });
       return state.setIn(["pages", current_page, "blocks", blockIndex], blockByIndex);
+    //=========BLOCKS=========
+    case 'SEND_COMMENT':
+      page_id = pages.getIn([current_page, "id"]);
+      currentSubscription.perform('send_comment', {
+        page_id: page_id,
+        comment: action.comment,
+      });
+      return state;
+    case 'ADD_COMMENT':
+      page = pages.get(current_page);
+      let comments = page.get("comments");
+      comments = comments.push(fromJS(action.comment));
+      page = page.set("comments", comments);
+      pages = pages.set(current_page, page);
+      return state.set("pages", pages);
     case 'EDIT_MODE':
       return state.set("edit_mode", !state.get("edit_mode"));
-    case 'UPDATE_TITLE':
-      let pageId = pages.getIn([current_page, "id"]);
-      currentSubscription.perform('update_title', {
-        id: pageId,
-        title: action.title,
-      });
-      return state.setIn(["pages", current_page, "title"], action.title);
     default:
       return state;
   }

@@ -15,9 +15,14 @@ class Block < ApplicationRecord
   serialize :data, JSON
 
   after_create_commit { ActionCable.server.broadcast ManualsChannel.channel_for_manual(page.manual_id), create_block_data }
+  after_destroy_commit { ActionCable.server.broadcast ManualsChannel.channel_for_manual(page.manual_id), destroy_block_data }
 
   def create_block_data
     { type: 'ADD_BLOCK', block: as_json }
+  end
+
+  def destroy_block_data
+    { type: 'DELETE_BLOCK', id: id }
   end
 
   def serializable_hash(options = nil)

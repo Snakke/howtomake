@@ -1,10 +1,28 @@
-<footer class="footer col-11">
-  <div class="locale">
-    Locale: 
+<footer class="footer">
+  <div class="container">
+    <div class="locale">
+      <div class="dropup">
+        <span>Locale:</span>
+        <a class="dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="current-value"><%= cookies[:locale].upcase %></span>
+        </a>
+        <div class="dropdown-menu">
+          <%= link_to "RU", user_set_locale_path(locale: 'ru'), method: :post, class: 'dropdown-item' %>
+          <%= link_to "EN", user_set_locale_path(locale: 'en'), method: :post, class: 'dropdown-item' %>
+        </div>
+      </div>
+    </div>
+    <div class="theme">
+      <div class="dropup">
+        <span>Theme:</span>
+        <a class="dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="current-value">Light</span>
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Light</a>
+          <a class="dropdown-item" href="#">Dark</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="theme">
-    Theme:
-  </div>
-  </div>
-  <div>2017</div>
 </footer>

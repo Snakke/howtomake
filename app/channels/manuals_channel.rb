@@ -9,47 +9,48 @@ class ManualsChannel < ApplicationCable::Channel
   end
 
   def add_page(data)
-    current_user.manuals.where(id: params[:manual_id]).first.pages.create(title: data['title'],
-                                                                          manual_id: data['manual_id'])
+    Page.create(title: data['title'], manual_id: data['manual_id']) if can_update?
   end
 
   def delete_page(data)
-    current_user.manuals.where(id: params[:manual_id]).first.pages.find(data['id']).destroy
-  end
-
-  def add_text(data)
-    Block.create(page_id: data['page_id'], type: data['type'], data: data['data'])
-  end
-
-  def add_image(data)
-    Block.create(page_id: data['page_id'], type: data['type'], data: data['data'])
-  end
-
-  def add_video(data)
-    Block.create(page_id: data['page_id'], type: data['type'], data: data['data'])
-  end
-
-  def resize_block(data)
-    Block.find(data['id']).update_attributes(data: data['data'])
-  end
-
-  def move_block(data)
-    Block.find(data['id']).update_attributes(data: data['data'])
+    Page.where(id: data['id']).first.destroy if can_update?
   end
 
   def sort_pages(data)
-    current_user.manuals.where(id: params[:manual_id]).first.pages.where(id: data['id']).first.update(position: data['newPosition'])
+    Page.where(id: data['id']).first.update(position: data['newPosition']) if can_update?
   end
 
-  def update_text(data)
-    Block.find(data['id']).update_attributes(data: data['data'])
+  def update_pages_title(data)
+    Page.where(id: data['id']).first.update(title: data['title']) if can_update?
   end
 
-  def update_title(data)
-    current_user.manuals.where(id: params[:manual_id]).first.pages.where(id: data['id']).first.update(title: data['title'])
+  def add_block(data)
+    Block.create(page_id: data['page_id'], type: data['type'], data: data['data']) if can_update?
+  end
+
+  def update_block(data)
+    Block.where(id: data['id']).first.update_attributes(data: data['data']) if can_update?
+  end
+
+  def delete_block(data)
+    Block.where(id: data['id']).first.destroy if can_update?
+  end
+
+  def send_comment(data)
+    Comment.create(user_id: current_user.id, page_id: data['page_id'], comment: data['comment'])
   end
 
   def self.channel_for_manual(manual_id)
     format(MANUAL_CHANNEL, manual_id)
+  end
+
+  private
+
+  def current_manual
+    Manual.where(id: params[:manual_id]).first
+  end
+
+  def can_update?
+    ability.can? :update, current_manual
   end
 end

@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  skip_before_action :authenticate_user!, only: %i[show index]
 
   load_and_authorize_resource
-  respond_to :html
+
+  respond_to :html, :json
+
+  helper_method :sort_column, :sort_direction
 
   def index
     @users = User.all
@@ -10,41 +13,27 @@ class UsersController < ApplicationController
   end
 
   def show
-    respond_with(@user)
-  end
-
-  def new
-    @user = User.new
-    respond_with(@user)
-  end
-
-  def edit
-  end
-
-  def create
-    @user = User.new(user_params)
-    @user.save
+    @user = User.includes(manuals: %i[category user]).find(params[:id])
     respond_with(@user)
   end
 
   def update
+    @user = User.find(params[:id])
     @user.update(user_params)
-    sign_in :user, @user, bypass: true if current_user == @user
-    respond_with(@user)
-  end
-
-  def destroy
-    @user.destroy
-    respond_with(@user)
+    sign_in :user, @user, bypass_sign_in: true if current_user == @user
   end
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
+  def sort_column
+    Manual.column_names.include?(params[:sort]) ? params[:sort] : 'title'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   def user_params
-    params.require(:user).permit(:uid, :name, :password, :password_confirmation, :role)
+    params.require(:user).permit(:name, :image)
   end
 end

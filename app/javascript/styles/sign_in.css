@@ -7,6 +7,15 @@
     margin-bottom: 10px;
   }
 
+  h6{
+    text-align: center;
+  }
+
+  i{
+    margin-left: 6%;
+    margin-right: 6%;
+  }
+
   .checkbox {
     font-weight: normal;
   }

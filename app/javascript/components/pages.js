@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import { SortableContainer } from 'react-sortable-hoc';
-import { connect } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { removePage } from '../actions/actions.js';
-import { selectCurrentPage } from '../actions/actions.js';
+import { connect } from 'react-redux';
+import { SortableContainer } from 'react-sortable-hoc';
+import { removePage, selectCurrentPage } from '../actions/actions.js';
 import Page from './page.js'
 
 const Pages = SortableContainer(({pages, onPageClick, onKeyDeleteDown, disabled}) => {
+  if (disabled) { onKeyDeleteDown = () => { return null } }
   return (
     <div className="pages-list">
       {pages.map((page, index) => (
