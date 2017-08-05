@@ -6,6 +6,6 @@ class CreateManualViews < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :manual_views, [:user_id, :manual_id], unique: true
+    add_index :manual_views, %i[user_id manual_id], unique: true
   end
 end

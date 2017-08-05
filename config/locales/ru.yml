@@ -25,15 +25,23 @@ ru:
       new: "Создать категорию"
     devise:
       log_in: "Войти"
+      or: "или"      
       sign_up: "Регистрация"
       resend_confirmation: "Отправить подтверждение повторно"
       reset_password: "Сбросить пароль"
       resend: "Отправить повторно"
+      profile: "Профиль"
       edit_profile: "Редактировать профиль"
       log_out: "Выйти"
   view:
     search: "Поиск"
     manuals: "Инструкции"
+    popular_manual: "Популярные инструкции"
+    new_manual: "Новые инструкции"
+    tag_cloud: "Облако тегов"
+    by: "от"
+    rating: "Рейтинг"
+    not_rated: "Нет оценки"
     users: "Пользователи"
     categories: "Категории"
     devise:

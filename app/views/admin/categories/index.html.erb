@@ -1,26 +1,28 @@
 <h3><%= Category.model_name.human(count: 2) %></h3>
 
-<table class="table table-striped table-bordered table-sm">
-  <thead>
-    <tr class="row">
-      <th class="col-8"><%= Category.human_attribute_name("title") %></th>
-      <th class="col-4"><%= t('action.actions') %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr  class="row">
-        <td class="col-8"><%=  category.title %></td>
-        <td class="col-4">
-          <%= link_to t('action.edit'), edit_admin_category_path(category), class: 'btn btn-sm btn-primary' %>
-          <%= link_to t('action.show'), admin_category_path(category), class: 'btn btn-sm btn-secondary' %>
-          <%= link_to t('action.destroy'), admin_category_path(category), class: 'btn btn-sm btn-danger', method: :delete,
-                                                                          data: { confirm: 'Are you sure?' } %>
-        </td>
+<div class="col-6">
+  <table class="table table-striped table-bordered table-sm">
+    <thead>
+      <tr class="m-0">
+        <th class="w-50"><%= Category.human_attribute_name("title") %></th>
+        <th class="w-50"><%= t('action.actions') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr  class="m-0">
+          <td class="w-50"><%=  category.title %></td>
+          <td class="w-50">
+            <%= link_to t('action.edit'), edit_admin_category_path(category), class: 'btn btn-sm btn-primary' %>
+            <%= link_to t('action.destroy'), admin_category_path(category), class: 'btn btn-sm btn-danger', method: :delete,
+                                                                            data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= link_to t('action.category.new'), new_admin_category_path, class: "btn btn-primary" %>
+

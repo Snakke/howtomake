@@ -38,6 +38,7 @@ class User < ApplicationRecord
 
   validates :email, format: { with: Devise.email_regexp }, if: :provider_email?
   validates :uid, presence: true, uniqueness: { case_sensitive: false }, unless: :provider_email?
+  validates :name, presence: true, length: { within: 4..40 }
   validates :password, presence: true, confirmation: true, length: { within: 6..40 }, on: :create
   validates :password, confirmation: true, length: { within: 6..40 }, allow_blank: true, on: :update
 

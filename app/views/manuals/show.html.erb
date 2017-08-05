@@ -1,5 +1,8 @@
-<h2 class="manual_title editable" data-object="manual" data-attribute="title" data-url=<%= manual_path %> data-activator="#title-edit"><%= @manual.title %></h2>
+<div class="manual">
+<div class="row justify-content-center">
+<h2 class="manual_title editable col-6" data-object="manual" data-attribute="title" data-url=<%= manual_path %> data-activator="#title-edit"><%= @manual.title %></h2>
 <%= editable(@manual, "title-edit") %>
+</div>
 
 <%= content_tag :div, nil, id: "manual", data: { "initial-state" => manual_data(@manual)} %>
 
@@ -31,3 +34,4 @@
 <%= link_to t('action.destroy'), manual_path, class: 'btn btn-sm btn-danger', method: :delete,
                                                                               data: { confirm: 'Are you sure?' } %>
 <% end %>
+</div>

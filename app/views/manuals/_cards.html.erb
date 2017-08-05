@@ -1,0 +1,30 @@
+<% sortable = true if sortable.nil? %>
+<div id="manual_cards">
+  <%= link_to t('action.manual.new'), new_manual_path, class: "btn btn-primary manual-create" %>
+  <div class="btn-group sort-dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
+    <div class="dropdown-menu">
+      <%= table_column Manual, "title", sortable: sortable %>
+      <%= table_column Manual, "category_id", sortable: sortable %>
+      <%= table_column Manual, "user_id", sortable: sortable %>
+      <%= table_column Manual, "updated_at", sortable: sortable %>
+    </div>
+  </div>
+
+  <div class="card-deck">
+    <% @manuals.each do |manual| %>
+      <div class="card profile-card">
+        <div class="card-block">
+          <h3 class="card-title"><%= link_to manual.title, manual %></h3>
+          <p><%= t('view.by') %> <%= link_to manual.user, user_path(manual.user_id) %></p>
+          <p><%= Manual.human_attribute_name("category_id") %>: <%= manual.category.title %></p>
+          <p><%= t('view.rating') %>: <%= manual_rating(manual.ratings.average(:value).to_f)  %></p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted"><strong><%= Manual.human_attribute_name("updated_at") %>:</strong>
+          <%= manual.updated_at.to_date%></small>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

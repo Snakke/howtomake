@@ -4,7 +4,7 @@
       <div class="dropup">
         <span>Locale:</span>
         <a class="dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span><%= cookies[:locale].upcase %></span>
+          <span class="current-value"><%= cookies[:locale].upcase %></span>
         </a>
         <div class="dropdown-menu">
           <%= link_to "RU", user_set_locale_path(locale: 'ru'), method: :post, class: 'dropdown-item' %>
@@ -14,8 +14,9 @@
     </div>
     <div class="theme">
       <div class="dropup">
-        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span>Theme:</span>
+        <span>Theme:</span>
+        <a class="dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="current-value">Light</span>
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Light</a>

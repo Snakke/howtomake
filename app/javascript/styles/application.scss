@@ -17,11 +17,23 @@ $fa-font-path: "~font-awesome/fonts";
 }
 
 #tag_cloud {
-  width: 400px;
   line-height: 1.6em;
-  .s { font-size: 0.8em; }
-  .m { font-size: 1.2em; }
-  .l { font-size: 1.8em; }
+  font-weight: bold;
+  .s { font-size: 1em; }
+  .m { font-size: 1.8em; }
+  .l { font-size: 2.6em; }
+}
+
+.home-title{
+  padding-left: 10px;
+}
+
+.sort-dropdown{
+  position: absolute;
+  right: 8.5%;
+}
+.manual-create{
+  margin-left: 1%;
 }
 
 .buttons{
@@ -211,8 +223,17 @@ $fa-font-path: "~font-awesome/fonts";
   margin: 5px;
 }
 
-.manual_title{
-  text-align: center;
+.manual{
+  .manual_title{
+    text-align: center;
+  }
+  .edit-button{
+    height: 35px;
+    width: 35px;
+  }
+  input{
+    height: 30px;
+  }
 }
 
 .manual_details{
@@ -227,16 +248,33 @@ $fa-font-path: "~font-awesome/fonts";
   text-align: center;
 }
 
+.fa-arrow-up{
+    color: #0275d8;
+}
 
-.profile{
+.card{
+  margin: 10px !important;
+  padding: 0 !important;
+  width: 240px !important;
+  flex: none !important;
   .image{
-    padding: 0px;
-    background-color: white;
-    height: 200px;
-    width: 200px;
+    width: 100%;
+  }
+  img{
+    width: 100%;
+  }
+  .editable{
+    width: 84%;
+    display: inline-block;
+    textarea{
+      width: 84%;
+    }
+  }
+  button{
+    position: absolute;
   }
 }
 
-.fa-arrow-up{
-    color: #0275d8;
+.user-table{
+  margin-top: 20px;
 }

@@ -7,7 +7,7 @@ class Ability
     can :manage, :all if user.admin?
     if user.author?
       can %i[create update destroy], Manual, user_id: user.id
-      can :update, User, id: user.id 
+      can :update, User, id: user.id
     end
   end
 end

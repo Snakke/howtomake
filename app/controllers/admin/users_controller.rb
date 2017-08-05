@@ -12,7 +12,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(manuals: [:category, :user]).find(params[:id])
+    @user = User.includes(manuals: %i[category user]).find(params[:id])
     respond_with(@user)
   end
 

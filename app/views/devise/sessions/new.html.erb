@@ -1,6 +1,10 @@
 <form class="form-sign-in"
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <h3><%= t('action.devise.log_in') %></h3>
+    <%= render "devise/shared/social_links" %>
+
+    <h6><%= t('action.devise.or') %></h4>
+
     <%= f.label :uid, 'Email Address', class: 'sr-only' %>
     <%= f.email_field :uid, autofocus: true, class: 'form-control', placeholder: t('view.devise.email'), required: true %>
 

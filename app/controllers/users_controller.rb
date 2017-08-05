@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show index]
-  
+
   load_and_authorize_resource
 
   respond_to :html, :json
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(manuals: [:category, :user]).find(params[:id])
+    @user = User.includes(manuals: %i[category user]).find(params[:id])
     respond_with(@user)
   end
 
@@ -21,7 +21,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     sign_in :user, @user, bypass_sign_in: true if current_user == @user
-    respond_with(@user)
   end
 
   private

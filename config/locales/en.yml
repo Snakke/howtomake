@@ -25,15 +25,23 @@ en:
       new: "Create category"
     devise:
       log_in: "Log in"
+      or: "or"
       sign_up: "Sign up"
       resend_confirmation: "Resend confirmation instructions"
       reset_password: "Reset password"
       resend: "Resend"
+      profile: "Profile"
       edit_profile: "Edit profile"
       log_out: "Log out"
   view:
     search: "Search"
     manuals: "Manuals"
+    popular_manual: "Popular manuals"
+    new_manual: "New manuals"
+    tag_cloud: "Tag cloud"
+    by: "by"
+    rating: "Rating"
+    not_rated: "Not rated"
     users: "Users"
     categories: "Categories"
     devise:

@@ -1,5 +1,2 @@
-<h3><%= Manual.model_name.human(count: 2) %></h3>
-
-<%= render 'table', manuals: @manuals %>
-
-<%= link_to t('action.manual.new'), new_manual_path, class: "btn btn-primary" %>
+<h3 class="home-title"><%= Manual.model_name.human(count: 2) %></h3>
+<%= render 'cards', manuals: @manuals %>

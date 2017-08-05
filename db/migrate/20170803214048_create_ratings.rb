@@ -7,6 +7,6 @@ class CreateRatings < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :ratings, [:user_id, :manual_id], unique: true
+    add_index :ratings, %i[user_id manual_id], unique: true
   end
 end

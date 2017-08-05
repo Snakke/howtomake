@@ -4,7 +4,7 @@ class ManualsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
-  #load_and_authorize_resource
+  # load_and_authorize_resource
 
   respond_to :html, :js, :json
 
@@ -59,7 +59,7 @@ class ManualsController < ApplicationController
     Rating.rate(params[:id], current_user.id, params[:value])
     head :ok
   end
-  
+
   private
 
   def sort_column
@@ -75,6 +75,6 @@ class ManualsController < ApplicationController
   end
 
   def manual_params
-    params.require(:manual).permit(:title, :category_id, :user_id, :tag_list, :manual_views_count)
+    params.require(:manual).permit(:title, :category_id, :user_id, :tag_list)
   end
 end
