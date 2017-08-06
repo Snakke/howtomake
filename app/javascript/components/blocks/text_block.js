@@ -39,11 +39,10 @@ class TextBlock extends React.Component{
 
   handleChange(){
     if (this.textAreaTimer) { clearTimeout(this.textAreaTimer) }
-    console.log(this.textArea.value);
     this.setState({data: this.props.data.content = this.textArea.value});
     this.textAreaTimer = setTimeout(() => { 
       this.props.sendUpdatedText(this.props.id, this.props.data.content);
-    }, 2000 );
+    }, 1000 );
   }
   
   render(){

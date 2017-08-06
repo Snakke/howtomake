@@ -11,9 +11,13 @@
 #
 
 class Page < ApplicationRecord
+  include Elasticsearch::Model
+  
   has_many :blocks, dependent: :destroy
   has_many :comments, dependent: :destroy
-  belongs_to :manual
+  # TODO: Move to background job
+  belongs_to :manual, touch: true
+
   acts_as_list scope: :manual
 
   after_create_commit { ActionCable.server.broadcast ManualsChannel.channel_for_manual(manual_id), create_page_data }

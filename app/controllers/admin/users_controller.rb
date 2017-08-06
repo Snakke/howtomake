@@ -4,10 +4,10 @@ class Admin::UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show index]
   helper_method :sort_column, :sort_direction
 
-  respond_to :html, :json
+  respond_to :html, :js, :json
 
   def index
-    @users = User.all
+    @users = User.order(:id)
     respond_with(@users)
   end
 
@@ -34,6 +34,16 @@ class Admin::UsersController < ApplicationController
     @user.update(user_params)
     sign_in :user, @user, bypass_sign_in: true if current_user == @user
     respond_with(@user)
+  end
+
+  def lock_user
+    User.where(id: params[:id]).first.lock_access!
+    redirect_back fallback_location: root_path
+  end
+
+  def unlock_user
+    User.where(id: params[:id]).first.unlock_access!
+    redirect_back fallback_location: root_path
   end
 
   def destroy

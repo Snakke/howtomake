@@ -8,7 +8,7 @@
             <h3 class="card-title"><%= link_to popular_manual.title, popular_manual %></h3>
             <p><%= t('view.by') %> <%= link_to popular_manual.user, user_path(popular_manual.user_id) %></p>
             <p><%= Manual.human_attribute_name("category_id") %>: <%= popular_manual.category.title %></p>
-            <p><%= t('view.rating') %>: <%= manual_rating(popular_manual.ratings.average(:value).to_f)  %></p>
+            <p><%= t('view.rating') %>: <%= manual_rating(@ratings[popular_manual.id].to_f)  %></p>
           </div>
           <div class="card-footer">
             <small class="text-muted"><strong><%= Manual.human_attribute_name("updated_at") %>:</strong>
@@ -25,7 +25,7 @@
             <h3 class="card-title"><%= link_to new_manual.title, new_manual %></h3>
             <p><%= t('view.by') %> <%= link_to new_manual.user, user_path(new_manual.user_id) %></p>
             <p><%= Manual.human_attribute_name("category_id") %>: <%= new_manual.category.title %></p>
-            <p><%= t('view.rating') %>: <%= manual_rating(new_manual.ratings.average(:value).to_f)  %></p>
+            <p><%= t('view.rating') %>: <%= manual_rating(@ratings[new_manual.id].to_f)  %></p>
           </div>
           <div class="card-footer">
             <small class="text-muted"><strong><%= Manual.human_attribute_name("updated_at") %>:</strong>

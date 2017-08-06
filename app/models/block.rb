@@ -11,7 +11,9 @@
 #
 
 class Block < ApplicationRecord
-  belongs_to :page
+  include Elasticsearch::Model
+
+  belongs_to :page, touch: true
   serialize :data, JSON
 
   after_create_commit { ActionCable.server.broadcast ManualsChannel.channel_for_manual(page.manual_id), create_block_data }
