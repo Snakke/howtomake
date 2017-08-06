@@ -9,7 +9,8 @@ class ManualsController < ApplicationController
   respond_to :html, :js, :json
 
   def index
-    @manuals = Manual.includes(:user, :category)
+    @manuals = Manual.includes(:user, :category, :ratings)
+    @ratings = @manuals.ratings
     if params[:user_id]
       @user = User.find(params[:user_id])
       @manuals = @manuals.where(user_id: params[:user_id])
@@ -21,7 +22,7 @@ class ManualsController < ApplicationController
 
   def show
     ManualView.add(current_user.id, params[:id]) if current_user
-    @manual = Manual.includes(:user, :category, pages: [:blocks, comments: :user]).find(params[:id])
+    @manual = Manual.includes(:user, :category, :ratings, pages: [:blocks, comments: :user]).find(params[:id])
     @tags = Tag.pluck(:name)
     @rating = @manual.ratings.average(:value).to_f
     respond_with(@manual)
@@ -58,6 +59,20 @@ class ManualsController < ApplicationController
   def rate
     Rating.rate(params[:id], current_user.id, params[:value])
     head :ok
+  end
+
+  def search
+    if params[:term].blank?
+      @manuals = []
+    else
+      @manuals = Manual.search(params[:term]).records
+      @ratings = @manuals.ratings
+    end
+    render action: :index
+  end
+
+  def typeahead
+    render json: Manual.search(query: { match_phrase_prefix: { title: params[:term] } }).map(&:title)
   end
 
   private

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.includes(manuals: %i[category user]).find(params[:id])
+    @ratings = @user.manuals.ratings
     respond_with(@user)
   end
 

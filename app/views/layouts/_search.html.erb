@@ -1,0 +1,6 @@
+<%= form_for :term, url: search_manuals_path, method: :get, :html => {class: "form-inline my-2 my-lg-0"} do |form| %>
+  <%= text_field_tag :term, params[:term], id: "input-search", class: "form-control mr-sm-2", 
+                                                               placeholder: t('view.search'),
+                                                               data: { url: typeahead_manuals_path },
+                                                               autocomplete: "off" %>
+<% end %>

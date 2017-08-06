@@ -33,7 +33,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :timeoutable and :validatable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable,
+         :recoverable, :rememberable, :trackable, :lockable,
          :confirmable, :omniauthable, omniauth_providers: %i[facebook twitter vkontakte]
 
   validates :email, format: { with: Devise.email_regexp }, if: :provider_email?

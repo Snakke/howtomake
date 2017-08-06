@@ -13,6 +13,7 @@ import connection from '../reducers/connection.js'
 import App from '../components/app.js';
 import Dropzone from 'dropzone';
 import rateit from 'jquery.rateit';
+import Typeahead from 'typeahead';
 import '../jinplace';
 import '../awesomplete';
 
@@ -114,6 +115,26 @@ document.addEventListener("DOMContentLoaded", () => {
                       }
                   });
          });
+      }
+    });
+  }
+
+  const input = $('#input-search');
+  if (input.length>0){
+    const ta = Typeahead(input[0], {
+      source: (query, result) => {
+        if (this.textAreaTimer) { clearTimeout(this.textAreaTimer) }
+        this.textAreaTimer = setTimeout( () => {
+          $.ajax({
+            url: input.data('url'),    
+            type: 'GET',   
+            dataType:'json',
+            data: { term: query },
+            success: (data) => {
+              result(data);
+            }
+          });
+        }, 1000);
       }
     });
   }
