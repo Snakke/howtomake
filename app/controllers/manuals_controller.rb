@@ -10,7 +10,7 @@ class ManualsController < ApplicationController
 
   def index
     @manuals = Manual.includes(:user, :category, :ratings)
-    @ratings = @manuals.get_ratings
+    @ratings = @manuals.ratings
     if params[:user_id]
       @user = User.find(params[:user_id])
       @manuals = @manuals.where(user_id: params[:user_id])
@@ -62,16 +62,17 @@ class ManualsController < ApplicationController
   end
 
   def search
-    if params[:term].nil?
+    if params[:term].blank?
       @manuals = []
     else
       @manuals = Manual.search(params[:term]).records
+      @ratings = @manuals.ratings
     end
     render action: :index
   end
 
   def typeahead
-    render json: Manual.search( query: { match_phrase_prefix: { title: params[:term] } } ).map(&:title)
+    render json: Manual.search(query: { match_phrase_prefix: { title: params[:term] } }).map(&:title)
   end
 
   private

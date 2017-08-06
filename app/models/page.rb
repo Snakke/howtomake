@@ -12,7 +12,7 @@
 
 class Page < ApplicationRecord
   include Elasticsearch::Model
-  
+
   has_many :blocks, dependent: :destroy
   has_many :comments, dependent: :destroy
   # TODO: Move to background job
