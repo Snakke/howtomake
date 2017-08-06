@@ -15,9 +15,12 @@ class Manual < ApplicationRecord
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  validates :title, presence: true, length: { within: 6..40 }
+  validates :title, presence: true, length: { within: 6..100 }
   validates :category_id, presence: true
+  
   acts_as_taggable_on :tags
+
+  paginates_per 6
 
   has_many :pages, -> { order(position: :asc) }
   has_many :manual_views
@@ -26,7 +29,7 @@ class Manual < ApplicationRecord
   belongs_to :user
 
   def self.ratings
-    return if pluck(:id).blank?
+    return {} if pluck(:id).blank?
     data_to_s = pluck(:id).map(&:inspect).join(', ').delete('"')
     sql = "select manual_id, avg(value) from ratings where manual_id in (#{data_to_s}) group by manual_id"
     Hash[ActiveRecord::Base.connection.select_rows(sql)]

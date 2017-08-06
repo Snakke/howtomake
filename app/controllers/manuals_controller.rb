@@ -9,13 +9,13 @@ class ManualsController < ApplicationController
   respond_to :html, :js, :json
 
   def index
-    @manuals = Manual.includes(:user, :category, :ratings)
-    @ratings = @manuals.ratings
+    @manuals = Manual.includes(:user, :category, :ratings).order(:title).page params[:page]
     if params[:user_id]
       @user = User.find(params[:user_id])
       @manuals = @manuals.where(user_id: params[:user_id])
     end
     @manuals = @manuals.tagged_with(params[:tag]) if params[:tag]
+    @ratings = @manuals.ratings
     @manuals = @manuals.order(sort_column + ' ' + sort_direction)
     respond_with(@manuals)
   end
@@ -68,6 +68,7 @@ class ManualsController < ApplicationController
       @manuals = Manual.search(params[:term]).records
       @ratings = @manuals.ratings
     end
+    @manuals = @manuals.order(:title).page params[:page]
     render action: :index
   end
 

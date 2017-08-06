@@ -1,2 +1,5 @@
 <h3 class="home-title"><%= Manual.model_name.human(count: 2) %></h3>
+
 <%= render 'cards', manuals: @manuals %>
+
+<%= link_to_next_page @manuals, 'Next Page', class: "next_page", remote: true %>

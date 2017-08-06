@@ -24,6 +24,10 @@ $fa-font-path: "~font-awesome/fonts";
   }
 }
 
+.next_page{
+  display: none;
+}
+
 #tag_cloud {
   line-height: 1.6em;
   font-weight: bold;
@@ -286,6 +290,13 @@ $fa-font-path: "~font-awesome/fonts";
   button{
     position: absolute;
   }
+}
+
+.manual-card{
+  margin: 10px !important;
+  padding: 0 !important;
+  width: 240px !important;
+  flex: none !important;
 }
 
 .user-table{
