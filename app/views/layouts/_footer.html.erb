@@ -4,7 +4,7 @@
       <div class="dropup">
         <span>Locale:</span>
         <a class="dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="current-value"><%= cookies[:locale].upcase ||= "EN" %></span>
+          <span class="current-value"><%= cookies[:locale] ||= "EN" %></span>
         </a>
         <div class="dropdown-menu">
           <%= link_to "RU", user_set_locale_path(locale: 'ru'), method: :post, class: 'dropdown-item' %>
