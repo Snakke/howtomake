@@ -30,7 +30,7 @@ class AddVideoButton extends React.Component{
           <Form  onSubmit={e => {
             e.preventDefault();
             let video_url = urlParser.parse(input.value)
-            this.props.onAddVideoClick("https://www.youtube.com/embed/"+video_url.id);
+            this.props.onAddVideoClick(video_url.id);
           }}>
             <ModalBody>
               <Label for="url" >Enter please url:</Label>

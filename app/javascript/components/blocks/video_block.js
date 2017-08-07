@@ -29,7 +29,7 @@ class VideoBlock extends React.Component{
                                               width: this.props.data.width }}
         >
           <iframe
-            src={this.props.data.content}
+            src={"https://www.youtube.com/embed/"+this.props.data.content}
             frameBorder="0" allowFullScreen
           ></iframe>
         </div>
@@ -52,7 +52,7 @@ class VideoBlock extends React.Component{
       >  
         <div className="video_block" >
           <iframe
-            src={this.props.data.content}
+            src={"https://www.youtube.com/embed/"+this.props.data.content}
             frameBorder="0" allowFullScreen
           ></iframe>
         </div>

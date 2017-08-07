@@ -14,6 +14,7 @@ import App from '../components/app.js';
 import Dropzone from 'dropzone';
 import rateit from 'jquery.rateit';
 import Typeahead from 'typeahead';
+import InfiniteScroll from 'infinite-scroll';
 import '../jinplace';
 import '../awesomplete';
 
@@ -136,6 +137,17 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }, 1000);
       }
+    });
+  }
+
+  const infinityScroll = $('.card-deck')
+  if (infinityScroll.length>0)
+  {
+    console.log(infinityScroll[0]);
+    const infScroll = new InfiniteScroll( infinityScroll[0], {
+      path: '.next_page',
+      append: '.manual-card',
+      history: false,
     });
   }
 });

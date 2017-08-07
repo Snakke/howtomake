@@ -1,18 +1,20 @@
 <div class="row">
-<div class="col-sm-3">
-  <div class="card profile-card">
-    <div id="profile-image" class="image" data-user-id=<%= @user.id %> data-can-edit=<%= can_edit(@user) %> >
-      <%= cl_image_tag(@user.image, id: "image", :height=>200, :aspect_ratio=>"4:3", crop: :fill) %>
-    </div>
-    <div class="card-block">
-      <h3 class="editable" data-type="textarea" data-object="user" data-attribute="name" data-url=<%= user_path %> data-activator="#bio-edit"><%= @user.name %></h3>
-        <%= editable(@user, "bio-edit") %>
+  <div class="col-sm-3">
+    <div class="card profile-card">
+      <div id="profile-image" class="image" data-user-id=<%= @user.id %> data-can-edit=<%= can_edit(@user) %> >
+        <%= cl_image_tag(@user.image, id: "image", :height=>200, :aspect_ratio=>"4:3", crop: :fill) %>
+      </div>
+      <div class="card-block">
+        <h3 class="editable" data-type="textarea" data-object="user" data-attribute="name" data-url=<%= user_path %> data-activator="#bio-edit"><%= @user.name %></h3>
+          <%= editable(@user, "bio-edit") %>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="col-sm-9 user-table">
-<h4>Users Manuals</h4>
-<%= render 'manuals/cards', manuals: @user.manuals %>
-</div>
+  <div class="col-sm-9 user-table">
+    <h4>Users Manuals</h4>
+    <div id="card-deck" class="card-deck">
+      <%= render 'manuals/cards', manuals: @user.manuals %>
+    </div>
+  </div>
 </div>

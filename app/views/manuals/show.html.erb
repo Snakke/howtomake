@@ -37,6 +37,7 @@
         <strong>Views:</strong>
         <%= @manual.manual_views.size %>
       </p>
+      <p><%= link_to "Printable Invoice (PDF)", manual_path(@manual, :format => 'pdf') %></p>
     </div>
     <% if can_edit(@manual) %>
       <div class="btn-group" role="group" aria-label="Basic example">
