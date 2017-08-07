@@ -35,7 +35,7 @@ class ManualPdf < Prawn::Document
     bounding_box([pdf_size(block.data['x']), PAGE_HEIGHT - pdf_size(block.data['y'])],
                  width: pdf_size(block.data['width']),
                  height: pdf_size(block.data['height'])) do
-      font('/home/kirill/projects/howtomake/public/arial.ttf') do
+      font('./public/arial.ttf') do
         text block.data['content']
       end
     end
@@ -57,7 +57,7 @@ class ManualPdf < Prawn::Document
     bounding_box([pdf_size(block.data['x']), PAGE_HEIGHT - pdf_size(block.data['y']) - pdf_size(block.data['height']) - OFFSET],
                  width: 50,
                  height: 15) do
-      font('/home/kirill/projects/howtomake/public/arial.ttf') do
+      font('./public/arial.ttf') do
         text "<u><link href='https://www.youtube.com/watch?v=#{block.data['content']}'>YouTube</link></u>",
              inline_format: true
       end
