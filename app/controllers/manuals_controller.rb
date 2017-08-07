@@ -35,7 +35,7 @@ class ManualsController < ApplicationController
 
   def new
     @categories = Category.order(:title)
-    @manual = Manual.new   
+    @manual = Manual.new
     respond_with(@manual)
   end
 

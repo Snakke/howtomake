@@ -12,7 +12,7 @@ class ManualPdf < Prawn::Document
 
   def print_pages(pages)
     pages.each_with_index do |page, index|
-      start_new_page if index > 0 
+      start_new_page if index > 0
       page_header(page)
       page.blocks.each do |block|
         try("#{block.type}_block".parameterize.underscore.to_sym, block)
