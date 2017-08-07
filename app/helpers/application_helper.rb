@@ -4,9 +4,9 @@ module ApplicationHelper
     return title unless sortable
     direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
     if @user.blank?
-      link_to title, manuals_path(sort: column, direction: direction), class: 'dropdown-item', remote: true
+      link_to title, manuals_path(sort: column, direction: direction), class: 'dropdown-item'
     else
-      link_to title, user_manuals_path(@user, sort: column, direction: direction), class: 'dropdown-item', remote: true
+      link_to title, user_manuals_path(@user, sort: column, direction: direction), class: 'dropdown-item'
     end
   end
 

@@ -1,5 +1,24 @@
 <h3 class="home-title"><%= Manual.model_name.human(count: 2) %></h3>
 
-<%= render 'cards', manuals: @manuals %>
+<div id="manuals_index">
+  <div id="manual_cards">
+    <% sortable = true if sortable.nil? %>
+
+    <%= link_to t('action.manual.new'), new_manual_path, class: "btn btn-primary manual-create" %>
+    <div class="btn-group sort-dropdown">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort</button>
+      <div class="dropdown-menu">
+        <%= table_column Manual, "title", sortable: sortable %>
+        <%= table_column Manual, "category_id", sortable: sortable %>
+        <%= table_column Manual, "user_id", sortable: sortable %>
+        <%= table_column Manual, "updated_at", sortable: sortable %>
+      </div>
+    </div>
+
+    <div id="card-deck" class="card-deck">
+      <%= render 'cards', manuals: @manuals %>
+    </div>
+  </div>
+</div>
 
 <%= link_to_next_page @manuals, 'Next Page', class: "next_page", remote: true %>

@@ -1,11 +1,11 @@
-<%= link_to omniauth_authorize_path(resource_name, "facebook") do %>
-  <i class="fa fa-facebook-square fa-4x" aria-hidden="true" style="color: #29487d"></i>
+<%= link_to omniauth_authorize_path(resource_name, "facebook"), class: "social-link" do %>
+  <i class="fa fa-facebook-square fa-4x" aria-hidden="true" style="color: #3b5998"></i>
 <% end %>
 
-<%= link_to omniauth_authorize_path(resource_name, "twitter") do %>
+<%= link_to omniauth_authorize_path(resource_name, "twitter"), class: "social-link" do %>
   <i class="fa fa-twitter-square fa-4x" aria-hidden="true" style="color: #1da1f2"></i>
 <% end %>
 
-<%= link_to omniauth_authorize_path(resource_name, "vkontakte") do %>
+<%= link_to omniauth_authorize_path(resource_name, "vkontakte"), class: "social-link" do %>
   <i class="fa fa-vk fa-4x" aria-hidden="true" style="color: #507299"></i>
 <% end %>

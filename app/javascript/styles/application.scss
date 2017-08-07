@@ -24,6 +24,15 @@ $fa-font-path: "~font-awesome/fonts";
   }
 }
 
+.social-link{
+  opacity: 0.9;
+}
+
+.social-link:hover{
+  text-decoration: none;
+  opacity: 1;
+}
+
 .next_page{
   display: none;
 }
@@ -67,7 +76,7 @@ $fa-font-path: "~font-awesome/fonts";
   display: -webkit-flex;
   display: flex;
   margin-bottom: 10px;
-  height: 455px;
+  height: 471px;
   
   .preview{
     position: relative;
@@ -171,7 +180,7 @@ $fa-font-path: "~font-awesome/fonts";
     margin-left: 5px;
     .comments{
       width: 280px;
-      height: 75%;
+      height: 78%;
       overflow-x: hidden;
       overflow-y: auto;
       .comment{

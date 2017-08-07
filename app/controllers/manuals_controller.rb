@@ -6,17 +6,17 @@ class ManualsController < ApplicationController
 
   # load_and_authorize_resource
 
-  respond_to :html, :js, :json
+  respond_to :html, :js, :json, :pdf
 
   def index
-    @manuals = Manual.includes(:user, :category, :ratings).order(:title).page params[:page]
+    @manuals = Manual.includes(:user, :category, :ratings)
     if params[:user_id]
       @user = User.find(params[:user_id])
       @manuals = @manuals.where(user_id: params[:user_id])
     end
     @manuals = @manuals.tagged_with(params[:tag]) if params[:tag]
     @ratings = @manuals.ratings
-    @manuals = @manuals.order(sort_column + ' ' + sort_direction)
+    @manuals = @manuals.order(sort_column + ' ' + sort_direction).page params[:page]
     respond_with(@manuals)
   end
 
@@ -25,19 +25,22 @@ class ManualsController < ApplicationController
     @manual = Manual.includes(:user, :category, :ratings, pages: [:blocks, comments: :user]).find(params[:id])
     @tags = Tag.pluck(:name)
     @rating = @manual.ratings.average(:value).to_f
-    respond_with(@manual)
+    respond_with(@manual) do |format|
+      format.pdf do
+        pdf = ManualPdf.new(@manual)
+        send_data pdf.render, filename: "manual_#{@manual.id}.pdf", type: 'application/pdf', disposition: 'inline'
+      end
+    end
   end
 
   def new
-    @manual = Manual.new
     @categories = Category.order(:title)
-    @tags = Tag.pluck(:name)
+    @manual = Manual.new   
     respond_with(@manual)
   end
 
   def edit
     @categories = Category.order(:title)
-    @tags = Tag.pluck(:name)
   end
 
   def create

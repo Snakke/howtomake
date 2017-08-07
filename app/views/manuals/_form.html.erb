@@ -19,13 +19,13 @@
     </div>
 
     <div class="form-group">
-      <%= form.label :category %>
-      <%= form.collection_select :category_id, @categories, :id, :title, { include_blank: t('view.manual.select_category') }, class: 'form-control', placeholder: true %>
+      <%= form.label :category_id %>
+      <%= form.collection_select :category_id, categories_list, :id, :title, { include_blank: t('view.manual.select_category') }, class: 'form-control', placeholder: true %>
     </div>
 
     <div class='form-group'>
       <%= form.label :tag_list, 'Tags (separated by commas)' %><br/>
-      <%= form.text_field :tag_list, id: "tag_field", data: {list: tags_list(@tags), multiple: ''}, class: "form-control", placeholder: true %>
+      <%= form.text_field :tag_list, id: "tag_field", data: {list: tags_list, multiple: ''}, class: "form-control", placeholder: true %>
     </div>
 
     <%= form.submit t('action.save'), class: "btn btn-primary" %>

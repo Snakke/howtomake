@@ -16,8 +16,7 @@ class Manual < ApplicationRecord
   include Elasticsearch::Model::Callbacks
 
   validates :title, presence: true, length: { within: 6..100 }
-  validates :category_id, presence: true
-  
+
   acts_as_taggable_on :tags
 
   paginates_per 6

@@ -143,9 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const infinityScroll = $('.card-deck')
   if (infinityScroll.length>0)
   {
+    console.log(infinityScroll[0]);
     const infScroll = new InfiniteScroll( infinityScroll[0], {
       path: '.next_page',
-      checkLastPage: '.next_page',
       append: '.manual-card',
       history: false,
     });

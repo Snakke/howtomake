@@ -52,6 +52,8 @@ gem 'elasticsearch', '~> 5.0', '>= 5.0.4'
 gem 'elasticsearch-model', '~> 5.0', '>= 5.0.1'
 gem 'elasticsearch-rails', '~> 5.0', '>= 5.0.1'
 gem 'kaminari', '~> 1.0', '>= 1.0.1'
+gem 'prawn', '~> 2.2', '>= 2.2.2'
+gem 'httparty', '~> 0.14.0'
 
 gem 'redis', '~> 3.3', '>= 3.3.3'
 
